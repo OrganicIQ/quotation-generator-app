@@ -50,7 +50,13 @@ function ensureAuth(req, res, next) { if (req.isAuthenticated()) { return next()
 
 // --- All API Routes (condensed) ---
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/' }), (req, res) => res.redirect('/'));
+app.get('/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: process.env.FRONTEND_URL || '/' }),
+    (req, res) => {
+        // After successful login, redirect the user back to the live frontend URL
+        res.redirect(process.env.FRONTEND_URL || '/');
+    }
+);
 app.get('/api/user', (req, res) => { if (req.user) { res.json({ loggedIn: true, user: { displayName: req.user.displayName } }); } else { res.json({ loggedIn: false }); } });
 app.get('/auth/logout', (req, res, next) => { req.logout((err) => { if (err) { return next(err); } req.session.destroy(() => res.redirect('/')); }); });
 app.get('/api/products', async (req, res) => { const s = req.query.q; let q = {}; if (s) { q = { $or: [{ baseName: { $regex: s, $options: 'i' } }, { variantName: { $regex: s, $options: 'i' } }] } }; try { const p = await Product.find(q).limit(50); res.json(p); } catch (e) { res.status(500).json({ m: 'E' }) } });

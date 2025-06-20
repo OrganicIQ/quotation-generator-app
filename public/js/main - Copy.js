@@ -1,7 +1,4 @@
-// main.js - FINAL DEPLOYMENT CODE WITH LIVE API URL
-
-// The new live URL for your backend server on Render
-const API_BASE_URL = 'https://my-quote-backend-q5i4.onrender.com';
+// main.js - FINAL BUG FIX FOR SAVING QUOTES
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- DOM Element References ---
@@ -13,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let lineItemDiscount = 10; let couponDiscountPercentage = 0; const GST_RATE = 18;
 
     // --- Helper Functions ---
-    function calculateQuotation(basePrice, quantity, discountPercentage) { const priceAfterDiscount = basePrice * (1 - (discountPercentage / 100)); const total = priceAfterDiscount * quantity; return { priceAfterDiscount: priceAfterDiscount, total: total }; }
+    function calculateQuotation(basePrice, quantity, discountPercentage) { const priceAfterDiscount = basePrice * (1 - (discountPercentage / 100)); const total = priceAfterDiscount * quantity; return { priceAfterDiscount, total }; }
     function debounce(func, delay) { let timeout; return function(...args) { clearTimeout(timeout); timeout = setTimeout(() => func.apply(this, args), delay); }; }
     function updateFinalTotals() { let subTotal = 0; const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); productRows.forEach(row => { const itemTotalSpan = row.querySelector('.item-total-price'); if (itemTotalSpan) { const itemTotal = parseFloat(itemTotalSpan.textContent); if (!isNaN(itemTotal)) { subTotal += itemTotal; } } }); const discountAmount = subTotal * (couponDiscountPercentage / 100); const amountAfterDiscount = subTotal - discountAmount; const gstAmount = amountAfterDiscount * (GST_RATE / 100); const finalGrandTotal = amountAfterDiscount + gstAmount; subtotalAmountSpan.textContent = subTotal.toFixed(2); if (couponDiscountPercentage > 0) { couponRateDisplay.textContent = couponDiscountPercentage; discountAmountSpan.textContent = discountAmount.toFixed(2); discountRow.style.display = 'table-row'; } else { discountRow.style.display = 'none'; } gstAmountSpan.textContent = gstAmount.toFixed(2); grandTotalAmountSpan.textContent = finalGrandTotal.toFixed(2); }
     function recalculateAllRows() { const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); productRows.forEach(row => { const quantityInput = row.querySelector('.quantity-input-small'); const quantity = parseInt(quantityInput.value) || 1; const basePrice = parseFloat(quantityInput.dataset.basePrice); const { priceAfterDiscount, total } = calculateQuotation(basePrice, quantity, lineItemDiscount); row.cells[4].textContent = `${lineItemDiscount}%`; row.querySelector('.item-discounted-price').textContent = priceAfterDiscount.toFixed(2); row.querySelector('.item-total-price').textContent = total.toFixed(2); }); updateFinalTotals(); }
@@ -34,29 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
         updateFinalTotals();
     }
     
-    async function loadSavedQuotes() {
-        try {
-            const response = await fetch(`${API_BASE_URL}/api/quotes`, { credentials: 'include' });
-            if (!response.ok) return;
-            const quotes = await response.json();
-            savedQuotesList.innerHTML = '';
-            if (quotes.length === 0) {
-                savedQuotesList.innerHTML = '<p>You have no saved quotes yet.</p>';
-            } else {
-                quotes.forEach(quote => {
-                    const quoteDate = new Date(quote.createdAt).toLocaleDateString();
-                    const quoteElement = document.createElement('div');
-                    quoteElement.classList.add('saved-quote-item');
-                    quoteElement.innerHTML = `<div class="quote-item-details-wrapper" data-quote-id="${quote._id}"><p class="quote-item-main"><strong>${quote.quoteNumber}</strong> - For: ${quote.clientName}</p><p class="quote-item-details">Saved on: ${quoteDate} | Total: ₹${quote.grandTotal.toFixed(2)}</p></div><div class="quote-item-actions"><button class="download-pdf-btn" data-quote-id="${quote._id}">PDF</button><button class="delete-quote-btn" data-quote-id="${quote._id}">Delete</button></div>`;
-                    savedQuotesList.appendChild(quoteElement);
-                });
-            }
-        } catch (error) { console.error('Error loading quotes:', error); }
-    }
-    
     async function loadSingleQuote(quoteId) {
         try {
-            const response = await fetch(`${API_BASE_URL}/api/quotes/${quoteId}`, { credentials: 'include' });
+            const response = await fetch(`/api/quotes/${quoteId}`, { credentials: 'include' });
             if (!response.ok) { alert('Could not retrieve quote.'); return; }
             const quote = await response.json();
             selectedProductsTbody.innerHTML = ''; clientNameInput.value = quote.clientName; couponDiscountPercentage = quote.couponDiscountPercentage || 0; couponCodeInput.value = quote.couponCode || ''; const hasCoupon = couponDiscountPercentage > 0; lineItemDiscount = hasCoupon ? 0 : 10; couponCodeInput.disabled = hasCoupon; applyCouponBtn.disabled = hasCoupon; applyCouponBtn.textContent = hasCoupon ? 'Applied!' : 'Apply'; couponStatusMessage.textContent = hasCoupon ? `${couponDiscountPercentage}% coupon applied.` : ''; if(hasCoupon) { couponStatusMessage.style.color = 'var(--primary-green)'; }
@@ -79,83 +56,109 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     const updateUI = (loggedIn, user = null) => { if (loggedIn) { authSection.style.display = 'none'; dashboardSection.style.display = 'block'; userDisplayName.textContent = user.displayName; loadSavedQuotes(); } else { authSection.style.display = 'block'; dashboardSection.style.display = 'none'; } };
-    const checkLoginStatus = async () => { try { const response = await fetch(`${API_BASE_URL}/api/user`, { credentials: 'include' }); const data = await response.json(); updateUI(data.loggedIn, data.user); } catch (e) { updateUI(false); } };
+    const checkLoginStatus = async () => { try { const response = await fetch('/api/user', { credentials: 'include' }); const data = await response.json(); updateUI(data.loggedIn, data.user); } catch (e) { updateUI(false); } };
     checkLoginStatus();
-
-    savedQuotesList.addEventListener('click', async (e) => {
-        const t = e.target;
-        if (t.matches('.delete-quote-btn')) {
-            const qId = t.dataset.quoteId;
-            if (confirm('Are you sure?')) {
-                try {
-                    const r = await fetch(`${API_BASE_URL}/api/quotes/${qId}`, { method: 'DELETE', credentials: 'include' });
-                    if (r.ok) { t.closest('.saved-quote-item').remove(); } else { alert('Failed to delete.'); }
-                } catch (e) { alert('Error deleting.'); }
-            }
-        } else if (t.matches('.download-pdf-btn')) {
-            const qId = t.dataset.quoteId;
-            window.open(`${API_BASE_URL}/api/quotes/${qId}/download`, '_blank');
-        } else if (t.closest('.quote-item-details-wrapper')) {
-            const qId = t.closest('.quote-item-details-wrapper').dataset.quoteId;
-            loadSingleQuote(qId);
-        }
-    });
-
-    const performSearch = async (sT) => {
-        autocompleteResultsUl.innerHTML = ''; if (!sT) return;
-        try {
-            const r = await fetch(`${API_BASE_URL}/api/products?q=${encodeURIComponent(sT)}`);
-            const p = await r.json();
-            if (p.length > 0) {
-                p.forEach(prod => {
-                    const li = document.createElement('li');
-                    li.textContent = `${prod.baseName} - ₹${prod.basePrice.toFixed(2)}`;
-                    li.dataset.product = JSON.stringify(prod);
-                    li.addEventListener('click', () => { addProductToSelectedList(JSON.parse(li.dataset.product)); quoteSearchInput.value = ''; autocompleteResultsUl.innerHTML = ''; });
-                    autocompleteResultsUl.appendChild(li);
-                });
-            } else {
-                autocompleteResultsUl.innerHTML = '<li>No items found</li>';
-            }
-            autocompleteResultsUl.classList.add('visible');
-        } catch (e) { console.error('Error searching:', e); }
-    };
+    async function loadSavedQuotes() { try { const response = await fetch('/api/quotes', { credentials: 'include' }); if (!response.ok) return; const quotes = await response.json(); savedQuotesList.innerHTML = ''; if (quotes.length === 0) { savedQuotesList.innerHTML = '<p>You have no saved quotes yet.</p>'; } else { quotes.forEach(quote => { const quoteDate = new Date(quote.createdAt).toLocaleDateString(); const quoteElement = document.createElement('div'); quoteElement.classList.add('saved-quote-item'); quoteElement.innerHTML = `<div class="quote-item-details-wrapper" data-quote-id="${quote._id}"><p class="quote-item-main"><strong>${quote.quoteNumber}</strong> - For: ${quote.clientName}</p><p class="quote-item-details">Saved on: ${quoteDate} | Total: ₹${quote.grandTotal.toFixed(2)}</p></div><div class="quote-item-actions"><button class="download-pdf-btn" data-quote-id="${quote._id}">PDF</button><button class="delete-quote-btn" data-quote-id="${quote._id}">Delete</button></div>`; savedQuotesList.appendChild(quoteElement); }); } } catch (error) { console.error('Error loading quotes:', error); } }
+    savedQuotesList.addEventListener('click', async (e) => { const t = e.target; if (t.matches('.delete-quote-btn')) { const qId = t.dataset.quoteId; if (confirm('Are you sure?')) { try { const r = await fetch(`/api/quotes/${qId}`, { method: 'DELETE', credentials: 'include' }); if (r.ok) { t.closest('.saved-quote-item').remove(); } else { alert('Failed to delete.'); } } catch (e) { alert('Error deleting.'); } } } else if (t.matches('.download-pdf-btn')) { const qId = t.dataset.quoteId; window.open(`/api/quotes/${qId}/download`, '_blank'); } else if (t.closest('.quote-item-details-wrapper')) { const qId = t.closest('.quote-item-details-wrapper').dataset.quoteId; loadSingleQuote(qId); } });
+    const performSearch = async (sT) => { autocompleteResultsUl.innerHTML = ''; if (!sT) return; try { const r = await fetch(`/api/products?q=${encodeURIComponent(sT)}`); const p = await r.json(); if (p.length > 0) { p.forEach(prod => { const li = document.createElement('li'); li.textContent = `${prod.baseName} - ₹${prod.basePrice.toFixed(2)}`; li.dataset.product = JSON.stringify(prod); li.addEventListener('click', () => { addProductToSelectedList(JSON.parse(li.dataset.product)); quoteSearchInput.value = ''; autocompleteResultsUl.innerHTML = ''; }); autocompleteResultsUl.appendChild(li); }); } else { autocompleteResultsUl.innerHTML = '<li>No items found</li>'; } autocompleteResultsUl.classList.add('visible'); } catch (e) { console.error('Error searching:', e); } };
     quoteSearchInput.addEventListener('input', (e) => debounce(performSearch, 300)(e.target.value.trim()));
-
+    
+    // --- CORRECTED: Save Quote Logic ---
     if (saveQuoteBtn) {
         saveQuoteBtn.addEventListener('click', async () => {
-            const pR = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); if (pR.length === 0) { alert('Cannot save empty quote.'); return; }
-            const lI = Array.from(pR).map(row => ({ product: row.dataset.productId, quantity: parseInt(row.querySelector('.quantity-input-small').value), priceAtTime: parseFloat(row.cells[2].textContent), discountPercentage: parseFloat(row.cells[4].textContent) || 0 }));
-            const subtotal = parseFloat(subtotalAmountSpan.textContent); const discountAmount = parseFloat(discountAmountSpan.textContent) || 0; const gstAmount = parseFloat(gstAmountSpan.textContent); const grandTotal = parseFloat(grandTotalAmountSpan.textContent);
-            const qD = { clientName: clientNameInput.value.trim() || 'N/A', lineItems: lI, subtotal, couponCode: couponDiscountPercentage > 0 ? couponCodeInput.value.trim() : null, couponDiscountPercentage, couponDiscountAmount: discountAmount, gstAmount, grandTotal };
+            const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row');
+            if (productRows.length === 0) {
+                alert('Cannot save an empty quote.');
+                return;
+            }
+            // Reading data from the new 8-column table structure
+            const lineItems = Array.from(productRows).map(row => ({
+                product: row.dataset.productId,
+                quantity: parseInt(row.querySelector('.quantity-input-small').value),
+                priceAtTime: parseFloat(row.cells[2].textContent), // Base Price is column 3 (index 2)
+                discountPercentage: parseFloat(row.cells[4].textContent) || 0 // Disc % is column 5 (index 4)
+            }));
+
+            const subtotal = parseFloat(subtotalAmountSpan.textContent);
+            const discountAmount = parseFloat(discountAmountSpan.textContent) || 0;
+            const gstAmount = parseFloat(gstAmountSpan.textContent);
+            const grandTotal = parseFloat(grandTotalAmountSpan.textContent);
+
+            const quoteData = {
+                clientName: clientNameInput.value.trim() || 'N/A',
+                lineItems: lineItems,
+                subtotal: subtotal,
+                couponCode: couponDiscountPercentage > 0 ? couponCodeInput.value.trim() : null,
+                couponDiscountPercentage: couponDiscountPercentage,
+                couponDiscountAmount: discountAmount,
+                gstAmount: gstAmount,
+                grandTotal: grandTotal
+            };
+
             try {
-                const r = await fetch(`${API_BASE_URL}/api/quotes`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(qD), credentials: 'include' });
-                if (r.ok) { const res = await r.json(); alert(`Quote ${res.quoteNumber} saved!`); loadSavedQuotes(); } else { const err = await r.json(); alert(`Error: ${err.message}`); }
-            } catch (e) { alert('Error saving.'); }
+                const response = await fetch('/api/quotes', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(quoteData),
+                    credentials: 'include' // Ensure authentication is included
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    alert(`Quote ${result.quoteNumber} saved successfully!`);
+                    loadSavedQuotes(); // Refresh the list of saved quotes
+                } else {
+                    const errorData = await response.json();
+                    alert(`Error saving quote: ${errorData.message}`);
+                }
+            } catch (err) {
+                console.error("Error saving quote:", err);
+                alert('Error saving.');
+            }
         });
     }
-
+    
     if (downloadPdfBtn) {
         downloadPdfBtn.addEventListener('click', async () => {
-            const pR = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); if (pR.length === 0) { alert('No items to download.'); return; }
-            const lI = Array.from(pR).map(row => ({ name: row.cells[1].innerHTML, quantity: parseInt(row.querySelector('.quantity-input-small').value), price: parseFloat(row.cells[2].textContent), total: parseFloat(row.querySelector('.item-total-price').textContent) }));
-            const qD = { clientName: clientNameInput.value.trim() || 'N/A', lineItems: lI, grandTotal: parseFloat(grandTotalAmountSpan.textContent) };
+            const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row');
+            if (productRows.length === 0) { alert('No items to download.'); return; }
+            // Reading data from the new 8-column table structure
+            const lineItems = Array.from(productRows).map(row => ({
+                name: row.cells[1].innerHTML,
+                description: '', // Description is now part of the name
+                quantity: parseInt(row.querySelector('.quantity-input-small').value),
+                price: parseFloat(row.cells[2].textContent), // Base Price is column 3 (index 2)
+                total: parseFloat(row.querySelector('.item-total-price').textContent)
+            }));
+            const quoteData = { clientName: clientNameInput.value.trim() || 'N/A', lineItems: lineItems, grandTotal: parseFloat(grandTotalAmountSpan.textContent) };
             try {
-                const r = await fetch(`${API_BASE_URL}/api/quotes/preview-pdf`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(qD), credentials: 'include' });
-                if (!r.ok) { throw new Error('Server failed to generate PDF.'); }
-                const b = await r.blob(); const u = window.URL.createObjectURL(b); const a = document.createElement('a'); a.style.display = 'none'; a.href = u; a.download = `Quote-Preview_${Date.now()}.pdf`; document.body.appendChild(a); a.click(); window.URL.revokeObjectURL(u); a.remove();
-            } catch (e) { console.error("PDF Preview Error:", e); alert("Could not generate PDF preview."); }
+                const response = await fetch('/api/quotes/preview-pdf', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(quoteData), credentials: 'include' });
+                if (!response.ok) { throw new Error('Server failed to generate PDF.'); }
+                const blob = await response.blob(); const url = window.URL.createObjectURL(blob); const a = document.createElement('a'); a.style.display = 'none'; a.href = url; a.download = `Quote-Preview_${Date.now()}.pdf`; document.body.appendChild(a); a.click(); window.URL.revokeObjectURL(url); a.remove();
+            } catch (err) { console.error("PDF Preview Error:", err); alert("Could not generate PDF preview."); }
         });
     }
 
     if (downloadExcelBtn) {
         downloadExcelBtn.addEventListener('click', () => {
-            const pR = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); if (pR.length === 0) { alert('No items to download.'); return; }
-            const d = [['#', 'Item', 'Base Price', 'Qty', 'Disc %', 'Disc Price', 'Total']];
-            pR.forEach(row => { const c = row.querySelectorAll('td'); d.push([c[0].textContent, c[1].textContent.replace(/<br\s*[\/]?>/gi, " ").replace(/<[^>]+>/g, ''), c[2].textContent, c[3].querySelector('input').value, c[4].textContent, c[5].textContent, c[6].textContent]); });
-            d.push([]); d.push(['', '', '', '', '', 'Subtotal', subtotalAmountSpan.textContent]); d.push(['', '', '', '', '', `Discount (${couponDiscountPercentage}%)`, discountAmountSpan.textContent]); d.push(['', '', '', '', '', 'GST (18%)', gstAmountSpan.textContent]); d.push(['', '', '', '', '', 'Grand Total', grandTotalAmountSpan.textContent]);
-            const wB = XLSX.utils.book_new(); const wS = XLSX.utils.aoa_to_sheet(d); XLSX.utils.book_append_sheet(wB, wS, 'Quotation');
-            XLSX.writeFile(wB, `Quotation_${new Date().toISOString().slice(0, 10)}.xlsx`);
+            const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); if (productRows.length === 0) { alert('No items to download.'); return; }
+            // Reading data from the new 8-column table structure
+            const data = [['#', 'Item', 'Base Price', 'Qty', 'Disc %', 'Disc Price', 'Total']];
+            productRows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                data.push([
+                    cells[0].textContent,
+                    cells[1].textContent.replace(/<br\s*[\/]?>/gi, " ").replace(/<[^>]+>/g, ''), // Cleaned up item
+                    cells[2].textContent, // Base Price
+                    cells[3].querySelector('input').value, // Qty
+                    cells[4].textContent, // Disc %
+                    cells[5].textContent, // Disc Price
+                    cells[6].textContent  // Total
+                ]);
+            });
+            data.push([]); data.push(['', '', '', '', '', 'Subtotal', subtotalAmountSpan.textContent]); data.push(['', '', '', '', '', `Discount (${couponDiscountPercentage}%)`, discountAmountSpan.textContent]); data.push(['', '', '', '', '', 'GST (18%)', gstAmountSpan.textContent]); data.push(['', '', '', '', '', 'Grand Total', grandTotalAmountSpan.textContent]);
+            const workbook = XLSX.utils.book_new(); const worksheet = XLSX.utils.aoa_to_sheet(data); XLSX.utils.book_append_sheet(workbook, worksheet, 'Quotation');
+            XLSX.writeFile(workbook, `Quotation_${new Date().toISOString().slice(0, 10)}.xlsx`);
         });
     }
     
@@ -163,9 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
         applyCouponBtn.addEventListener('click', async () => {
             const code = couponCodeInput.value.trim(); if (!code) { couponStatusMessage.textContent = 'Please enter a code.'; couponStatusMessage.style.color = 'var(--danger-color)'; return; }
             try {
-                const r = await fetch(`${API_BASE_URL}/api/coupons/apply`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: code }), credentials: 'include' });
-                const data = await r.json();
-                if (r.ok) {
+                const response = await fetch('/api/coupons/apply', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: code }), credentials: 'include' });
+                const data = await response.json();
+                if (response.ok) {
                     couponStatusMessage.textContent = data.message;
                     couponStatusMessage.style.color = 'var(--primary-green)';
                     couponDiscountPercentage = data.discountPercentage;

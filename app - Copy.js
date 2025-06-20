@@ -1,12 +1,5 @@
 // app.js - FINAL FIX FOR PDF PREVIEW GENERATION
 
-const cors = require('cors');
-// ... after app.use(express.json());
-app.use(cors({
-    origin: 'https://quote.organiciqsolutions.com', // <-- Use your actual Hostinger subdomain URL
-    credentials: true
-}));
-
 console.log("App.js started processing...");
 
 require('dotenv').config();

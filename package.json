@@ -1,0 +1,27 @@
+{
+  "name": "final-test-app",
+  "version": "1.0.0",
+  "description": "Final test for Express/Session/Passport modules",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parser": "^3.2.0",
+    "dotenv": "^16.5.0",
+    "express": "^4.19.2",
+    "express-session": "^1.18.1",
+    "html-pdf-node": "^1.0.8",
+    "mongoose": "^8.16.0",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "pdfmake": "^0.2.20"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

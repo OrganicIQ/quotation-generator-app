@@ -21,7 +21,7 @@ const html_to_pdf = require('html-pdf-node');
 
 // --- Main App Initialization ---
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 // --- Middleware Setup ---
 app.use(express.json());

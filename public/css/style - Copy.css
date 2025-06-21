@@ -1,4 +1,4 @@
-/* public/css/style.css */
+/* public/css/style.css - FINAL POLISHED TABLE */
 
 /* --- 1. Foundation: Colors, Fonts, and Basic Layout --- */
 :root {
@@ -39,7 +39,7 @@ input:focus { outline: none; border-color: var(--primary-green); box-shadow: 0 0
 .autocomplete-results.visible { display: block; } .autocomplete-results li { padding: 12px; cursor: pointer; } .autocomplete-results li:hover { background-color: rgba(40, 167, 69, 0.1); }
 
 /* --- 5. Quotation Table & Totals Breakdown --- */
-#selected-products-table-container { width: 100%; }
+#selected-products-table-container { width: 100%; } /* REMOVED overflow-x: auto; */
 #selected-products-table { width: 100%; border-collapse: separate; border-spacing: 0 5px; table-layout: fixed; }
 #selected-products-table th, #selected-products-table td { padding: 10px; font-size: 0.9rem; text-align: left; vertical-align: middle; word-wrap: break-word; }
 #selected-products-table th { font-weight: 700; color: var(--primary-green); }
@@ -48,7 +48,7 @@ input:focus { outline: none; border-color: var(--primary-green); box-shadow: 0 0
 #selected-products-table td:last-child { border-top-right-radius: var(--border-radius-card); border-bottom-right-radius: var(--border-radius-card); }
 #selected-products-table td small { font-size: 0.9em; color: var(--secondary-green); }
 
-/* Final column widths */
+/* UPDATED: Final column widths */
 #selected-products-table th:nth-child(1) { width: 6%; }  /* # */
 #selected-products-table th:nth-child(2) { width: 44%; } /* Item */
 #selected-products-table th:nth-child(3) { width: 11%; } /* Base Price */
@@ -85,43 +85,3 @@ input:focus { outline: none; border-color: var(--primary-green); box-shadow: 0 0
 
 /* Responsive adjustments */
 @media (max-width: 1200px) { .main-content-grid { grid-template-columns: 1fr; } }
-
-/* --- NEW: Styles for Category Pills --- */
-.search-bar {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.category-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding-bottom: 5px; /* Adds a little space below the pills */
-}
-
-.category-pill {
-    padding: 8px 18px;
-    border-radius: var(--border-radius-pill);
-    background-color: rgba(255, 255, 255, 0.7);
-    border: 1px solid var(--border-green);
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--dark-green-text);
-    transition: all 0.2s ease;
-    user-select: none; /* Prevents text selection on click */
-}
-
-.category-pill:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-light);
-    border-color: var(--primary-green);
-}
-
-.category-pill.active {
-    background-color: var(--primary-green);
-    color: #fff;
-    border-color: var(--primary-green);
-    box-shadow: none;
-}

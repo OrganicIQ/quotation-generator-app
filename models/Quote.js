@@ -1,32 +1,75 @@
-// models/Quote.js - FINAL CODE WITH GST AND DISCOUNT FIELDS
+// server/models/Quote.js - CORRECTED VERSION
 
 const mongoose = require('mongoose');
 
-const LineItemSchema = new mongoose.Schema({
-    product: { type: mongoose.Schema.Types.ObjectId, ref: 'Product', required: true },
-    quantity: { type: Number, required: true, min: 1 },
-    priceAtTime: { type: Number, required: true },
-    discountPercentage: { type: Number, required: true, default: 0 }
-});
+const lineItemSchema = new mongoose.Schema({
+    product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+        required: true
+    },
+    quantity: {
+        type: Number,
+        required: true
+    },
+    priceAtTime: {
+        type: Number,
+        required: true
+    },
+    discountPercentage: {
+        type: Number,
+        default: 0
+    }
+}, { _id: false });
 
-const QuoteSchema = new mongoose.Schema({
-    quoteNumber: { type: String, required: true, unique: true },
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    clientName: { type: String, default: 'N/A' },
-    lineItems: [LineItemSchema],
+const quoteSchema = new mongoose.Schema({
+    quoteNumber: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    clientName: {
+        type: String,
+        required: true
+    },
+    lineItems: [lineItemSchema],
+    subtotal: {
+        type: Number,
+        required: true
+    },
+    gstPercentage: {
+        type: Number,
+        required: true
+    },
+    gstAmount: {
+        type: Number,
+        required: true
+    },
+    grandTotal: {
+        type: Number,
+        required: true
+    },
     
-    // --- NEW: Detailed financial fields ---
-    subtotal: { type: Number, required: true, default: 0 },
-    couponCode: { type: String, default: null },
-    couponDiscountPercentage: { type: Number, default: 0 },
-    couponDiscountAmount: { type: Number, default: 0 },
-    gstPercentage: { type: Number, default: 18 },
-    gstAmount: { type: Number, default: 0 },
-    // ------------------------------------
+    // --- ADDED FIELDS FOR COUPON ---
+    couponCode: {
+        type: String,
+        default: null
+    },
+    couponDiscountPercentage: {
+        type: Number,
+        default: 0
+    },
+    couponDiscountAmount: {
+        type: Number,
+        default: 0
+    }
+    // --------------------------------
 
-    grandTotal: { type: Number, required: true },
-    status: { type: String, enum: ['Draft', 'Sent', 'Accepted', 'Rejected'], default: 'Draft' },
-    createdAt: { type: Date, default: Date.now }
-});
+}, { timestamps: true }); // timestamps adds createdAt and updatedAt
 
-module.exports = mongoose.model('Quote', QuoteSchema);
+module.exports = mongoose.model('Quote', quoteSchema);

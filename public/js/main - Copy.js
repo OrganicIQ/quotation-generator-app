@@ -1,94 +1,24 @@
-// main.js - FINAL, COMPLETE, AND WORKING VERSION
+// main.js - FINAL VERSION WITH CORRECTED EXCEL DOWNLOAD
 
 const API_BASE_URL = window.location.origin.includes('localhost')
     ? 'http://localhost:3000'
     : 'https://my-quote-backend-q5i4.onrender.com';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // --- DOM Element References ---
-    const authSection = document.getElementById('auth-section');
-    const dashboardSection = document.getElementById('dashboard-section');
-    const userDisplayName = document.getElementById('user-display-name');
-    const quoteSearchInput = document.getElementById('quote-search');
-    const autocompleteResultsUl = document.getElementById('autocomplete-results');
-    const noItemsMessage = document.getElementById('no-items-message');
-    const selectedProductsTable = document.getElementById('selected-products-table');
-    const selectedProductsTbody = document.getElementById('selected-products-tbody');
-    const subtotalAmountSpan = document.getElementById('subtotal-amount');
-    const discountRow = document.getElementById('discount-row');
-    const couponRateDisplay = document.getElementById('coupon-rate-display');
-    const discountAmountSpan = document.getElementById('discount-amount');
-    const gstAmountSpan = document.getElementById('gst-amount');
-    const grandTotalAmountSpan = document.getElementById('grand-total-amount');
-    const downloadExcelBtn = document.getElementById('download-excel-btn');
-    const downloadPdfBtn = document.getElementById('download-pdf-btn');
-    const saveQuoteBtn = document.getElementById('save-quote-btn');
-    const clientNameInput = document.getElementById('client-name-input');
-    const savedQuotesList = document.getElementById('saved-quotes-list');
-    const couponCodeInput = document.getElementById('coupon-code-input');
-    const applyCouponBtn = document.getElementById('apply-coupon-btn');
-    const couponStatusMessage = document.getElementById('coupon-status-message');
+    // DOM Element References
+    const authSection = document.getElementById('auth-section'); const dashboardSection = document.getElementById('dashboard-section'); const userDisplayName = document.getElementById('user-display-name'); const quoteSearchInput = document.getElementById('quote-search'); const autocompleteResultsUl = document.getElementById('autocomplete-results'); const noItemsMessage = document.getElementById('no-items-message'); const selectedProductsTable = document.getElementById('selected-products-table'); const selectedProductsTbody = document.getElementById('selected-products-tbody');
+    const subtotalAmountSpan = document.getElementById('subtotal-amount'); const discountRow = document.getElementById('discount-row'); const couponRateDisplay = document.getElementById('coupon-rate-display'); const discountAmountSpan = document.getElementById('discount-amount'); const gstAmountSpan = document.getElementById('gst-amount'); const grandTotalAmountSpan = document.getElementById('grand-total-amount');
+    const downloadExcelBtn = document.getElementById('download-excel-btn'); const downloadPdfBtn = document.getElementById('download-pdf-btn'); const saveQuoteBtn = document.getElementById('save-quote-btn'); const clientNameInput = document.getElementById('client-name-input'); const savedQuotesList = document.getElementById('saved-quotes-list'); const couponCodeInput = document.getElementById('coupon-code-input'); const applyCouponBtn = document.getElementById('apply-coupon-btn'); const couponStatusMessage = document.getElementById('coupon-status-message');
     const categoryFilter = document.getElementById('category-filter');
 
-    // --- State Variables ---
-    let lineItemDiscount = 10;
-    let couponDiscountPercentage = 0;
-    const GST_RATE = 18;
+    // State Variables
+    let lineItemDiscount = 10; let couponDiscountPercentage = 0; const GST_RATE = 18;
 
-    // --- Helper Functions ---
-    function calculateQuotation(basePrice, quantity, discountPercentage) {
-        const priceAfterDiscount = basePrice * (1 - (discountPercentage / 100));
-        const total = priceAfterDiscount * quantity;
-        return { priceAfterDiscount, total };
-    }
-
-    function debounce(func, delay) {
-        let timeout;
-        return function(...args) {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(this, args), delay);
-        };
-    }
-
-    function updateFinalTotals() {
-        let subTotal = 0;
-        const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row');
-        productRows.forEach(row => {
-            const itemTotalSpan = row.querySelector('.item-total-price');
-            if (itemTotalSpan) {
-                const itemTotal = parseFloat(itemTotalSpan.textContent);
-                if (!isNaN(itemTotal)) { subTotal += itemTotal; }
-            }
-        });
-        const discountAmount = subTotal * (couponDiscountPercentage / 100);
-        const amountAfterDiscount = subTotal - discountAmount;
-        const gstAmount = amountAfterDiscount * (GST_RATE / 100);
-        const finalGrandTotal = amountAfterDiscount + gstAmount;
-        subtotalAmountSpan.textContent = subTotal.toFixed(2);
-        if (couponDiscountPercentage > 0) {
-            couponRateDisplay.textContent = couponDiscountPercentage;
-            discountAmountSpan.textContent = discountAmount.toFixed(2);
-            discountRow.style.display = 'table-row';
-        } else {
-            discountRow.style.display = 'none';
-        }
-        gstAmountSpan.textContent = gstAmount.toFixed(2);
-        grandTotalAmountSpan.textContent = finalGrandTotal.toFixed(2);
-    }
-
-    function recalculateAllRows() {
-        const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row');
-        productRows.forEach(row => {
-            const quantityInput = row.querySelector('.quantity-input-small');
-            const quantity = parseInt(quantityInput.value) || 1;
-            const basePrice = parseFloat(quantityInput.dataset.basePrice);
-            const { priceAfterDiscount, total } = calculateQuotation(basePrice, quantity, lineItemDiscount);
-            row.cells[4].textContent = `${lineItemDiscount}%`;
-            row.querySelector('.item-discounted-price').textContent = priceAfterDiscount.toFixed(2);
-            row.querySelector('.item-total-price').textContent = total.toFixed(2);
-        });
-        updateFinalTotals();
-    }
+    // Helper Functions
+    function calculateQuotation(basePrice, quantity, discountPercentage) { const priceAfterDiscount = basePrice * (1 - (discountPercentage / 100)); const total = priceAfterDiscount * quantity; return { priceAfterDiscount, total }; }
+    function debounce(func, delay) { let timeout; return function(...args) { clearTimeout(timeout); timeout = setTimeout(() => func.apply(this, args), delay); }; }
+    function updateFinalTotals() { let subTotal = 0; const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); productRows.forEach(row => { const itemTotalSpan = row.querySelector('.item-total-price'); if (itemTotalSpan) { const itemTotal = parseFloat(itemTotalSpan.textContent); if (!isNaN(itemTotal)) { subTotal += itemTotal; } } }); const discountAmount = subTotal * (couponDiscountPercentage / 100); const amountAfterDiscount = subTotal - discountAmount; const gstAmount = amountAfterDiscount * (GST_RATE / 100); const finalGrandTotal = amountAfterDiscount + gstAmount; subtotalAmountSpan.textContent = subTotal.toFixed(2); if (couponDiscountPercentage > 0) { couponRateDisplay.textContent = couponDiscountPercentage; discountAmountSpan.textContent = discountAmount.toFixed(2); discountRow.style.display = 'table-row'; } else { discountRow.style.display = 'none'; } gstAmountSpan.textContent = gstAmount.toFixed(2); grandTotalAmountSpan.textContent = finalGrandTotal.toFixed(2); }
+    function recalculateAllRows() { const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); productRows.forEach(row => { const quantityInput = row.querySelector('.quantity-input-small'); const quantity = parseInt(quantityInput.value) || 1; const basePrice = parseFloat(quantityInput.dataset.basePrice); const { priceAfterDiscount, total } = calculateQuotation(basePrice, quantity, lineItemDiscount); row.cells[4].textContent = `${lineItemDiscount}%`; row.querySelector('.item-discounted-price').textContent = priceAfterDiscount.toFixed(2); row.querySelector('.item-total-price').textContent = total.toFixed(2); }); updateFinalTotals(); }
 
     function addProductToSelectedList(product) {
         if (selectedProductsTbody.querySelector(`[data-product-id="${product._id}"]`)) { alert('Item is already in quote.'); return; }
@@ -96,35 +26,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const initialQuantity = 1;
         const { priceAfterDiscount, total } = calculateQuotation(product.basePrice, initialQuantity, lineItemDiscount);
         const itemNameHtml = `<strong>${product.baseName} ${product.variantName ? `(${product.variantName})` : ''}</strong><br><small>${product.description || ''}</small>`;
-        noItemsMessage.style.display = 'none';
-        selectedProductsTable.style.display = 'table';
+        noItemsMessage.style.display = 'none'; selectedProductsTable.style.display = 'table';
         const newRow = document.createElement('tr');
-        newRow.classList.add('selected-product-row');
-        newRow.dataset.productId = product._id;
+        newRow.classList.add('selected-product-row'); newRow.dataset.productId = product._id;
         newRow.innerHTML = `<td>${rowIndex}</td><td>${itemNameHtml}</td><td>${product.basePrice.toFixed(2)}</td><td><input type="number" class="quantity-input-small" value="${initialQuantity}" min="1" data-base-price="${product.basePrice}"/></td><td>${lineItemDiscount}%</td><td><span class="item-discounted-price">${priceAfterDiscount.toFixed(2)}</span></td><td><span class="item-total-price">${total.toFixed(2)}</span></td><td><button class="remove-btn">Remove</button></td>`;
         selectedProductsTbody.appendChild(newRow);
-        newRow.querySelector('.quantity-input-small').addEventListener('input', () => {
-            let quantity = parseInt(newRow.querySelector('.quantity-input-small').value) || 1;
-            const basePrice = parseFloat(newRow.querySelector('.quantity-input-small').dataset.basePrice);
-            const { priceAfterDiscount, total } = calculateQuotation(basePrice, quantity, lineItemDiscount);
-            newRow.querySelector('.item-discounted-price').textContent = priceAfterDiscount.toFixed(2);
-            newRow.querySelector('.item-total-price').textContent = total.toFixed(2);
-            updateFinalTotals();
-        });
-        newRow.querySelector('.remove-btn').addEventListener('click', () => {
-            newRow.remove();
-            updateFinalTotals();
-            if (selectedProductsTbody.children.length === 0) {
-                noItemsMessage.style.display = 'block';
-                selectedProductsTable.style.display = 'none';
-            }
-            selectedProductsTbody.querySelectorAll('tr').forEach((row, idx) => {
-                row.cells[0].textContent = idx + 1;
-            });
-        });
+        newRow.querySelector('.quantity-input-small').addEventListener('input', (event) => { let quantity = parseInt(event.target.value) || 1; const basePrice = parseFloat(event.target.dataset.basePrice); const { priceAfterDiscount, total } = calculateQuotation(basePrice, quantity, lineItemDiscount); newRow.querySelector('.item-discounted-price').textContent = priceAfterDiscount.toFixed(2); newRow.querySelector('.item-total-price').textContent = total.toFixed(2); updateFinalTotals(); });
+        newRow.querySelector('.remove-btn').addEventListener('click', () => { newRow.remove(); updateFinalTotals(); if (selectedProductsTbody.children.length === 0) { noItemsMessage.style.display = 'block'; selectedProductsTable.style.display = 'none'; } selectedProductsTbody.querySelectorAll('tr').forEach((row, idx) => { row.cells[0].textContent = idx + 1; }); });
         updateFinalTotals();
     }
-
+    
     async function loadSavedQuotes() {
         try {
             const response = await fetch(`${API_BASE_URL}/api/quotes`, { credentials: 'include' });
@@ -142,11 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     savedQuotesList.appendChild(quoteElement);
                 });
             }
-        } catch (error) {
-            console.error('Error loading saved quotes:', error);
-        }
+        } catch (error) { console.error('Error loading quotes:', error); }
     }
-
+    
     async function loadSingleQuote(quoteId) {
         try {
             const response = await fetch(`${API_BASE_URL}/api/quotes/${quoteId}`, { credentials: 'include' });
@@ -195,8 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`${API_BASE_URL}/api/products?${query.toString()}`, { credentials: 'include' });
             const products = await response.json();
             if (products.length > 0) {
-                products.forEach(prod => { const li = document.createElement('li'); li.textContent = `${prod.baseName} - ₹${prod.basePrice.toFixed(2)}`; li.dataset.product = JSON.stringify(prod); li.addEventListener('click', () => { addProductToSelectedList(JSON.parse(li.dataset.product)); quoteSearchInput.value = ''; autocompleteResultsUl.classList.remove('visible'); }); autocompleteResultsUl.appendChild(li); });
-            } else { autocompleteResultsUl.innerHTML = '<li>No items found</li>'; }
+                products.forEach(prod => { const li = document.createElement('li'); li.textContent = `${prod.baseName} - ₹${prod.basePrice.toFixed(2)}`; li.dataset.product = JSON.stringify(prod); li.addEventListener('click', () => { addProductToSelectedList(JSON.parse(li.dataset.product)); quoteSearchInput.value = ''; autocompleteResultsUl.innerHTML = ''; autocompleteResultsUl.classList.remove('visible'); }); autocompleteResultsUl.appendChild(li); });
+            } else {
+                autocompleteResultsUl.innerHTML = '<li>No items found</li>';
+            }
             autocompleteResultsUl.classList.add('visible');
         } catch (e) { console.error('Error searching:', e); }
     };
@@ -239,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: row.cells[1].innerHTML,
                 quantity: parseInt(row.querySelector('.quantity-input-small').value),
                 price: parseFloat(row.cells[2].textContent),
-                discountPercentage: parseFloat(row.cells[4].textContent) || 0,
+                discountPercentage: parseFloat(row.cells[4].textContent) || 0
             }));
             const quoteData = { clientName: clientNameInput.value.trim() || 'N/A', lineItems, subtotal: parseFloat(subtotalAmountSpan.textContent), couponDiscountPercentage, couponDiscountAmount: parseFloat(discountAmountSpan.textContent) || 0, gstPercentage: GST_RATE, gstAmount: parseFloat(gstAmountSpan.textContent), grandTotal: parseFloat(grandTotalAmountSpan.textContent) };
             try {
@@ -250,8 +161,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if(downloadExcelBtn){ /* unchanged */ }
-
+    // --- CORRECTED: Download as Excel Logic ---
+    if (downloadExcelBtn) {
+        downloadExcelBtn.addEventListener('click', () => {
+            const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row');
+            if (productRows.length === 0) {
+                alert('No items to download.');
+                return;
+            }
+            // Headers match the new 8-column layout
+            const data = [['#', 'Item', 'Base Price', 'Qty', 'Disc %', 'Disc Price', 'Total']];
+            productRows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                data.push([
+                    cells[0].textContent,
+                    // Clean up the combined Item HTML for Excel
+                    cells[1].innerText.replace(/\n/g, " "), 
+                    cells[2].textContent, // Base Price
+                    cells[3].querySelector('input').value, // Qty
+                    cells[4].textContent, // Disc %
+                    cells[5].textContent, // Disc Price
+                    cells[6].textContent  // Total
+                ]);
+            });
+            // Add the full financial breakdown at the bottom
+            data.push([]); // Spacer row
+            data.push(['', '', '', '', '', 'Subtotal', subtotalAmountSpan.textContent]);
+            if (couponDiscountPercentage > 0) {
+                data.push(['', '', '', '', '', `Discount (${couponDiscountPercentage}%)`, `-${discountAmountSpan.textContent}`]);
+            }
+            data.push(['', '', '', '', '', `GST (${GST_RATE}%)`, `+${gstAmountSpan.textContent}`]);
+            data.push(['', '', '', '', '', 'Grand Total', grandTotalAmountSpan.textContent]);
+            
+            const workbook = XLSX.utils.book_new();
+            const worksheet = XLSX.utils.aoa_to_sheet(data);
+            XLSX.utils.book_append_sheet(workbook, worksheet, 'Quotation');
+            XLSX.writeFile(workbook, `Quotation_${new Date().toISOString().slice(0, 10)}.xlsx`);
+        });
+    }
+    
     if (applyCouponBtn) {
         applyCouponBtn.addEventListener('click', async () => {
             const code = couponCodeInput.value.trim(); if (!code) { couponStatusMessage.textContent = 'Please enter a code.'; couponStatusMessage.style.color = 'var(--danger-color)'; return; }

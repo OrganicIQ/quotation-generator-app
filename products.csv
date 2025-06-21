@@ -1,270 +1,270 @@
 ﻿productId,baseName,variantName,description,category,basePrice
-1,BEAKER 5ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",18
-2,BEAKER 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",18
-3,BEAKER 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",20
-4,BEAKER 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",24
-5,BEAKER 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",34
-6,BEAKER 150ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",44
-7,BEAKER 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",60
-8,BEAKER 400ml,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",84
-9,BEAKER 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",100
-10,BEAKER 600ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",170
-11,BEAKER 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",230
-12,BEAKER 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",540
-13,BEAKER 3000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",940
-14,BEAKER 5000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1650
-15,BOD BOTTLES 125ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",160
-16,BOD BOTTLES 300ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",230
-17,REAGENT BOTTLES WITH HOLLOW STOPPERS 30ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",80
-18,REAGENT BOTTLES WITH HOLLOW STOPPERS 60ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",100
-19,REAGENT BOTTLES WITH HOLLOW STOPPERS 125ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",110
-20,REAGENT BOTTLES WITH HOLLOW STOPPERS 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",140
-21,REAGENT BOTTLES WITH HOLLOW STOPPERS 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",220
-22,REAGENT BOTTLES WITH HOLLOW STOPPERS 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",350
-23,REAGENT BOTTLES WITH HOLLOW STOPPERS 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",700
-24,REAGENT BOTTLES WITH  SOLID STOPPERS 30ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",90
-25,REAGENT BOTTLES WITH  SOLID STOPPERS 60ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",110
-26,REAGENT BOTTLES WITH  SOLID STOPPERS 125ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",130
-27,REAGENT BOTTLES WITH  SOLID STOPPERS 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",160
-28,REAGENT BOTTLES WITH  SOLID STOPPERS 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",250
-29,REAGENT BOTTLES WITH  SOLID STOPPERS 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",400
-30,REAGENT BOTTLES WITH  SOLID STOPPERS 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",760
-31,REAGENT BOTTLES WITH SCREW CAP 30ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",90
-32,REAGENT BOTTLES WITH SCREW CAP 60ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",100
-33,REAGENT BOTTLES WITH SCREW CAP 125ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",150
-34,REAGENT BOTTLES WITH SCREW CAP 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",200
-35,REAGENT BOTTLES WITH SCREW CAP 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",270
-36,REAGENT BOTTLES WITH SCREW CAP 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",420
-37,REAGENT BOTTLES WITH SCREW CAP 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",700
-38,REAGENT BOTTLES WITH SCREW CAP 5000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1900
-39,GAS WASHING BOTTLES WITH HEAD 125ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",320
-40,GAS WASHING BOTTLES WITH HEAD 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",420
-41,GAS WASHING BOTTLES WITH HEAD 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",540
-42,RELATIVE DENSITY BOTTLE WITH GLASS STOPPER 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",56
-43,RELATIVE DENSITY BOTTLE WITH GLASS STOPPER 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",64
-44,RELATIVE DENSITY BOTTLE WITH GLASS STOPPER 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",76
-45,RELATIVE DENSITY BOTTLE WITH GLASS STOPPER 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",140
-46,RELATIVE DENSITY BOTTLE  WITH TEFLON STOPPERS 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",76
-47,RELATIVE DENSITY BOTTLE  WITH TEFLON STOPPERS 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",84
-48,RELATIVE DENSITY BOTTLE  WITH TEFLON STOPPERS 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",94
-49,RELATIVE DENSITY BOTTLE  WITH TEFLON STOPPERS 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",160
-50,WEIGHING BOTTLE TALL FORM WITH STOPPERS 5ML(20X40MM),,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",50
-51,WEIGHING BOTTLE TALL FORM WITH STOPPERS 15ML(25X60MM),,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",60
-52,WEIGHING BOTTLE TALL FORM WITH STOPPERS 25ML(30X65MM),,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",70
-53,WEIGHING BOTTLE TALL FORM WITH STOPPERS 60ML(40X90MM),,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",170
-54,WEIGHING BOTTLE SQUAT FORM WITH STOPPERS 20ML(50X35MM),,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",170
-55,WEIGHING BOTTLE SQUAT FORM WITH STOPPERS 40ML(60X40MM),,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",180
-56,WEIGHING BOTTLE SQUAT FORM WITH STOPPERS 50ML(50X50MM),,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",190
-57,CHROMATOGRPHY COLUMN PLAIN WITH ROTA FLOW STOPCOCK EFECTIVE LENGTH 50CMX20MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",140
-58,CHROMATOGRPHY COLUMN PLAIN WITH ROTA FLOW STOPCOCK EFECTIVE LENGTH 60CMX25MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",160
-59,CHROMATOGRPHY COLUMN PLAIN WITH ROTA FLOW STOPCOCK EFECTIVE LENGTH 60CMX38MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",300
-60,BURETTE WITH ROTAFLOW STOPCOCK MEDIUM WALL 5ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",100
-61,BURETTE WITH ROTAFLOW STOPCOCK MEDIUM WALL 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",100
-62,BURETTE WITH ROTAFLOW STOPCOCK MEDIUM WALL 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",100
-63,BURETTE WITH ROTAFLOW STOPCOCK MEDIUM WALL 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",110
-64,BURETTE WITH ROTAFLOW STOPCOCK MEDIUM WALL 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",160
-65,BURETTE WITH GLASS STOPCOCK MEDIUM WALL 5ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",140
-66,BURETTE WITH GLASS STOPCOCK MEDIUM WALL 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",140
-67,BURETTE WITH GLASS STOPCOCK MEDIUM WALL 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",140
-68,BURETTE WITH GLASS STOPCOCK MEDIUM WALL 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",150
-69,BURETTE WITH GLASS STOPCOCK MEDIUM WALL 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",200
-70,MEASURING CYLINDER ROUND BASE CLASS B 5ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",48
-71,MEASURING CYLINDER ROUND BASE CLASS B 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",50
-72,MEASURING CYLINDER ROUND BASE CLASS B 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",60
-73,MEASURING CYLINDER ROUND BASE CLASS B 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",70
-74,MEASURING CYLINDER ROUND BASE CLASS B 100ML   ,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",96
-75,MEASURING CYLINDER ROUND BASE CLASS B 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",170
-76,MEASURING CYLINDER ROUND BASE CLASS B 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",240
-77,MEASURING CYLINDER ROUND BASE CLASS B 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",420
-78,MEASURING CYLINDER ROUND BASE CLASS B 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",800
-79,MEASURING CYLINDER HEXAGONAL BASE CLASS B 5ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",140
-80,MEASURING CYLINDER HEXAGONAL BASE CLASS B 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",140
-81,MEASURING CYLINDER HEXAGONAL BASE CLASS B 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",150
-82,MEASURING CYLINDER HEXAGONAL BASE CLASS B 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",190
-83,MEASURING CYLINDER HEXAGONAL BASE CLASS B 100ML   ,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",230
-84,MEASURING CYLINDER HEXAGONAL BASE CLASS B 250 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",370
-85,MEASURING CYLINDER HEXAGONAL BASE CLASS B 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",550
-86,MEASURING CYLINDER HEXAGONAL BASE CLASS B 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",800
-87,MEASURING CYLINDER HEXAGONAL BASE CLASS B 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1350
-88,NESSLERS CYLINDERS 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",36
-89,NESSLERS CYLINDERS 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",56
-90,CONDENSOR   LEIBIG WITH INTERCHANGEABLE JOINTS 200MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",190
-91,CONDENSOR   LEIBIG WITH INTERCHANGEABLE JOINTS 300MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",220
-92,CONDENSOR   LEIBIG WITH INTERCHANGEABLE JOINTS 400MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",280
-93,CONDENSOR   LEIBIG WITH INTERCHANGEABLE JOINTS 500MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",350
-94,BULB CONDENSOR WITH INTERCHANGEABLE JOINTS 200MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",260
-95,BULB CONDENSOR WITH INTERCHANGEABLE JOINTS 300MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",320
-96,BULB CONDENSOR WITH INTERCHANGEABLE JOINTS 400MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",400
-97,COIL CONDENSOR WITH INTERCHANGEABLE JOINTS 300MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",360
-98,COIL CONDENSOR WITH INTERCHANGEABLE JOINTS 400MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",440
-99,COIL CONDENSOR WITH INTERCHANGEABLE JOINTS 500MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",600
-100,SOXLET EXTRACTION APPARATUS WITH FLASK 60ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",720
-101,SOXLET EXTRACTION APPARATUS WITH FLASK 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",750
-102,SOXLET EXTRACTION APPARATUS WITH FLASK 200ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1040
-103,SOXLET EXTRACTION APPARATUS WITH FLASK 400ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1900
-104,GLASS DESSICATORS PLAIN IMPORTED 120MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",850
-105,GLASS DESSICATORS PLAIN IMPORTED 150MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1100
-106,GLASS DESSICATORS PLAIN IMPORTED 210MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1900
-107,GLASS DESSICATORS PLAIN IMPORTED 240MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",2900
-108,GLASS DESSICATORS PLAIN IMPORTED 300MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",4200
-109,GLASS DESSICATORS VACCUM IMPORTED 150MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1600
-110,GLASS DESSICATORS VACCUM IMPORTED 210MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",2900
-111,GLASS DESSICATORS VACCUM IMPORTED 240MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",3700
-112,GLASS DESSICATORS VACCUM IMPORTED 300MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",5400
-113,SOCKETS B 10,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",36
-114,SOCKETS B 14,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",42
-115,SOCKETS B 19,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",48
-116,SOCKETS B 24,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",56
-117,SOCKETS B 29,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",88
-118,SOCKETS B 34,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",120
-119,"PETRI DISH 2""",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",68
-120,"PETRI DISH 3""",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",84
-121,"PETRI DISH 4""",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",100
-122,"PETRI DISH 6""",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",350
-123,"PETRI DISH 8""",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",400
-124,"DISTILATION ASSEMBLY CONSISTING RB FLASK LEIBIG COND, RECIEVER ADOPTOR AND BEND 250 ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",520
-125,"DISTILATION ASSEMBLY CONSISTING RB FLASK LEIBIG COND, RECIEVER ADOPTOR AND BEND 500 ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",560
-126,"DISTILATION ASSEMBLY CONSISTING RB FLASK LEIBIG COND, RECIEVER ADOPTOR AND BEND 1000 ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",750
-127,"DISTILATION ASSEMBLY CONSISTING RB FLASK LEIBIG COND, RECIEVER ADOPTOR AND BEND 2000ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1150
-128,THIEL TUBE 18X150MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",44
-129,THIEL TUBE 25X150MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",56
-130,PYKNOMETER 5 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",40
-131,PYKNOMETER 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",54
-132,PYKNOMETER 25 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",80
-133,DROPPER WITH RUBBER TEAT BOROCILICATE GLASS 10CM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",8
-134,DROPPER WITH RUBBER TEAT BOROCILICATE GLASS 15CM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",8
-135,DROPPER WITH RUBBER TEAT BOROCILICATE GLASS 20CM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",12
-136,RECTANGULAR MEUSUM JARS WITH GLASS COVER IMPORTED 140X210X100,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1300
-137,RECTANGULAR MEUSUM JARS WITH GLASS COVER IMPORTED 210X170X130,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1300
-138,RECTANGULAR MEUSUM JARS WITH GLASS COVER IMPORTED 220X140X140,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1300
-139,RECTANGULAR MEUSUM JARS WITH GLASS COVER IMPORTED 225X225X125,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1900
-140,RECTANGULAR MEUSUM JARS WITH GLASS COVER IMPORTED 250x250x150,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",2600
-141,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 5 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",46
-142,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",56
-143,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",60
-144,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",68
-145,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",84
-146,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 250ML  ,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",124
-147,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",220
-148,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",310
-149,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",620
-150,VOLUMETRIC FLASK WITH HOLLOW STOPPERS AMBER COLOUR 5 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",110
-151,VOLUMETRIC FLASK WITH HOLLOW STOPPERS AMBER COLOUR 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",130
-152,VOLUMETRIC FLASK WITH HOLLOW STOPPERS AMBER COLOUR 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",140
-153,VOLUMETRIC FLASK WITH HOLLOW STOPPERS AMBER COLOUR 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",160
-154,VOLUMETRIC FLASK WITH HOLLOW STOPPERS AMBER COLOUR 100ML   ,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",220
-155,VOLUMETRIC FLASK WITH HOLLOW STOPPERS AMBER COLOUR 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",320
-156,VOLUMETRIC FLASK WITH HOLLOW STOPPERS AMBER COLOUR 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",450
-157,VOLUMETRIC FLASK WITH HOLLOW STOPPERS AMBER COLOUR 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",700
-158,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",36
-159,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",40
-160,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",44
-161,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",50
-162,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 150ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",66
-163,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",80
-164,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",130
-165,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",220
-166,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",550
-167,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 3000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",950
-168,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 5000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1600
-169,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",60
-170,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",68
-171,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",72
-172,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",76
-173,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",120
-174,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",160
-175,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",260
-176,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",660
-177,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 3000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1050
-178,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 5000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1700
-179,IODINE FLASK 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",130
-180,IODINE FLASK 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",160
-181,IODINE FLASK 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",220
-182,PIPETTE VOLUMETRIC ONE MARK CLASS B 1ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",30
-183,PIPETTE VOLUMETRIC ONE MARK CLASS B 2ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",30
-184,PIPETTE VOLUMETRIC ONE MARK CLASS B 5ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",30
-185,PIPETTE VOLUMETRIC ONE MARK CLASS B 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",36
-186,PIPETTE VOLUMETRIC ONE MARK CLASS B 20ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",40
-187,PIPETTE VOLUMETRIC ONE MARK CLASS B 25ML  ,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",40
-188,PIPETTE VOLUMETRIC ONE MARK CLASS B 50ML   ,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",60
-189,PIPETTE VOLUMETRIC ONE MARK CLASS B 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",100
-190,PIPETTE GRADUATED SERLOGICAL AND MOHAR TYPE       CLASS B 0.1ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",34
-191,PIPETTE GRADUATED SERLOGICAL AND MOHAR TYPE       CLASS B 0.2ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",34
-192,PIPETTE GRADUATED SERLOGICAL AND MOHAR TYPE       CLASS B 0.5ML   ,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",34
-193,PIPETTE GRADUATED SERLOGICAL AND MOHAR TYPE       CLASS B 1ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",34
-194,PIPETTE GRADUATED SERLOGICAL AND MOHAR TYPE       CLASS B 2ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",36
-195,PIPETTE GRADUATED SERLOGICAL AND MOHAR TYPE       CLASS B 5ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",38
-196,PIPETTE GRADUATED SERLOGICAL AND MOHAR TYPE       CLASS B 10ML   ,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",40
-197,PIPETTE GRADUATED SERLOGICAL AND MOHAR TYPE       CLASS B 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",54
-198,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 10X75,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",320
-199,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 12X75,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",360
-200,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 12X100,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",440
-201,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 15X125,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",660
-202,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 15X150,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",720
-203,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 18X150,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",920
-204,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 25X150,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1160
-205,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 25X200,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1800
-206,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 32X200,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",3600
-207,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 38X200,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",5000
-208,CULTURE TUBE S WITH SCREW CAP ROUND BOTTOM 5 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",14
-209,CULTURE TUBE S WITH SCREW CAP ROUND BOTTOM 10 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",16
-210,CULTURE TUBE S WITH SCREW CAP ROUND BOTTOM 15 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",18
-211,CULTURE TUBE S WITH SCREW CAP ROUND BOTTOM 30 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",20
-212,CULTURE TUBE S WITH SCREW CAP ROUND BOTTOM 50 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",26
-213,CULTURE TUBE S WITH SCREW CAP ROUND BOTTOM 60 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",30
-214,TEST TUBE GRADUATED WITH STANDARD JOINT AND STOPPER 5ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",50
-215,TEST TUBE GRADUATED WITH STANDARD JOINT AND STOPPER 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",50
-216,TEST TUBE GRADUATED WITH STANDARD JOINT AND STOPPER 15ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",52
-217,TEST TUBE GRADUATED WITH STANDARD JOINT AND STOPPER 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",60
-218,TEST TUBE GRADUATED WITH STANDARD JOINT AND STOPPER 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",68
-219,TEST TUBE GRADUATED WITH STANDARD JOINT AND STOPPER 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",120
-220,KJELDHAL FLASK WITH JOINT B 24 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",110
-221,KJELDHAL FLASK WITH JOINT B 25 300ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",150
-222,KJELDHAL FLASK WITH JOINT B 26 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",220
-223,KJELDHAL FLASK WITH JOINT B 27 800ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",360
-224,GLASS FUNNEL 25MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",28
-225,GLASS FUNNEL 50MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",32
-226,GLASS FUNNEL 65MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",34
-227,GLASS FUNNEL 75MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",44
-228,GLASS FUNNEL 100MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",72
-229,GLASS FUNNEL 125 MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",170
-230,GLASS FUNNEL 150MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",300
-231,SEPARATING FUNNEL WITH ROTAFLOW STOPCOCK / HOLLOW STOPER 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",140
-232,SEPARATING FUNNEL WITH ROTAFLOW STOPCOCK / HOLLOW STOPER 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",140
-233,SEPARATING FUNNEL WITH ROTAFLOW STOPCOCK / HOLLOW STOPER 125ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",160
-234,SEPARATING FUNNEL WITH ROTAFLOW STOPCOCK / HOLLOW STOPER 250 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",220
-235,SEPARATING FUNNEL WITH ROTAFLOW STOPCOCK / HOLLOW STOPER 500 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",310
-236,SEPARATING FUNNEL WITH ROTAFLOW STOPCOCK / HOLLOW STOPER 1000 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",500
-237,SEPARATING FUNNEL WITH ROTAFLOW STOPCOCK / HOLLOW STOPER 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",950
-238,SEPARATING FUNNEL WITH ROTAFLOW STOPCOCK / HOLLOW STOPER 5000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",3200
-239,SEPARATING FUNNEL WITH GLASS STOPCOCK / HOLLOW STOPER 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",180
-240,SEPARATING FUNNEL WITH GLASS STOPCOCK / HOLLOW STOPER 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",180
-241,SEPARATING FUNNEL WITH GLASS STOPCOCK / HOLLOW STOPER 125ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",200
-242,SEPARATING FUNNEL WITH GLASS STOPCOCK / HOLLOW STOPER 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",260
-243,SEPARATING FUNNEL WITH GLASS STOPCOCK / HOLLOW STOPER 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",350
-244,SEPARATING FUNNEL WITH GLASS STOPCOCK / HOLLOW STOPER 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",540
-245,SEPARATING FUNNEL WITH GLASS STOPCOCK / HOLLOW STOPER 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1000
-246,SEPARATING FUNNEL WITH GLASS STOPCOCK / HOLLOW STOPER 5000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",3200
-247,"SINTERED CURSIBLE G 1,2,3,4 15 ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",60
-248,"SINTERED CURSIBLE G 1,2,3,5 30ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",64
-249,"SINTERED CURSIBLE G 1,2,3,6 50ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",120
-250,"SINTERED BUCKNER FUNNEL G 1,2,3,4 35ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",136
-251,"SINTERED BUCKNER FUNNEL G 1,2,3,5 80ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",250
-252,"SINTERED BUCKNER FUNNEL G 1,2,3,6 200ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",520
-253,"SINTERED BUCKNER FUNNEL G 1,2,3,7 500ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1240
-254,"SINTERED BUCKNER FUNNEL G 1,2,3,8 1000 ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",3000
-255,FILTER FLASKS BOLT NECK 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",160
-256,FILTER FLASKS BOLT NECK 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",220
-257,FILTER FLASKS BOLT NECK 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",320
-258,FILTER FLASKS BOLT NECK 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",520
-259,FILTER FLASKS BOLT NECK 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1200
-260,REAGENT BOTTLES WITH HOLLOW STOPPERS AMBER COLOUR 30ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",160
-261,REAGENT BOTTLES WITH HOLLOW STOPPERS AMBER COLOUR 60ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",170
-262,REAGENT BOTTLES WITH HOLLOW STOPPERS AMBER COLOUR 125ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",220
-263,REAGENT BOTTLES WITH HOLLOW STOPPERS AMBER COLOUR 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",320
-264,REAGENT BOTTLES WITH HOLLOW STOPPERS AMBER COLOUR 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",450
-265,REAGENT BOTTLES WITH HOLLOW STOPPERS AMBER COLOUR 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",700
-266,REAGENT BOTTLES WITH HOLLOW STOPPERS AMBER COLOUR 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1300
+1,BEAKER 5ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",19.8
+2,BEAKER 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",19.8
+3,BEAKER 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",22
+4,BEAKER 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",26.4
+5,BEAKER 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",37.4
+6,BEAKER 150ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",48.4
+7,BEAKER 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",66
+8,BEAKER 400ml,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",92.4
+9,BEAKER 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",110
+10,BEAKER 600ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",187
+11,BEAKER 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",253
+12,BEAKER 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",594
+13,BEAKER 3000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1034
+14,BEAKER 5000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1815
+15,BOD BOTTLES 125ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",176
+16,BOD BOTTLES 300ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",253
+17,REAGENT BOTTLES WITH HOLLOW STOPPERS 30ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",88
+18,REAGENT BOTTLES WITH HOLLOW STOPPERS 60ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",110
+19,REAGENT BOTTLES WITH HOLLOW STOPPERS 125ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",121
+20,REAGENT BOTTLES WITH HOLLOW STOPPERS 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",154
+21,REAGENT BOTTLES WITH HOLLOW STOPPERS 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",242
+22,REAGENT BOTTLES WITH HOLLOW STOPPERS 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",385
+23,REAGENT BOTTLES WITH HOLLOW STOPPERS 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",770
+24,REAGENT BOTTLES WITH  SOLID STOPPERS 30ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",99
+25,REAGENT BOTTLES WITH  SOLID STOPPERS 60ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",121
+26,REAGENT BOTTLES WITH  SOLID STOPPERS 125ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",143
+27,REAGENT BOTTLES WITH  SOLID STOPPERS 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",176
+28,REAGENT BOTTLES WITH  SOLID STOPPERS 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",275
+29,REAGENT BOTTLES WITH  SOLID STOPPERS 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",440
+30,REAGENT BOTTLES WITH  SOLID STOPPERS 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",836
+31,REAGENT BOTTLES WITH SCREW CAP 30ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",99
+32,REAGENT BOTTLES WITH SCREW CAP 60ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",110
+33,REAGENT BOTTLES WITH SCREW CAP 125ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",165
+34,REAGENT BOTTLES WITH SCREW CAP 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",220
+35,REAGENT BOTTLES WITH SCREW CAP 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",297
+36,REAGENT BOTTLES WITH SCREW CAP 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",462
+37,REAGENT BOTTLES WITH SCREW CAP 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",770
+38,REAGENT BOTTLES WITH SCREW CAP 5000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",2090
+39,GAS WASHING BOTTLES WITH HEAD 125ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",352
+40,GAS WASHING BOTTLES WITH HEAD 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",462
+41,GAS WASHING BOTTLES WITH HEAD 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",594
+42,RELATIVE DENSITY BOTTLE WITH GLASS STOPPER 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",61.6
+43,RELATIVE DENSITY BOTTLE WITH GLASS STOPPER 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",70.4
+44,RELATIVE DENSITY BOTTLE WITH GLASS STOPPER 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",83.6
+45,RELATIVE DENSITY BOTTLE WITH GLASS STOPPER 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",154
+46,RELATIVE DENSITY BOTTLE  WITH TEFLON STOPPERS 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",83.6
+47,RELATIVE DENSITY BOTTLE  WITH TEFLON STOPPERS 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",92.4
+48,RELATIVE DENSITY BOTTLE  WITH TEFLON STOPPERS 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",103.4
+49,RELATIVE DENSITY BOTTLE  WITH TEFLON STOPPERS 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",176
+50,WEIGHING BOTTLE TALL FORM WITH STOPPERS 5ML(20X40MM),,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",55
+51,WEIGHING BOTTLE TALL FORM WITH STOPPERS 15ML(25X60MM),,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",66
+52,WEIGHING BOTTLE TALL FORM WITH STOPPERS 25ML(30X65MM),,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",77
+53,WEIGHING BOTTLE TALL FORM WITH STOPPERS 60ML(40X90MM),,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",187
+54,WEIGHING BOTTLE SQUAT FORM WITH STOPPERS 20ML(50X35MM),,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",187
+55,WEIGHING BOTTLE SQUAT FORM WITH STOPPERS 40ML(60X40MM),,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",198
+56,WEIGHING BOTTLE SQUAT FORM WITH STOPPERS 50ML(50X50MM),,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",209
+57,CHROMATOGRPHY COLUMN PLAIN WITH ROTA FLOW STOPCOCK EFECTIVE LENGTH 50CMX20MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",154
+58,CHROMATOGRPHY COLUMN PLAIN WITH ROTA FLOW STOPCOCK EFECTIVE LENGTH 60CMX25MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",176
+59,CHROMATOGRPHY COLUMN PLAIN WITH ROTA FLOW STOPCOCK EFECTIVE LENGTH 60CMX38MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",330
+60,BURETTE WITH ROTAFLOW STOPCOCK MEDIUM WALL 5ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",110
+61,BURETTE WITH ROTAFLOW STOPCOCK MEDIUM WALL 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",110
+62,BURETTE WITH ROTAFLOW STOPCOCK MEDIUM WALL 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",110
+63,BURETTE WITH ROTAFLOW STOPCOCK MEDIUM WALL 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",121
+64,BURETTE WITH ROTAFLOW STOPCOCK MEDIUM WALL 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",176
+65,BURETTE WITH GLASS STOPCOCK MEDIUM WALL 5ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",154
+66,BURETTE WITH GLASS STOPCOCK MEDIUM WALL 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",154
+67,BURETTE WITH GLASS STOPCOCK MEDIUM WALL 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",154
+68,BURETTE WITH GLASS STOPCOCK MEDIUM WALL 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",165
+69,BURETTE WITH GLASS STOPCOCK MEDIUM WALL 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",220
+70,MEASURING CYLINDER ROUND BASE CLASS B 5ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",52.8
+71,MEASURING CYLINDER ROUND BASE CLASS B 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",55
+72,MEASURING CYLINDER ROUND BASE CLASS B 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",66
+73,MEASURING CYLINDER ROUND BASE CLASS B 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",77
+74,MEASURING CYLINDER ROUND BASE CLASS B 100ML   ,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",105.6
+75,MEASURING CYLINDER ROUND BASE CLASS B 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",187
+76,MEASURING CYLINDER ROUND BASE CLASS B 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",264
+77,MEASURING CYLINDER ROUND BASE CLASS B 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",462
+78,MEASURING CYLINDER ROUND BASE CLASS B 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",880
+79,MEASURING CYLINDER HEXAGONAL BASE CLASS B 5ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",154
+80,MEASURING CYLINDER HEXAGONAL BASE CLASS B 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",154
+81,MEASURING CYLINDER HEXAGONAL BASE CLASS B 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",165
+82,MEASURING CYLINDER HEXAGONAL BASE CLASS B 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",209
+83,MEASURING CYLINDER HEXAGONAL BASE CLASS B 100ML   ,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",253
+84,MEASURING CYLINDER HEXAGONAL BASE CLASS B 250 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",407
+85,MEASURING CYLINDER HEXAGONAL BASE CLASS B 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",605
+86,MEASURING CYLINDER HEXAGONAL BASE CLASS B 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",880
+87,MEASURING CYLINDER HEXAGONAL BASE CLASS B 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1485
+88,NESSLERS CYLINDERS 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",39.6
+89,NESSLERS CYLINDERS 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",61.6
+90,CONDENSOR   LEIBIG WITH INTERCHANGEABLE JOINTS 200MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",209
+91,CONDENSOR   LEIBIG WITH INTERCHANGEABLE JOINTS 300MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",242
+92,CONDENSOR   LEIBIG WITH INTERCHANGEABLE JOINTS 400MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",308
+93,CONDENSOR   LEIBIG WITH INTERCHANGEABLE JOINTS 500MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",385
+94,BULB CONDENSOR WITH INTERCHANGEABLE JOINTS 200MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",286
+95,BULB CONDENSOR WITH INTERCHANGEABLE JOINTS 300MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",352
+96,BULB CONDENSOR WITH INTERCHANGEABLE JOINTS 400MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",440
+97,COIL CONDENSOR WITH INTERCHANGEABLE JOINTS 300MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",396
+98,COIL CONDENSOR WITH INTERCHANGEABLE JOINTS 400MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",484
+99,COIL CONDENSOR WITH INTERCHANGEABLE JOINTS 500MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",660
+100,SOXLET EXTRACTION APPARATUS WITH FLASK 60ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",792
+101,SOXLET EXTRACTION APPARATUS WITH FLASK 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",825
+102,SOXLET EXTRACTION APPARATUS WITH FLASK 200ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1144
+103,SOXLET EXTRACTION APPARATUS WITH FLASK 400ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",2090
+104,GLASS DESSICATORS PLAIN IMPORTED 120MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",935
+105,GLASS DESSICATORS PLAIN IMPORTED 150MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1210
+106,GLASS DESSICATORS PLAIN IMPORTED 210MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",2090
+107,GLASS DESSICATORS PLAIN IMPORTED 240MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",3190
+108,GLASS DESSICATORS PLAIN IMPORTED 300MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",4620
+109,GLASS DESSICATORS VACCUM IMPORTED 150MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1760
+110,GLASS DESSICATORS VACCUM IMPORTED 210MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",3190
+111,GLASS DESSICATORS VACCUM IMPORTED 240MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",4070
+112,GLASS DESSICATORS VACCUM IMPORTED 300MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",5940
+113,SOCKETS B 10,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",39.6
+114,SOCKETS B 14,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",46.2
+115,SOCKETS B 19,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",52.8
+116,SOCKETS B 24,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",61.6
+117,SOCKETS B 29,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",96.8
+118,SOCKETS B 34,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",132
+119,"PETRI DISH 2""",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",74.8
+120,"PETRI DISH 3""",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",92.4
+121,"PETRI DISH 4""",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",110
+122,"PETRI DISH 6""",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",385
+123,"PETRI DISH 8""",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",440
+124,"DISTILATION ASSEMBLY CONSISTING RB FLASK LEIBIG COND, RECIEVER ADOPTOR AND BEND 250 ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",572
+125,"DISTILATION ASSEMBLY CONSISTING RB FLASK LEIBIG COND, RECIEVER ADOPTOR AND BEND 500 ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",616
+126,"DISTILATION ASSEMBLY CONSISTING RB FLASK LEIBIG COND, RECIEVER ADOPTOR AND BEND 1000 ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",825
+127,"DISTILATION ASSEMBLY CONSISTING RB FLASK LEIBIG COND, RECIEVER ADOPTOR AND BEND 2000ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1265
+128,THIEL TUBE 18X150MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",48.4
+129,THIEL TUBE 25X150MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",61.6
+130,PYKNOMETER 5 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",44
+131,PYKNOMETER 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",59.4
+132,PYKNOMETER 25 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",88
+133,DROPPER WITH RUBBER TEAT BOROCILICATE GLASS 10CM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",8.8
+134,DROPPER WITH RUBBER TEAT BOROCILICATE GLASS 15CM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",8.8
+135,DROPPER WITH RUBBER TEAT BOROCILICATE GLASS 20CM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",13.2
+136,RECTANGULAR MEUSUM JARS WITH GLASS COVER IMPORTED 140X210X100,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1430
+137,RECTANGULAR MEUSUM JARS WITH GLASS COVER IMPORTED 210X170X130,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1430
+138,RECTANGULAR MEUSUM JARS WITH GLASS COVER IMPORTED 220X140X140,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1430
+139,RECTANGULAR MEUSUM JARS WITH GLASS COVER IMPORTED 225X225X125,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",2090
+140,RECTANGULAR MEUSUM JARS WITH GLASS COVER IMPORTED 250x250x150,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",2860
+141,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 5 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",50.6
+142,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",61.6
+143,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",66
+144,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",74.8
+145,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",92.4
+146,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 250ML  ,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",136.4
+147,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",242
+148,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",341
+149,VOLUMETRIC FLASK WITH HOLLOW STOPPERS 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",682
+150,VOLUMETRIC FLASK WITH HOLLOW STOPPERS AMBER COLOUR 5 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",121
+151,VOLUMETRIC FLASK WITH HOLLOW STOPPERS AMBER COLOUR 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",143
+152,VOLUMETRIC FLASK WITH HOLLOW STOPPERS AMBER COLOUR 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",154
+153,VOLUMETRIC FLASK WITH HOLLOW STOPPERS AMBER COLOUR 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",176
+154,VOLUMETRIC FLASK WITH HOLLOW STOPPERS AMBER COLOUR 100ML   ,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",242
+155,VOLUMETRIC FLASK WITH HOLLOW STOPPERS AMBER COLOUR 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",352
+156,VOLUMETRIC FLASK WITH HOLLOW STOPPERS AMBER COLOUR 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",495
+157,VOLUMETRIC FLASK WITH HOLLOW STOPPERS AMBER COLOUR 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",770
+158,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",39.6
+159,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",44
+160,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",48.4
+161,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",55
+162,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 150ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",72.6
+163,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",88
+164,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",143
+165,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",242
+166,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",605
+167,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 3000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1045
+168,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK 5000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1760
+169,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",66
+170,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",74.8
+171,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",79.2
+172,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",83.6
+173,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",132
+174,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",176
+175,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",286
+176,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",726
+177,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 3000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1155
+178,CONICAL FLASK/FLAT BOTTOM/ROUND BOTTOM FLASK WITH STANDARD JOINT 5000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1870
+179,IODINE FLASK 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",143
+180,IODINE FLASK 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",176
+181,IODINE FLASK 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",242
+182,PIPETTE VOLUMETRIC ONE MARK CLASS B 1ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",33
+183,PIPETTE VOLUMETRIC ONE MARK CLASS B 2ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",33
+184,PIPETTE VOLUMETRIC ONE MARK CLASS B 5ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",33
+185,PIPETTE VOLUMETRIC ONE MARK CLASS B 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",39.6
+186,PIPETTE VOLUMETRIC ONE MARK CLASS B 20ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",44
+187,PIPETTE VOLUMETRIC ONE MARK CLASS B 25ML  ,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",44
+188,PIPETTE VOLUMETRIC ONE MARK CLASS B 50ML   ,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",66
+189,PIPETTE VOLUMETRIC ONE MARK CLASS B 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",110
+190,PIPETTE GRADUATED SERLOGICAL AND MOHAR TYPE       CLASS B 0.1ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",37.4
+191,PIPETTE GRADUATED SERLOGICAL AND MOHAR TYPE       CLASS B 0.2ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",37.4
+192,PIPETTE GRADUATED SERLOGICAL AND MOHAR TYPE       CLASS B 0.5ML   ,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",37.4
+193,PIPETTE GRADUATED SERLOGICAL AND MOHAR TYPE       CLASS B 1ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",37.4
+194,PIPETTE GRADUATED SERLOGICAL AND MOHAR TYPE       CLASS B 2ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",39.6
+195,PIPETTE GRADUATED SERLOGICAL AND MOHAR TYPE       CLASS B 5ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",41.8
+196,PIPETTE GRADUATED SERLOGICAL AND MOHAR TYPE       CLASS B 10ML   ,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",44
+197,PIPETTE GRADUATED SERLOGICAL AND MOHAR TYPE       CLASS B 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",59.4
+198,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 10X75,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",352
+199,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 12X75,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",396
+200,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 12X100,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",484
+201,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 15X125,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",726
+202,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 15X150,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",792
+203,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 18X150,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1012
+204,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 25X150,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1276
+205,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 25X200,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1980
+206,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 32X200,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",3960
+207,TEST TUBE WITH RIM/WITHOUT RIM BOROSILICATE GLASS PACK OF 100 PC 38X200,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",5500
+208,CULTURE TUBE S WITH SCREW CAP ROUND BOTTOM 5 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",15.4
+209,CULTURE TUBE S WITH SCREW CAP ROUND BOTTOM 10 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",17.6
+210,CULTURE TUBE S WITH SCREW CAP ROUND BOTTOM 15 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",19.8
+211,CULTURE TUBE S WITH SCREW CAP ROUND BOTTOM 30 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",22
+212,CULTURE TUBE S WITH SCREW CAP ROUND BOTTOM 50 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",28.6
+213,CULTURE TUBE S WITH SCREW CAP ROUND BOTTOM 60 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",33
+214,TEST TUBE GRADUATED WITH STANDARD JOINT AND STOPPER 5ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",55
+215,TEST TUBE GRADUATED WITH STANDARD JOINT AND STOPPER 10ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",55
+216,TEST TUBE GRADUATED WITH STANDARD JOINT AND STOPPER 15ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",57.2
+217,TEST TUBE GRADUATED WITH STANDARD JOINT AND STOPPER 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",66
+218,TEST TUBE GRADUATED WITH STANDARD JOINT AND STOPPER 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",74.8
+219,TEST TUBE GRADUATED WITH STANDARD JOINT AND STOPPER 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",132
+220,KJELDHAL FLASK WITH JOINT B 24 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",121
+221,KJELDHAL FLASK WITH JOINT B 25 300ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",165
+222,KJELDHAL FLASK WITH JOINT B 26 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",242
+223,KJELDHAL FLASK WITH JOINT B 27 800ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",396
+224,GLASS FUNNEL 25MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",30.8
+225,GLASS FUNNEL 50MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",35.2
+226,GLASS FUNNEL 65MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",37.4
+227,GLASS FUNNEL 75MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",48.4
+228,GLASS FUNNEL 100MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",79.2
+229,GLASS FUNNEL 125 MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",187
+230,GLASS FUNNEL 150MM,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",330
+231,SEPARATING FUNNEL WITH ROTAFLOW STOPCOCK / HOLLOW STOPER 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",154
+232,SEPARATING FUNNEL WITH ROTAFLOW STOPCOCK / HOLLOW STOPER 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",154
+233,SEPARATING FUNNEL WITH ROTAFLOW STOPCOCK / HOLLOW STOPER 125ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",176
+234,SEPARATING FUNNEL WITH ROTAFLOW STOPCOCK / HOLLOW STOPER 250 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",242
+235,SEPARATING FUNNEL WITH ROTAFLOW STOPCOCK / HOLLOW STOPER 500 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",341
+236,SEPARATING FUNNEL WITH ROTAFLOW STOPCOCK / HOLLOW STOPER 1000 ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",550
+237,SEPARATING FUNNEL WITH ROTAFLOW STOPCOCK / HOLLOW STOPER 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1045
+238,SEPARATING FUNNEL WITH ROTAFLOW STOPCOCK / HOLLOW STOPER 5000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",3520
+239,SEPARATING FUNNEL WITH GLASS STOPCOCK / HOLLOW STOPER 25ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",198
+240,SEPARATING FUNNEL WITH GLASS STOPCOCK / HOLLOW STOPER 50ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",198
+241,SEPARATING FUNNEL WITH GLASS STOPCOCK / HOLLOW STOPER 125ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",220
+242,SEPARATING FUNNEL WITH GLASS STOPCOCK / HOLLOW STOPER 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",286
+243,SEPARATING FUNNEL WITH GLASS STOPCOCK / HOLLOW STOPER 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",385
+244,SEPARATING FUNNEL WITH GLASS STOPCOCK / HOLLOW STOPER 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",594
+245,SEPARATING FUNNEL WITH GLASS STOPCOCK / HOLLOW STOPER 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1100
+246,SEPARATING FUNNEL WITH GLASS STOPCOCK / HOLLOW STOPER 5000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",3520
+247,"SINTERED CURSIBLE G 1,2,3,4 15 ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",66
+248,"SINTERED CURSIBLE G 1,2,3,5 30ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",70.4
+249,"SINTERED CURSIBLE G 1,2,3,6 50ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",132
+250,"SINTERED BUCKNER FUNNEL G 1,2,3,4 35ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",149.6
+251,"SINTERED BUCKNER FUNNEL G 1,2,3,5 80ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",275
+252,"SINTERED BUCKNER FUNNEL G 1,2,3,6 200ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",572
+253,"SINTERED BUCKNER FUNNEL G 1,2,3,7 500ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1364
+254,"SINTERED BUCKNER FUNNEL G 1,2,3,8 1000 ML",,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",3300
+255,FILTER FLASKS BOLT NECK 100ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",176
+256,FILTER FLASKS BOLT NECK 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",242
+257,FILTER FLASKS BOLT NECK 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",352
+258,FILTER FLASKS BOLT NECK 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",572
+259,FILTER FLASKS BOLT NECK 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1320
+260,REAGENT BOTTLES WITH HOLLOW STOPPERS AMBER COLOUR 30ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",176
+261,REAGENT BOTTLES WITH HOLLOW STOPPERS AMBER COLOUR 60ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",187
+262,REAGENT BOTTLES WITH HOLLOW STOPPERS AMBER COLOUR 125ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",242
+263,REAGENT BOTTLES WITH HOLLOW STOPPERS AMBER COLOUR 250ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",352
+264,REAGENT BOTTLES WITH HOLLOW STOPPERS AMBER COLOUR 500ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",495
+265,REAGENT BOTTLES WITH HOLLOW STOPPERS AMBER COLOUR 1000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",770
+266,REAGENT BOTTLES WITH HOLLOW STOPPERS AMBER COLOUR 2000ML,,,"Borosilicate Glassware, Chemistry Lab, Biology Lab",1430
 267,OXFORD,OXFORD,OXFORD,,1
 268,ABSCISIC ACID 99% (For Biochemistry)  25 mg,,,Lab Chem and Reagents,1350
 269,ABSCISIC ACID 99% (For Biochemistry) 100 mg,,,Lab Chem and Reagents,4500

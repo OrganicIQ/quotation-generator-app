@@ -1,4 +1,4 @@
-// main.js - FINAL VERSION WITH CORRECTED EXCEL DOWNLOAD
+// main.js - Updated to only show search results when user types.
 
 const API_BASE_URL = window.location.origin.includes('localhost')
     ? 'http://localhost:3000'
@@ -6,13 +6,34 @@ const API_BASE_URL = window.location.origin.includes('localhost')
 
 document.addEventListener('DOMContentLoaded', () => {
     // DOM Element References
-    const authSection = document.getElementById('auth-section'); const dashboardSection = document.getElementById('dashboard-section'); const userDisplayName = document.getElementById('user-display-name'); const quoteSearchInput = document.getElementById('quote-search'); const autocompleteResultsUl = document.getElementById('autocomplete-results'); const noItemsMessage = document.getElementById('no-items-message'); const selectedProductsTable = document.getElementById('selected-products-table'); const selectedProductsTbody = document.getElementById('selected-products-tbody');
-    const subtotalAmountSpan = document.getElementById('subtotal-amount'); const discountRow = document.getElementById('discount-row'); const couponRateDisplay = document.getElementById('coupon-rate-display'); const discountAmountSpan = document.getElementById('discount-amount'); const gstAmountSpan = document.getElementById('gst-amount'); const grandTotalAmountSpan = document.getElementById('grand-total-amount');
-    const downloadExcelBtn = document.getElementById('download-excel-btn'); const downloadPdfBtn = document.getElementById('download-pdf-btn'); const saveQuoteBtn = document.getElementById('save-quote-btn'); const clientNameInput = document.getElementById('client-name-input'); const savedQuotesList = document.getElementById('saved-quotes-list'); const couponCodeInput = document.getElementById('coupon-code-input'); const applyCouponBtn = document.getElementById('apply-coupon-btn'); const couponStatusMessage = document.getElementById('coupon-status-message');
-    const categoryFilter = document.getElementById('category-filter');
+    const authSection = document.getElementById('auth-section'); 
+    const dashboardSection = document.getElementById('dashboard-section'); 
+    const userDisplayName = document.getElementById('user-display-name'); 
+    const quoteSearchInput = document.getElementById('quote-search'); 
+    const autocompleteResultsUl = document.getElementById('autocomplete-results'); 
+    const noItemsMessage = document.getElementById('no-items-message'); 
+    const selectedProductsTable = document.getElementById('selected-products-table'); 
+    const selectedProductsTbody = document.getElementById('selected-products-tbody');
+    const subtotalAmountSpan = document.getElementById('subtotal-amount'); 
+    const discountRow = document.getElementById('discount-row'); 
+    const couponRateDisplay = document.getElementById('coupon-rate-display'); 
+    const discountAmountSpan = document.getElementById('discount-amount'); 
+    const gstAmountSpan = document.getElementById('gst-amount'); 
+    const grandTotalAmountSpan = document.getElementById('grand-total-amount');
+    const downloadExcelBtn = document.getElementById('download-excel-btn'); 
+    const downloadPdfBtn = document.getElementById('download-pdf-btn'); 
+    const saveQuoteBtn = document.getElementById('save-quote-btn'); 
+    const clientNameInput = document.getElementById('client-name-input'); 
+    const savedQuotesList = document.getElementById('saved-quotes-list'); 
+    const couponCodeInput = document.getElementById('coupon-code-input'); 
+    const applyCouponBtn = document.getElementById('apply-coupon-btn'); 
+    const couponStatusMessage = document.getElementById('coupon-status-message');
+    const categoryPillsContainer = document.getElementById('category-pills-container');
 
     // State Variables
-    let lineItemDiscount = 10; let couponDiscountPercentage = 0; const GST_RATE = 18;
+    let lineItemDiscount = 10; 
+    let couponDiscountPercentage = 0; 
+    const GST_RATE = 18;
 
     // Helper Functions
     function calculateQuotation(basePrice, quantity, discountPercentage) { const priceAfterDiscount = basePrice * (1 - (discountPercentage / 100)); const total = priceAfterDiscount * quantity; return { priceAfterDiscount, total }; }
@@ -85,9 +106,27 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`${API_BASE_URL}/api/categories`, { credentials: 'include' });
             if (!response.ok) return;
             const categories = await response.json();
-            categoryFilter.innerHTML = '<option value="">All Categories</option>';
-            categories.forEach(category => { if (category) { const option = document.createElement('option'); option.value = category; option.textContent = category; categoryFilter.appendChild(option); } });
-        } catch (error) { console.error('Error loading categories:', error); }
+            
+            categoryPillsContainer.innerHTML = ''; 
+
+            const allPill = document.createElement('div');
+            allPill.classList.add('category-pill', 'active'); 
+            allPill.textContent = 'All Categories';
+            allPill.dataset.category = ''; 
+            categoryPillsContainer.appendChild(allPill);
+
+            categories.forEach(category => {
+                if (category) {
+                    const pill = document.createElement('div');
+                    pill.classList.add('category-pill');
+                    pill.textContent = category;
+                    pill.dataset.category = category;
+                    categoryPillsContainer.appendChild(pill);
+                }
+            });
+        } catch (error) {
+            console.error('Error loading categories:', error);
+        }
     }
 
     const updateUI = (loggedIn, user = null) => { if (loggedIn) { authSection.style.display = 'none'; dashboardSection.style.display = 'block'; userDisplayName.textContent = user.displayName; loadSavedQuotes(); loadCategories(); } else { authSection.style.display = 'block'; dashboardSection.style.display = 'none'; } };
@@ -96,7 +135,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const performSearch = async (searchTerm, category) => {
         autocompleteResultsUl.innerHTML = '';
-        if (!searchTerm && !category) { autocompleteResultsUl.classList.remove('visible'); return; }
+        // MODIFIED: This is the key change. We only proceed if the search term is not empty.
+        if (!searchTerm) {
+            autocompleteResultsUl.classList.remove('visible');
+            return;
+        }
+
         const query = new URLSearchParams();
         if (searchTerm) query.append('q', searchTerm);
         if (category) query.append('category', category);
@@ -113,9 +157,29 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const debouncedSearch = debounce(performSearch, 300);
-    const handleSearchAndFilter = () => { const searchTerm = quoteSearchInput.value.trim(); const category = categoryFilter.value; debouncedSearch(searchTerm, category); };
+    
+    const handleSearchAndFilter = () => {
+        const searchTerm = quoteSearchInput.value.trim();
+        const activePill = categoryPillsContainer.querySelector('.category-pill.active');
+        const category = activePill ? activePill.dataset.category : '';
+        debouncedSearch(searchTerm, category);
+    };
+
     quoteSearchInput.addEventListener('input', handleSearchAndFilter);
-    categoryFilter.addEventListener('change', handleSearchAndFilter);
+
+    categoryPillsContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('category-pill')) {
+            const currentActive = categoryPillsContainer.querySelector('.active');
+            if (currentActive) {
+                currentActive.classList.remove('active');
+            }
+            event.target.classList.add('active');
+            
+            // This will now correctly trigger a search ONLY if there's text in the input,
+            // or hide the results if the input is empty.
+            handleSearchAndFilter();
+        }
+    });
 
     savedQuotesList.addEventListener('click', async (e) => { const t = e.target; if (t.matches('.delete-quote-btn')) { const qId = t.dataset.quoteId; if (confirm('Are you sure?')) { try { const r = await fetch(`${API_BASE_URL}/api/quotes/${qId}`, { method: 'DELETE', credentials: 'include' }); if (r.ok) { t.closest('.saved-quote-item').remove(); } else { alert('Failed to delete.'); } } catch (e) { alert('Error deleting.'); } } } else if (t.matches('.download-pdf-btn')) { window.open(`${API_BASE_URL}/api/quotes/${t.dataset.quoteId}/download`); } else if (t.closest('.quote-item-details-wrapper')) { const qId = t.closest('.quote-item-details-wrapper').dataset.quoteId; loadSingleQuote(qId); } });
     
@@ -161,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- CORRECTED: Download as Excel Logic ---
     if (downloadExcelBtn) {
         downloadExcelBtn.addEventListener('click', () => {
             const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row');
@@ -169,23 +232,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('No items to download.');
                 return;
             }
-            // Headers match the new 8-column layout
             const data = [['#', 'Item', 'Base Price', 'Qty', 'Disc %', 'Disc Price', 'Total']];
             productRows.forEach(row => {
                 const cells = row.querySelectorAll('td');
                 data.push([
                     cells[0].textContent,
-                    // Clean up the combined Item HTML for Excel
                     cells[1].innerText.replace(/\n/g, " "), 
-                    cells[2].textContent, // Base Price
-                    cells[3].querySelector('input').value, // Qty
-                    cells[4].textContent, // Disc %
-                    cells[5].textContent, // Disc Price
-                    cells[6].textContent  // Total
+                    cells[2].textContent,
+                    cells[3].querySelector('input').value,
+                    cells[4].textContent,
+                    cells[5].textContent,
+                    cells[6].textContent
                 ]);
             });
-            // Add the full financial breakdown at the bottom
-            data.push([]); // Spacer row
+            data.push([]); 
             data.push(['', '', '', '', '', 'Subtotal', subtotalAmountSpan.textContent]);
             if (couponDiscountPercentage > 0) {
                 data.push(['', '', '', '', '', `Discount (${couponDiscountPercentage}%)`, `-${discountAmountSpan.textContent}`]);

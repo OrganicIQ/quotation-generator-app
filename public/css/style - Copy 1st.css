@@ -35,33 +35,8 @@ input:focus { outline: none; border-color: var(--primary-green); box-shadow: 0 0
 .header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding: 1rem; }
 .header-bar p { font-size: 1.2rem; font-weight: 500; }
 .search-container { position: relative; margin-bottom: 1rem; }
-
-/* MODIFIED: Autocomplete results styling for scrolling */
-.autocomplete-results {
-    list-style: none;
-    position: absolute;
-    width: 100%;
-    margin-top: 5px;
-    background: #fff; 
-    border: 1px solid var(--border-green);
-    border-radius: var(--border-radius-card);
-    box-shadow: var(--shadow-strong);
-    z-index: 1000;
-    display: none;
-    /* --- NEW CSS FOR SCROLLING --- */
-    max-height: 350px; /* Set a maximum height for the list */
-    overflow-y: auto;   /* Add a vertical scrollbar only when needed */
-    overflow-x: hidden; /* Hide horizontal scrollbar */
-}
-.autocomplete-results.visible { display: block; }
-
-.autocomplete-results li {
-    padding: 10px 12px;
-    cursor: pointer;
-    font-size: 0.9rem;
-}
-.autocomplete-results li:hover { background-color: rgba(40, 167, 69, 0.1); }
-
+.autocomplete-results { list-style: none; position: absolute; width: 100%; margin-top: 5px; background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); border-radius: var(--border-radius-card); box-shadow: var(--shadow-strong); z-index: 1000; display: none; overflow: hidden;}
+.autocomplete-results.visible { display: block; } .autocomplete-results li { padding: 12px; cursor: pointer; } .autocomplete-results li:hover { background-color: rgba(40, 167, 69, 0.1); }
 
 /* --- 5. Quotation Table & Totals Breakdown --- */
 #selected-products-table-container { width: 100%; }
@@ -73,17 +48,19 @@ input:focus { outline: none; border-color: var(--primary-green); box-shadow: 0 0
 #selected-products-table td:last-child { border-top-right-radius: var(--border-radius-card); border-bottom-right-radius: var(--border-radius-card); }
 #selected-products-table td small { font-size: 0.9em; color: var(--secondary-green); }
 
-#selected-products-table th:nth-child(1) { width: 6%; }
-#selected-products-table th:nth-child(2) { width: 44%; }
-#selected-products-table th:nth-child(3) { width: 11%; }
-#selected-products-table th:nth-child(4) { width: 9%; }
-#selected-products-table th:nth-child(5) { width: 8%; }
-#selected-products-table th:nth-child(6) { width: 11%; }
-#selected-products-table th:nth-child(7) { width: 11%; }
-#selected-products-table th:nth-child(8) { width: 10%; }
+/* Final column widths */
+#selected-products-table th:nth-child(1) { width: 6%; }  /* # */
+#selected-products-table th:nth-child(2) { width: 44%; } /* Item */
+#selected-products-table th:nth-child(3) { width: 11%; } /* Base Price */
+#selected-products-table th:nth-child(4) { width: 9%; }  /* Qty */
+#selected-products-table th:nth-child(5) { width: 8%; }  /* Disc % */
+#selected-products-table th:nth-child(6) { width: 11%; } /* Disc Price */
+#selected-products-table th:nth-child(7) { width: 11%; } /* Total */
+#selected-products-table th:nth-child(8) { width: 10%; } /* Action */
 
 .quantity-input-small { width: 100%; min-width: 60px; padding: 8px 5px; border-radius: var(--border-radius-card); text-align: center; font-size: 0.9rem; }
 
+/* Styles for right-column cards */
 .totals-breakdown { display: flex; flex-direction: column; gap: 0.75rem; }
 .totals-table { width: 100%; font-size: 0.9rem; }
 .totals-table td:last-child { text-align: right; font-weight: 500; }
@@ -106,9 +83,10 @@ input:focus { outline: none; border-color: var(--primary-green); box-shadow: 0 0
 .quote-item-actions { display: flex; gap: 10px; margin-left: 1rem; }
 .download-pdf-btn, .delete-quote-btn { padding: 8px 15px; font-size: 0.8rem; }
 
+/* Responsive adjustments */
 @media (max-width: 1200px) { .main-content-grid { grid-template-columns: 1fr; } }
 
-/* --- Styles for Category Pills --- */
+/* --- NEW: Styles for Category Pills --- */
 .search-bar {
     display: flex;
     flex-direction: column;
@@ -119,7 +97,7 @@ input:focus { outline: none; border-color: var(--primary-green); box-shadow: 0 0
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 5px; /* Adds a little space below the pills */
 }
 
 .category-pill {
@@ -132,7 +110,7 @@ input:focus { outline: none; border-color: var(--primary-green); box-shadow: 0 0
     font-weight: 500;
     color: var(--dark-green-text);
     transition: all 0.2s ease;
-    user-select: none;
+    user-select: none; /* Prevents text selection on click */
 }
 
 .category-pill:hover {
@@ -146,24 +124,4 @@ input:focus { outline: none; border-color: var(--primary-green); box-shadow: 0 0
     color: #fff;
     border-color: var(--primary-green);
     box-shadow: none;
-}
-
-/* --- NEW: Custom Scrollbar Styling --- */
-/* Works on Chrome, Edge, and Safari */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--secondary-green);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-green);
 }

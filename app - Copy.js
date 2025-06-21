@@ -71,27 +71,19 @@ app.get('/auth/logout', (req, res, next) => { req.logout((err) => { if (err) { r
 
 
 // --- ALL API ROUTES RESTORED ---
-// In app.js
-
 app.get('/api/products', async (req, res) => {
     const searchTerm = req.query.q;
-    // MODIFIED: 'category' can now be a single string or an array of strings
     const category = req.query.category;
     let query = {};
-
     if (searchTerm) {
         query.$or = [
             { baseName: { $regex: searchTerm, $options: 'i' } },
             { variantName: { $regex: searchTerm, $options: 'i' } }
         ];
     }
-
-    // MODIFIED: Use the $in operator to find products in any of the selected categories
-    if (category && category.length > 0) {
-        // This works whether 'category' is a single value or an array
-        query.category = { $in: Array.isArray(category) ? category : [category] };
+    if (category) {
+        query.category = category;
     }
-    
     try {
         const products = await Product.find(query).limit(50);
         res.json(products);

@@ -1,4 +1,4 @@
-// importData.js - FINAL VERSION THAT HANDLES MULTIPLE CATEGORIES
+// importData.js - FINAL ROBUST VERSION
 
 require('dotenv').config();
 const fs = require('fs');
@@ -31,34 +31,28 @@ async function importData() {
             rowCount++;
             const basePrice = parseFloat(row.basePrice);
 
+            // --- NEW: Validate the basePrice before adding ---
             if (isNaN(basePrice) || basePrice < 0) {
                 console.warn(`[SKIPPING] Row ${rowCount} has an invalid basePrice. Data:`, row);
             } else {
-                // --- NEW: Split the category string into an array ---
-                const categories = row.category ? row.category.split(',').map(cat => cat.trim()) : ['Uncategorized'];
-                
-                const productData = {
+                // This product is valid, add it to our list
+                productsToInsert.push({
                    productId: row.productId || row['\ufeffproductId'],
                     baseName: row.baseName,
                     variantName: row.variantName,
                     description: row.description,
-                    category: categories, // Use the new array
-                    basePrice: basePrice
-                };
-
-                if (productData.productId && productData.baseName) {
-                    productsToInsert.push(productData);
-                } else {
-                    console.warn(`[SKIPPING] Row ${rowCount} is missing a required field. Data:`, row);
-                }
+                    category: row.category,
+                    basePrice: basePrice // Use the parsed number
+                });
             }
         })
         .on('end', async () => {
             console.log(`\nFinished parsing CSV. Found ${productsToInsert.length} valid products out of ${rowCount} total rows.`);
+
             if (productsToInsert.length > 0) {
                 try {
                     console.log('Deleting old products...');
-                    await Product.deleteMany({});
+                    await Product.deleteMany({}); // Deletes all old products
                     console.log('Old products deleted.');
 
                     console.log('Inserting new products...');
@@ -70,6 +64,7 @@ async function importData() {
             } else {
                 console.warn('No valid products were found to insert.');
             }
+
             await mongoose.disconnect();
             console.log('MongoDB Disconnected.');
         });

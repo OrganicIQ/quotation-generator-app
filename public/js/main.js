@@ -40,25 +40,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedCategories = [];
     let userRole = 'user';
 
-    // --- HELPER FUNCTIONS ---
+    // Helper Functions
     function calculateQuotation(basePrice, quantity, discountPercentage) { const priceAfterDiscount = basePrice * (1 - (discountPercentage / 100)); const total = priceAfterDiscount * quantity; return { priceAfterDiscount, total }; }
     function debounce(func, delay) { let timeout; return function(...args) { clearTimeout(timeout); timeout = setTimeout(() => func.apply(this, args), delay); }; }
     function updateFinalTotals() { let subTotal = 0; const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); productRows.forEach(row => { const itemTotalSpan = row.querySelector('.item-total-price'); if (itemTotalSpan) { const itemTotal = parseFloat(itemTotalSpan.textContent); if (!isNaN(itemTotal)) { subTotal += itemTotal; } } }); const discountAmount = subTotal * (couponDiscountPercentage / 100); const amountAfterDiscount = subTotal - discountAmount; const gstAmount = amountAfterDiscount * (GST_RATE / 100); const finalGrandTotal = amountAfterDiscount + gstAmount; subtotalAmountSpan.textContent = subTotal.toFixed(2); if (couponDiscountPercentage > 0) { couponRateDisplay.textContent = couponDiscountPercentage; discountAmountSpan.textContent = discountAmount.toFixed(2); discountRow.style.display = 'table-row'; } else { discountRow.style.display = 'none'; } gstAmountSpan.textContent = gstAmount.toFixed(2); grandTotalAmountSpan.textContent = finalGrandTotal.toFixed(2); }
     function recalculateAllRows() { const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); productRows.forEach(row => { row.querySelector('.quantity-input').dispatchEvent(new Event('input', { bubbles: true })); }); }
-    
-    // --- UI AND DATA FUNCTIONS ---
+
+    // UI and Data Functions
     function renderSelectedPills() {
         selectedPillsArea.innerHTML = '';
         selectedCategories.forEach(category => {
-            const pill = document.createElement('div');
-            pill.className = 'selected-category-pill';
-            pill.textContent = category;
-            const removeBtn = document.createElement('button');
-            removeBtn.className = 'remove-pill-btn';
-            removeBtn.textContent = '×';
-            removeBtn.dataset.category = category;
-            pill.appendChild(removeBtn);
-            selectedPillsArea.appendChild(pill);
+            const pill = document.createElement('div'); pill.className = 'selected-category-pill'; pill.textContent = category;
+            const removeBtn = document.createElement('button'); removeBtn.className = 'remove-pill-btn'; removeBtn.textContent = '×'; removeBtn.dataset.category = category;
+            pill.appendChild(removeBtn); selectedPillsArea.appendChild(pill);
         });
         handleSearchAndFilter();
     }
@@ -66,10 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function filterCategoryDropdown() {
         const searchTerm = categorySearchInput.value.toLowerCase();
         const items = categoryDropdown.querySelectorAll('li');
-        items.forEach(item => {
-            const isMatch = item.textContent.toLowerCase().includes(searchTerm);
-            item.classList.toggle('hidden', !isMatch);
-        });
+        items.forEach(item => { const isMatch = item.textContent.toLowerCase().includes(searchTerm); item.classList.toggle('hidden', !isMatch); });
     }
 
     async function loadCategories() {
@@ -78,14 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) return;
             allCategories = await response.json();
             const list = document.createElement('ul');
-            allCategories.forEach(category => {
-                if (category) {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = category;
-                    listItem.dataset.category = category;
-                    list.appendChild(listItem);
-                }
-            });
+            allCategories.forEach(category => { if (category) { const listItem = document.createElement('li'); listItem.textContent = category; listItem.dataset.category = category; list.appendChild(listItem); } });
             categoryDropdown.innerHTML = ''; categoryDropdown.appendChild(list);
         } catch (error) { console.error('Error loading categories:', error); }
     }
@@ -96,12 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) { savedQuotesList.innerHTML = '<p>Could not load saved quotes.</p>'; return; }
             const quotes = await response.json();
             savedQuotesList.innerHTML = '';
-            if (quotes.length === 0) { savedQuotesList.innerHTML = '<p>You have no saved quotes yet.</p>'; }
-            else {
+            if (quotes.length === 0) { savedQuotesList.innerHTML = '<p>You have no saved quotes yet.</p>'; } else {
                 quotes.forEach(quote => {
                     const quoteDate = new Date(quote.createdAt).toLocaleDateString();
-                    const quoteElement = document.createElement('div');
-                    quoteElement.classList.add('saved-quote-item');
+                    const quoteElement = document.createElement('div'); quoteElement.classList.add('saved-quote-item');
                     quoteElement.innerHTML = `<div class="quote-item-details-wrapper" data-quote-id="${quote._id}"><p class="quote-item-main"><strong>${quote.quoteNumber}</strong> - For: ${quote.clientName}</p><p class="quote-item-details">Saved on: ${quoteDate} | Total: ₹${quote.grandTotal.toFixed(2)}</p></div><div class="quote-item-actions"><button class="delete-quote-btn" data-quote-id="${quote._id}">Delete</button></div>`;
                     savedQuotesList.appendChild(quoteElement);
                 });
@@ -136,22 +118,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function addProductToSelectedList(product, quantity = 1, price = null, discount = null) {
         if (selectedProductsTbody.querySelector(`[data-product-id="${product._id}"]`)) { alert('Item is already in quote.'); return; }
         const rowIndex = selectedProductsTbody.rows.length + 1;
-        
         const basePrice = price !== null ? price : product.basePrice;
         const currentDiscount = discount !== null ? discount : lineItemDiscount;
-
         const itemNameHtml = `<strong>${product.baseName} ${product.variantName ? `(${product.variantName})` : ''}</strong><br><small>${product.description || ''}</small>`;
         noItemsMessage.style.display = 'none'; selectedProductsTable.style.display = 'table';
-        const newRow = document.createElement('tr');
-        newRow.classList.add('selected-product-row'); newRow.dataset.productId = product._id;
-
+        const newRow = document.createElement('tr'); newRow.classList.add('selected-product-row'); newRow.dataset.productId = product._id;
         const isAdmin = userRole === 'admin';
         const priceCellHtml = isAdmin ? `<input type="number" class="price-input" step="0.01" value="${basePrice.toFixed(2)}" />` : `<span>${basePrice.toFixed(2)}</span>`;
         const discountCellHtml = isAdmin ? `<input type="number" class="discount-input" value="${currentDiscount}" min="0" max="100" />` : `<span>${currentDiscount}</span>`;
-        
         newRow.innerHTML = `<td>${rowIndex}</td><td>${itemNameHtml}</td><td>${priceCellHtml}</td><td><input type="number" class="quantity-input" value="${quantity}" min="1" /></td><td>${discountCellHtml}%</td><td><span class="item-discounted-price">0.00</span></td><td><span class="item-total-price">0.00</span></td><td><button class="remove-btn">Remove</button></td>`;
         selectedProductsTbody.appendChild(newRow);
-
         const recalculateRow = () => {
             const currentPrice = parseFloat(isAdmin ? newRow.querySelector('.price-input').value : newRow.cells[2].textContent);
             const currentQuantity = parseInt(newRow.querySelector('.quantity-input').value, 10);
@@ -162,7 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
             newRow.querySelector('.item-total-price').textContent = total.toFixed(2);
             updateFinalTotals();
         };
-
         newRow.querySelector('.quantity-input').addEventListener('input', recalculateRow);
         if (isAdmin) {
             newRow.querySelector('.price-input').addEventListener('input', recalculateRow);
@@ -192,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateUI = (loggedIn, user = null) => { if (loggedIn) { authSection.style.display = 'none'; dashboardSection.style.display = 'block'; userDisplayName.textContent = user.displayName; userRole = user.role || 'user'; loadSavedQuotes(); loadCategories(); } else { authSection.style.display = 'block'; dashboardSection.style.display = 'none'; userRole = 'user'; } };
     const checkLoginStatus = async () => { try { const response = await fetch(`${API_BASE_URL}/api/user`, { credentials: 'include' }); const data = await response.json(); updateUI(data.loggedIn, data.user); } catch (e) { console.error("Error during checkLoginStatus:", e); updateUI(false); } };
 
-    // --- EVENT LISTENERS ---
+    // --- Event Listeners ---
     quoteSearchInput.addEventListener('input', handleSearchAndFilter);
     comboboxInputWrapper.addEventListener('click', () => { categoryDropdown.classList.add('visible'); categorySearchInput.focus(); });
     categorySearchInput.addEventListener('input', filterCategoryDropdown);
@@ -217,12 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (productRows.length === 0) { return alert('Cannot save an empty quote.'); }
             const lineItems = Array.from(productRows).map(row => {
                 const isAdmin = userRole === 'admin';
-                return {
-                    product: row.dataset.productId,
-                    quantity: parseInt(row.querySelector('.quantity-input').value),
-                    priceAtTime: parseFloat(isAdmin ? row.querySelector('.price-input').value : row.cells[2].textContent),
-                    discountPercentage: parseFloat(isAdmin ? row.querySelector('.discount-input').value : row.cells[4].textContent.replace('%',''))
-                };
+                return { product: row.dataset.productId, quantity: parseInt(row.querySelector('.quantity-input').value), priceAtTime: parseFloat(isAdmin ? row.querySelector('.price-input').value : row.cells[2].textContent), discountPercentage: parseFloat(isAdmin ? row.querySelector('.discount-input').value : row.cells[4].textContent.replace('%','')) };
             });
             const quoteData = { clientName: clientNameInput.value.trim() || 'N/A', lineItems, subtotal: parseFloat(subtotalAmountSpan.textContent), couponCode: couponDiscountPercentage > 0 ? couponCodeInput.value.trim() : null, couponDiscountPercentage, couponDiscountAmount: parseFloat(discountAmountSpan.textContent) || 0, gstPercentage: GST_RATE, gstAmount: parseFloat(gstAmountSpan.textContent), grandTotal: parseFloat(grandTotalAmountSpan.textContent) };
             try {
@@ -241,10 +211,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch(`${API_BASE_URL}/api/coupons/apply`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: code }), credentials: 'include' });
                 const data = await response.json();
                 if (response.ok) {
-                    couponStatusMessage.textContent = data.message;
-                    couponStatusMessage.style.color = 'var(--primary-green)';
-                    couponDiscountPercentage = data.discountPercentage;
-                    lineItemDiscount = 0; // Set default item discount to 0 when coupon is applied
+                    couponStatusMessage.textContent = data.message; couponStatusMessage.style.color = 'var(--primary-green)';
+                    couponDiscountPercentage = data.discountPercentage; lineItemDiscount = 0;
                     recalculateAllRows();
                     couponCodeInput.disabled = true; applyCouponBtn.disabled = true; applyCouponBtn.textContent = 'Applied!';
                 } else { couponStatusMessage.textContent = data.message; couponStatusMessage.style.color = 'var(--danger-color)'; }
@@ -258,8 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (productRows.length === 0) { alert('No items to download.'); return; }
             const data = [['#', 'Item', 'Base Price', 'Qty', 'Disc %', 'Disc Price', 'Total']];
             productRows.forEach(row => {
-                const cells = row.querySelectorAll('td');
-                const isAdmin = userRole === 'admin';
+                const cells = row.querySelectorAll('td'); const isAdmin = userRole === 'admin';
                 const price = isAdmin ? cells[2].querySelector('input').value : cells[2].textContent;
                 const quantity = cells[3].querySelector('input').value;
                 const discount = isAdmin ? cells[4].querySelector('input').value : cells[4].textContent;
@@ -281,12 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (productRows.length === 0) { alert('No items to download.'); return; }
             const lineItems = Array.from(productRows).map(row => {
                 const isAdmin = userRole === 'admin';
-                return {
-                    name: row.cells[1].innerHTML,
-                    quantity: parseInt(row.querySelector('.quantity-input').value),
-                    price: parseFloat(isAdmin ? row.querySelector('.price-input').value : row.cells[2].textContent),
-                    discountPercentage: parseFloat(isAdmin ? row.querySelector('.discount-input').value : row.cells[4].textContent.replace('%',''))
-                };
+                return { name: row.cells[1].innerHTML, quantity: parseInt(row.querySelector('.quantity-input').value), price: parseFloat(isAdmin ? row.querySelector('.price-input').value : row.cells[2].textContent), discountPercentage: parseFloat(isAdmin ? row.querySelector('.discount-input').value : row.cells[4].textContent.replace('%','')) };
             });
             const quoteData = { clientName: clientNameInput.value.trim() || 'N/A', lineItems, subtotal: parseFloat(subtotalAmountSpan.textContent), couponDiscountPercentage, couponDiscountAmount: parseFloat(discountAmountSpan.textContent) || 0, gstPercentage: GST_RATE, gstAmount: parseFloat(gstAmountSpan.textContent), grandTotal: parseFloat(grandTotalAmountSpan.textContent) };
             try {
@@ -297,6 +259,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Initial Load ---
+    // Initial Load
     checkLoginStatus();
 });

@@ -1,5 +1,3 @@
-// app.js - Final Version with Immediate Coupon Consumption
-
 require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
@@ -11,7 +9,6 @@ const cors = require('cors');
 const MongoStore = require('connect-mongo');
 const html_to_pdf = require('html-pdf-node');
 
-// Models
 const User = require('./models/Users');
 const Product = require('./models/Products');
 const Quote = require('./models/Quote');
@@ -47,13 +44,28 @@ function ensureAuth(req, res, next) { if (req.isAuthenticated()) { return next()
 // --- AUTHENTICATION ROUTES ---
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: process.env.FRONTEND_URL || '/' }), (req, res) => { res.redirect(process.env.FRONTEND_URL || '/'); });
-app.get('/api/user', (req, res) => { if (req.user) { res.json({ loggedIn: true, user: { displayName: req.user.displayName, role: req.user.role } }); } else { res.json({ loggedIn: false }); } });
+
+app.get('/api/user', (req, res) => {
+    if (req.user) {
+        res.json({
+            loggedIn: true,
+            user: {
+                displayName: req.user.displayName,
+                role: req.user.role // Corrected: removed invalid comment
+            }
+        });
+    } else {
+        res.json({ loggedIn: false });
+    }
+});
+
 app.get('/auth/logout', (req, res, next) => { req.logout((err) => { if (err) { return next(err); } req.session.destroy(() => res.redirect(process.env.FRONTEND_URL || '/')); }); });
 
 
 // --- DATA AND ACTION API ROUTES ---
 app.get('/api/products', ensureAuth, async (req, res) => {
-    const searchTerm = req.query.q; const category = req.query.category;
+    const searchTerm = req.query.q;
+    const category = req.query.category;
     let query = {};
     if (searchTerm) { query.$or = [{ baseName: { $regex: searchTerm, $options: 'i' } }, { variantName: { $regex: searchTerm, $options: 'i' } }]; }
     if (category && category.length > 0) { query.category = { $in: Array.isArray(category) ? category : [category] }; }
@@ -64,12 +76,14 @@ app.get('/api/categories', ensureAuth, async (req, res) => {
     try { const categories = await Product.distinct('category'); res.json(categories.sort()); } catch (e) { res.status(500).json({ message: 'Error fetching categories' }); }
 });
 
-// MODIFIED: This route NO LONGER updates the coupon status.
 app.post('/api/quotes', ensureAuth, async (req, res) => {
     try {
         const quoteNumber = `Q-${Date.now()}`;
         const newQuote = new Quote({ quoteNumber: quoteNumber, user: req.user.id, ...req.body });
         const savedQuote = await newQuote.save();
+        if (req.body.couponCode) {
+            await Coupon.updateOne({ code: req.body.couponCode.toUpperCase() }, { $set: { isUsed: true } });
+        }
         res.status(201).json(savedQuote);
     } catch (e) { console.error("Error saving quote:", e); res.status(500).json({ message: 'Error saving quote' }); }
 });
@@ -95,7 +109,6 @@ app.delete('/api/quotes/:id', ensureAuth, async (req, res) => {
     } catch (e) { res.status(500).json({ message: 'Error deleting quote' }); }
 });
 
-// MODIFIED: This route NOW marks the coupon as used immediately.
 app.post('/api/coupons/apply', ensureAuth, async (req, res) => {
     const { code } = req.body;
     if (!code) { return res.status(400).json({ message: 'Code required.' }) }
@@ -103,11 +116,7 @@ app.post('/api/coupons/apply', ensureAuth, async (req, res) => {
         const coupon = await Coupon.findOne({ code: code.toUpperCase() });
         if (!coupon) { return res.status(404).json({ message: 'Invalid coupon' }) }
         if (coupon.isUsed) { return res.status(410).json({ message: 'This coupon has already been used' }) }
-
-        // Mark the coupon as used and save it to the database
-        coupon.isUsed = true;
-        await coupon.save();
-
+        coupon.isUsed = true; await coupon.save();
         res.json({ message: `Success! ${coupon.discountPercentage}% discount applied.`, discountPercentage: coupon.discountPercentage });
     } catch (e) { res.status(500).json({ message: 'Server error' }); }
 });
@@ -123,7 +132,6 @@ app.post('/api/quotes/preview-pdf', ensureAuth, async (req, res) => {
         res.setHeader('Content-Type', 'application/pdf'); res.setHeader('Content-Disposition', `attachment; filename=Quote-Preview.pdf`); res.send(pdfBuffer);
     } catch (err) { console.error('CRITICAL ERROR in PDF Generation:', err); res.status(500).send('Error generating preview PDF'); }
 });
-
 
 // --- Serve Static Files for Local Development ---
 if (process.env.NODE_ENV !== 'production') {

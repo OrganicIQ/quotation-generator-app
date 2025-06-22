@@ -3,7 +3,7 @@ const API_BASE_URL = window.location.origin.includes('localhost')
     : 'https://my-quote-backend-q5i4.onrender.com';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // --- DOM Element References ---
+    // DOM Element References
     const authSection = document.getElementById('auth-section');
     const dashboardSection = document.getElementById('dashboard-section');
     const userDisplayName = document.getElementById('user-display-name');
@@ -31,9 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedPillsArea = document.getElementById('selected-pills-area');
     const categorySearchInput = document.getElementById('category-search-input');
     const categoryDropdown = document.getElementById('category-dropdown');
-    const newQuoteBtn = document.getElementById('new-quote-btn');
 
-    // --- State Variables ---
+    // State Variables
     let lineItemDiscount = 10;
     let couponDiscountPercentage = 0;
     const GST_RATE = 18;
@@ -41,28 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedCategories = [];
     let userRole = 'user';
 
-    // --- HELPER FUNCTIONS ---
+    // Helper Functions
     function calculateQuotation(basePrice, quantity, discountPercentage) { const priceAfterDiscount = basePrice * (1 - (discountPercentage / 100)); const total = priceAfterDiscount * quantity; return { priceAfterDiscount, total }; }
     function debounce(func, delay) { let timeout; return function(...args) { clearTimeout(timeout); timeout = setTimeout(() => func.apply(this, args), delay); }; }
     function updateFinalTotals() { let subTotal = 0; const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); productRows.forEach(row => { const itemTotalSpan = row.querySelector('.item-total-price'); if (itemTotalSpan) { const itemTotal = parseFloat(itemTotalSpan.textContent); if (!isNaN(itemTotal)) { subTotal += itemTotal; } } }); const discountAmount = subTotal * (couponDiscountPercentage / 100); const amountAfterDiscount = subTotal - discountAmount; const gstAmount = amountAfterDiscount * (GST_RATE / 100); const finalGrandTotal = amountAfterDiscount + gstAmount; subtotalAmountSpan.textContent = subTotal.toFixed(2); if (couponDiscountPercentage > 0) { couponRateDisplay.textContent = couponDiscountPercentage; discountAmountSpan.textContent = discountAmount.toFixed(2); discountRow.style.display = 'table-row'; } else { discountRow.style.display = 'none'; } gstAmountSpan.textContent = gstAmount.toFixed(2); grandTotalAmountSpan.textContent = finalGrandTotal.toFixed(2); }
     function recalculateAllRows() { const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); productRows.forEach(row => { row.querySelector('.quantity-input').dispatchEvent(new Event('input', { bubbles: true })); }); }
 
-    function resetQuotationWorkspace() {
-        selectedProductsTbody.innerHTML = '';
-        noItemsMessage.style.display = 'block';
-        selectedProductsTable.style.display = 'none';
-        clientNameInput.value = '';
-        couponCodeInput.value = '';
-        couponCodeInput.disabled = false;
-        applyCouponBtn.disabled = false;
-        applyCouponBtn.textContent = 'Apply';
-        couponStatusMessage.textContent = '';
-        couponDiscountPercentage = 0;
-        lineItemDiscount = 10;
-        updateFinalTotals();
-    }
-
-    // --- UI AND DATA FUNCTIONS ---
+    // UI and Data Functions
     function renderSelectedPills() {
         selectedPillsArea.innerHTML = '';
         selectedCategories.forEach(category => {
@@ -112,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`${API_BASE_URL}/api/quotes/${quoteId}`, { credentials: 'include' });
             if (!response.ok) { alert('Could not retrieve quote.'); return; }
             const quote = await response.json();
-            resetQuotationWorkspace(); // Reset before loading
+            selectedProductsTbody.innerHTML = '';
             clientNameInput.value = quote.clientName;
             couponDiscountPercentage = quote.couponDiscountPercentage || 0;
             couponCodeInput.value = quote.couponCode || '';
@@ -121,7 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
             couponCodeInput.disabled = hasCoupon; applyCouponBtn.disabled = hasCoupon; applyCouponBtn.textContent = hasCoupon ? 'Applied!' : 'Apply';
             couponStatusMessage.textContent = hasCoupon ? `${couponDiscountPercentage}% coupon applied.` : '';
             if (hasCoupon) { couponStatusMessage.style.color = 'var(--primary-green)'; }
-            quote.lineItems.forEach(item => { if (item.product) { addProductToSelectedList(item.product, item.quantity, item.priceAtTime, item.discountPercentage); } });
+            quote.lineItems.forEach(item => {
+                if (item.product) {
+                    addProductToSelectedList(item.product, item.quantity, item.priceAtTime, item.discountPercentage);
+                }
+            });
             updateFinalTotals();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (error) { console.error("Error loading single quote:", error); }
@@ -179,18 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateUI = (loggedIn, user = null) => { if (loggedIn) { authSection.style.display = 'none'; dashboardSection.style.display = 'block'; userDisplayName.textContent = user.displayName; userRole = user.role || 'user'; loadSavedQuotes(); loadCategories(); } else { authSection.style.display = 'block'; dashboardSection.style.display = 'none'; userRole = 'user'; } };
     const checkLoginStatus = async () => { try { const response = await fetch(`${API_BASE_URL}/api/user`, { credentials: 'include' }); const data = await response.json(); updateUI(data.loggedIn, data.user); } catch (e) { console.error("Error during checkLoginStatus:", e); updateUI(false); } };
 
-    // --- EVENT LISTENERS ---
-    if (newQuoteBtn) {
-        newQuoteBtn.addEventListener('click', () => {
-            if (selectedProductsTbody.children.length > 0) {
-                if (confirm("You have unsaved items. Are you sure you want to discard them and start a new quote?")) {
-                    resetQuotationWorkspace();
-                }
-            } else {
-                resetQuotationWorkspace();
-            }
-        });
-    }
+    // --- Event Listeners ---
     quoteSearchInput.addEventListener('input', handleSearchAndFilter);
     comboboxInputWrapper.addEventListener('click', () => { categoryDropdown.classList.add('visible'); categorySearchInput.focus(); });
     categorySearchInput.addEventListener('input', filterCategoryDropdown);
@@ -252,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const cells = row.querySelectorAll('td'); const isAdmin = userRole === 'admin';
                 const price = isAdmin ? cells[2].querySelector('input').value : cells[2].textContent;
                 const quantity = cells[3].querySelector('input').value;
-                const discount = isAdmin ? cells[4].querySelector('input').value + '%' : cells[4].textContent;
+                const discount = isAdmin ? cells[4].querySelector('input').value : cells[4].textContent;
                 data.push([ cells[0].textContent, cells[1].innerText.replace(/\n/g, " "), price, quantity, discount, cells[5].textContent, cells[6].textContent ]);
             });
             data.push([]); data.push(['', '', '', '', '', 'Subtotal', subtotalAmountSpan.textContent]);

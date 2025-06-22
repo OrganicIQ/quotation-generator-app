@@ -6,82 +6,108 @@
     <title>Price Quotation Generator</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1 id="welcome-message">Welcome to the Price Quotation Generator</h1>
-        <div id="auth-section">
-            <p>Please log in with your Google account to continue.</p>
-            <button id="google-login-btn"><img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo"> Login with Google</button>
+    <div id="auth-container" style="display: none;">
+        <div class="auth-panel auth-image-panel">
+            <div class="auth-branding">
+                <h2>Quotation Generator</h2>
+                <p>Streamline Your Business.</p>
+            </div>
         </div>
+        <div class="auth-panel auth-form-panel">
+            <div id="auth-section">
+                <h1>Welcome</h1>
+                <p>Please log in to continue</p>
+                <button id="google-login-btn"><img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo"> Login with Google</button>
+            </div>
+        </div>
+    </div>
 
-        <div id="dashboard-section" style="display: none;">
-            <div class="header-bar"><p>Hello, <span id="user-display-name"></span>!</p><button id="logout-btn">Logout</button></div>
-            
-            <h2>Create New Quotation:</h2>
-            
-            <div class="main-content-grid">
-                <div class="left-column">
-
-                    <div class="search-and-filter-container">
-                        <div id="category-combobox-container" class="category-combobox-container">
-                            <div id="combobox-input-wrapper" class="combobox-input-wrapper">
-                                <div id="selected-pills-area" class="selected-pills-area">
-                                    </div>
-                                <input type="text" id="category-search-input" placeholder="Search categories...">
-                            </div>
-                            <div id="category-dropdown" class="category-dropdown">
-                                </div>
+    <div class="container" id="main-container" style="display: none;">
+        <div class="header-bar">
+            <p>Hello, <span id="user-display-name"></span>!</p>
+            <button id="logout-btn">Logout</button>
+        </div>
+        
+        <h2 class="section-title">Create New Quotation</h2>
+        
+        <div class="main-content-grid">
+            <div class="left-column">
+                <div class="search-and-filter-container">
+                    <div id="category-combobox-container" class="category-combobox-container">
+                        <div id="combobox-input-wrapper" class="combobox-input-wrapper">
+                            <div id="selected-pills-area" class="selected-pills-area"></div>
+                            <input type="text" id="category-search-input" placeholder="Search categories...">
                         </div>
-    
-                        <div class="search-container">
-                             <input type="text" id="quote-search" placeholder="Search for products...">
-                             <ul id="autocomplete-results" class="autocomplete-results"></ul>
-                        </div>
+                        <div id="category-dropdown" class="category-dropdown"></div>
                     </div>
-                    <div id="current-quotation-area">
-                        <div id="selected-products-table-container">
-                            <p id="no-items-message">No items selected yet.</p>
-                            <table id="selected-products-table">
-                                <thead>
-                                    <tr><th>#</th><th>Item</th><th>Base Price</th><th>Qty</th><th>Disc %</th><th>Disc Price</th><th>Total</th><th>Action</th></tr>
-                                </thead>
-                                <tbody id="selected-products-tbody"></tbody>
-                            </table>
-                        </div>
+                    <div class="search-container">
+                         <input type="text" id="quote-search" placeholder="Search for products...">
+                         <ul id="autocomplete-results" class="autocomplete-results"></ul>
                     </div>
                 </div>
-
-                <div class="right-column">
-                    <div class="totals-breakdown card">
-                        <h3>Summary</h3>
-                        <table class="totals-table">
-                            <tbody>
-                                <tr><td>Subtotal:</td><td>₹<span id="subtotal-amount">0.00</span></td></tr>
-                                <tr id="discount-row" style="display: none;"><td>Discount (<span id="coupon-rate-display">0</span>%):</td><td>- ₹<span id="discount-amount">0.00</span></td></tr>
-                                <tr><td>GST (18%):</td><td>+ ₹<span id="gst-amount">0.00</span></td></tr>
-                                <tr class="grand-total-row"><td>Grand Total:</td><td>₹<span id="grand-total-amount">0.00</span></td></tr>
-                            </tbody>
+                <div id="current-quotation-area">
+                    <div id="selected-products-table-container">
+                        <p id="no-items-message">No items selected yet.</p>
+                        <table id="selected-products-table">
+                            <thead>
+                                <tr><th>#</th><th>Item</th><th>Base Price</th><th>Qty</th><th>Disc %</th><th>Disc Price</th><th>Total</th><th>Action</th></tr>
+                            </thead>
+                            <tbody id="selected-products-tbody"></tbody>
                         </table>
-                        <div id="coupon-section"><input type="text" id="coupon-code-input" placeholder="Enter Coupon Code"><button id="apply-coupon-btn">Apply</button></div>
-                        <p id="coupon-status-message"></p>
-                    </div>
-                    <div class="quote-actions card">
-                        <h3>Actions</h3>
-                         <input type="text" id="client-name-input" placeholder="Enter Client Name Here">
-                         <button id="save-quote-btn" class="btn-primary">Save Quote</button>
-                         <button id="download-excel-btn" class="btn-secondary">Download as Excel</button>
-                         <button id="download-pdf-btn" class="btn-secondary">Download as PDF</button>
                     </div>
                 </div>
             </div>
 
-            <hr class="section-divider">
-            <div id="saved-quotes-section">
-                <h2>My Saved Quotations</h2>
-                <div id="saved-quotes-list"><p>You have no saved quotes yet.</p></div>
+            <div class="right-column">
+                <div class="totals-breakdown card">
+                    <h3>Summary</h3>
+                    <table class="totals-table">
+                        <tbody>
+                            <tr><td>Subtotal:</td><td>₹<span id="subtotal-amount">0.00</span></td></tr>
+                            <tr id="discount-row" style="display: none;"><td>Discount (<span id="coupon-rate-display">0</span>%):</td><td>- ₹<span id="discount-amount">0.00</span></td></tr>
+                            <tr><td>GST (18%):</td><td>+ ₹<span id="gst-amount">0.00</span></td></tr>
+                            <tr class="grand-total-row"><td>Grand Total:</td><td>₹<span id="grand-total-amount">0.00</span></td></tr>
+                        </tbody>
+                    </table>
+                    <hr class="card-divider">
+                    <div id="coupon-section">
+                        <input type="text" id="coupon-code-input" placeholder="Enter Coupon Code">
+                        <button id="apply-coupon-btn">Apply</button>
+                    </div>
+                    <p id="coupon-status-message"></p>
+                </div>
+
+                <div class="quote-actions card">
+                    <h3>Actions</h3>
+                    <input type="text" id="client-name-input" placeholder="Enter Client Name Here">
+                    <button id="new-quote-btn" class="btn-secondary">New Quote</button>
+                    <button id="save-quote-btn" class="btn-primary">Save Quote</button>
+                    <div class="download-menu-container">
+                        <button id="download-menu-btn" class="btn-secondary">Download As...</button>
+                        <div id="download-options" class="download-options">
+                            <button id="download-excel-btn">Excel (.xlsx)</button>
+                            <button id="download-pdf-btn">PDF (.pdf)</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+        
+        <div id="saved-quotes-section">
+            <div id="saved-quotes-header" class="collapsible-header">
+                <h2 class="section-title">My Saved Quotations</h2>
+                <div class="arrow-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+            </div>
+            <div id="saved-quotes-content" class="collapsible-content">
+                <div id="saved-quotes-list"></div>
             </div>
         </div>
     </div>

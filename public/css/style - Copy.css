@@ -1,16 +1,18 @@
+/* public/css/style.css - Final Version with Gradient Background */
+
 /* --- 1. Foundation --- */
 :root {
-    --color-primary: #1E8449; /* A professional, rich green */
+    --color-primary: #1E8449;
     --color-primary-hover: #196F3D;
-    --color-accent: #D2B48C; /* Tan */
+    --color-accent: #D2B48C;
     --color-surface: #FFFFFF;
     --color-background: #F8F9FA;
     --color-border: #EAECEF;
+    --color-dot: rgba(0, 0, 0, 0.05);
     --color-text-primary: #212529;
     --color-text-secondary: #6C757D;
     --color-text-on-primary: #FFFFFF;
     --color-danger: #C14A4A;
-    --color-success: #198754;
     --font-family: 'Poppins', sans-serif;
     --border-radius-sm: 8px;
     --border-radius-md: 12px;
@@ -27,6 +29,13 @@ body {
     color: var(--color-text-primary); 
     line-height: 1.6; 
     font-size: 14px;
+    /* MODIFIED: Layer a subtle gradient behind the dots */
+    background-image:
+        /* Layer 1: Dots (on top) */
+        radial-gradient(var(--color-dot) 1px, transparent 1px),
+        /* Layer 2: Gradient (behind) */
+        linear-gradient(to bottom, #FFFFFF, var(--color-background));
+    background-size: 25px 25px, 100% 100%;
 }
 
 /* --- 2. Login Screen Styles --- */
@@ -36,6 +45,15 @@ body {
     top: 0; left: 0;
     width: 100%; height: 100%;
     display: flex;
+    /* Give the login screen its own, different background */
+    background-color: var(--color-background);
+    background-image:
+        linear-gradient(45deg, #E5E7EB 25%, transparent 25%), 
+        linear-gradient(135deg, #E5E7EB 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #E5E7EB 75%),
+        linear-gradient(135deg, transparent 75%, #E5E7EB 75%);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 0, 20px -20px, 0px 20px;
 }
 .auth-panel {
     width: 50%; height: 100%;
@@ -46,8 +64,8 @@ body {
 .auth-image-panel { background-color: var(--color-primary); color: white; text-align: center; }
 .auth-branding h2 { font-size: 2.5rem; font-weight: 700; margin: 0; margin-bottom: 1rem; color: white; border: none; text-align: center; padding: 0; }
 .auth-branding p { font-size: 1.2rem; opacity: 0.8; }
-.auth-form-panel { background-color: var(--color-surface); }
-#auth-section { width: 100%; max-width: 400px; text-align: center; }
+.auth-form-panel { background-color: transparent; }
+#auth-section { width: 100%; max-width: 400px; text-align: center; background: var(--color-surface); padding: 2.5rem; border-radius: var(--border-radius-md); box-shadow: var(--shadow-strong); }
 #auth-section h1 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--color-text-primary); }
 #auth-section p { font-size: 1.1rem; color: var(--color-text-secondary); margin-bottom: 2.5rem; }
 #google-login-btn { 
@@ -56,12 +74,12 @@ body {
     background-color: var(--color-surface); 
     border: 1px solid var(--color-border);
     border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-strong);
+    box-shadow: var(--shadow-soft);
     color: var(--color-text-primary);
     transition: all 0.2s ease;
     cursor: pointer;
 }
-#google-login-btn:hover { transform: translateY(-3px); }
+#google-login-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-strong); }
 #google-login-btn img { width: 20px; height: 20px; margin-right: 12px; }
 
 
@@ -69,7 +87,13 @@ body {
 .container { 
     max-width: 1400px; 
     margin: 2rem auto; 
-    padding: 2.5rem; 
+    padding: 2.5rem;
+    /* MODIFIED: Make container transparent so body background is visible */
+    background-color: transparent;
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
 }
 .section-title { font-weight: 600; margin-top: 2.5rem; margin-bottom: 1.5rem; padding-bottom: 0.5rem; color: var(--color-text-primary); border-bottom: 1px solid var(--color-border); text-align: left;}
 h3 { margin-bottom: 1rem; color: var(--color-text-primary); font-weight: 600; }
@@ -90,22 +114,12 @@ button { border-radius: var(--border-radius-lg); transition: all 0.2s ease; font
 input[type="text"], input[type="number"] { width: 100%; padding: 12px 20px; border: 1px solid var(--color-border); border-radius: var(--border-radius-lg); font-family: var(--font-family); font-size: 0.95rem; background-color: #fff; transition: all 0.2s ease; }
 input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(30, 132, 73, 0.2); }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
-}
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
-
-
 /* --- 5. Search & Filters --- */
 .search-and-filter-container { display: grid; grid-template-columns: 1fr 2fr; gap: 1rem; margin-bottom: 1rem; }
 .search-container { position: relative; }
 .autocomplete-results { list-style: none; position: absolute; width: 100%; margin-top: 5px; background: #fff; border: 1px solid var(--color-border); border-radius: var(--border-radius-md); box-shadow: var(--shadow-strong); z-index: 999; display: none; max-height: 350px; overflow-y: auto; padding: 0.5rem; }
-.autocomplete-results.visible { display: block; } .autocomplete-results li { padding: 10px 12px; cursor: pointer; font-size: 0.9rem; border-radius: var(--border-radius-sm); }
+.autocomplete-results.visible { display: block; }
+.autocomplete-results li { padding: 10px 12px; cursor: pointer; font-size: 0.9rem; border-radius: var(--border-radius-sm); }
 .autocomplete-results li:hover { background-color: var(--color-background); }
 .category-combobox-container { position: relative; }
 .combobox-input-wrapper { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; padding: 6px; background-color: #fff; border: 1px solid var(--color-border); border-radius: var(--border-radius-lg); cursor: text; transition: all 0.2s ease; }
@@ -130,28 +144,9 @@ input[type=number] {
 #selected-products-table th { font-weight: 600; background-color: #f8f9fa; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
 #selected-products-table tr:last-child td { border-bottom: none; }
 #selected-products-table td:nth-child(3), #selected-products-table td:nth-child(4), #selected-products-table td:nth-child(5), #selected-products-table td:nth-child(8) { text-align: center; }
-.quantity-input, .price-input, .discount-input { text-align: center; font-size: 0.72rem; padding: 4px 12px; border-radius: var(--border-radius-sm); border: 1px solid var(--color-border); max-width: 100px; margin: 0 auto; }
-.remove-btn {
-    background: transparent;
-    border: 1px solid var(--color-danger);
-    color: var(--color-danger);
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    font-size: 20px;
-    font-weight: bold;
-    line-height: 1;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.remove-btn:hover { 
-    background-color: var(--color-danger); 
-    color: #fff; 
-    transform: scale(1.1); /* Add a slight scale effect on hover */
-    box-shadow: none;
-}
+.quantity-input, .price-input, .discount-input { text-align: center; font-size: 0.85rem; padding: 4px 8px; border-radius: var(--border-radius-sm); border: 1px solid var(--color-border); max-width: 100px; margin: 0 auto; }
+.remove-btn { background-color: var(--color-surface); color: var(--color-danger); border: 1px solid var(--color-danger); padding: 6px 15px; font-size: 0.8rem; }
+.remove-btn:hover { background-color: var(--color-danger); color: #fff; }
 .totals-table td:last-child { text-align: right; font-weight: 600; }
 .grand-total-row td { padding-top: 10px; border-top: 2px solid var(--color-text-primary); font-size: 1.1rem; font-weight: 700; }
 #coupon-section { display: flex; gap: 10px; }

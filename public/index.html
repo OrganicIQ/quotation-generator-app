@@ -24,13 +24,22 @@
             
             <div class="main-content-grid">
                 <div class="left-column">
-                    <div class="search-container">
-                        <div class="search-bar">
-                            <div id="category-pills-container" class="category-pills">
+
+                    <div class="search-and-filter-container">
+                        <div id="category-combobox-container" class="category-combobox-container">
+                            <div id="combobox-input-wrapper" class="combobox-input-wrapper">
+                                <div id="selected-pills-area" class="selected-pills-area">
+                                    </div>
+                                <input type="text" id="category-search-input" placeholder="Search categories...">
+                            </div>
+                            <div id="category-dropdown" class="category-dropdown">
                                 </div>
-                            <input type="text" id="quote-search" placeholder="Search for products...">
                         </div>
-                        <ul id="autocomplete-results" class="autocomplete-results"></ul>
+    
+                        <div class="search-container">
+                             <input type="text" id="quote-search" placeholder="Search for products...">
+                             <ul id="autocomplete-results" class="autocomplete-results"></ul>
+                        </div>
                     </div>
                     <div id="current-quotation-area">
                         <div id="selected-products-table-container">

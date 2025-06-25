@@ -157,24 +157,63 @@ const generateExcelBuffer = (quoteData) => {
 };
 
 const generatePdfBuffer = async (quoteData, user) => {
-    const quoteDate = new Date().toLocaleDateString("en-IN", { day: '2-digit', month: 'short', year: 'numeric' });
+    // ** FIX: Provide default empty objects to prevent errors if details are missing **
+    const senderDetails = user.billingDetails || {};
+    const clientDetails = quoteData.client || {}; // Assuming client details might be passed in future
+
+    const quoteDate = new Date().toLocaleDateString("en-IN", { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+    const headerHtml = `
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+            <tr>
+                <td style="width: 20%;">
+                    <img src="${user.image || 'https://organiciqsolutions.com/wp-content/uploads/2025/06/Asset-1@2x-1.png'}" style="width: 80px; height: 80px; border-radius: 50%;">
+                </td>
+                <td style="width: 45%; vertical-align: top; font-size: 11px;">
+                    <strong style="font-size: 16px;">${senderDetails.organisation || user.displayName}</strong><br>
+                    ${senderDetails.address || ''}<br>
+                    ${senderDetails.state || ''} - ${senderDetails.pinCode || ''}<br>
+                    ${senderDetails.contactNumber || ''}<br>
+                    ${senderDetails.gstNumber ? `GSTIN: ${senderDetails.gstNumber}` : ''}
+                </td>
+                <td style="width: 35%; text-align: right; vertical-align: top;">
+                    <h1 style="font-size: 24px; margin: 0; color: #333;">QUOTATION</h1>
+                </td>
+            </tr>
+        </table>
+        <div style="border-top: 2px solid #333; margin-bottom: 20px;"></div>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 12px;">
+            <tr>
+                <td style="width: 50%;">
+                    <strong>Quote No:</strong> Q-${Date.now()}<br>
+                    <strong>Date:</strong> ${quoteDate}<br>
+                </td>
+                <td style="width: 50%;">
+                    <strong>Bill To:</strong> ${quoteData.clientName || ''}
+                </td>
+            </tr>
+        </table>
+    `;
+
     const itemsHtml = quoteData.lineItems.map((item, index) => {
         const basePrice = item.price;
         const quantity = item.quantity;
         const discount = item.discountPercentage;
         const discountedPrice = basePrice * (1 - (discount / 100));
-        // ** FIX: Calculate the total correctly here **
-        const total = discountedPrice * quantity; 
-        return `<tr><td>${index + 1}</td><td>${item.name.replace(/, /g, "<br>")}</td><td>₹${basePrice.toFixed(2)}</td><td>${quantity}</td><td>${discount}%</td><td>₹${discountedPrice.toFixed(2)}</td><td>₹${total.toFixed(2)}</td></tr>`;
+        const total = discountedPrice * quantity;
+        return `<tr><td>${index + 1}</td><td>${item.name}</td><td>₹${basePrice.toFixed(2)}</td><td>${quantity}</td><td>${discount}%</td><td>₹${discountedPrice.toFixed(2)}</td><td>₹${total.toFixed(2)}</td></tr>`;
     }).join('');
-    
+
     const totalsHtml = `<tr><td colspan="6" style="text-align:right;">Subtotal:</td><td style="text-align:right;">₹${quoteData.subtotal.toFixed(2)}</td></tr>${quoteData.couponDiscountPercentage > 0 ? `<tr><td colspan="6" style="text-align:right;">Discount (${quoteData.couponDiscountPercentage}%):</td><td style="text-align:right;">- ₹${quoteData.couponDiscountAmount.toFixed(2)}</td></tr>` : ''}<tr><td colspan="6" style="text-align:right;">GST (${quoteData.gstPercentage}%):</td><td style="text-align:right;">+ ₹${quoteData.gstAmount.toFixed(2)}</td></tr><tr style="font-weight:bold; border-top: 2px solid #333;"><td colspan="6" style="text-align:right;">Grand Total:</td><td style="text-align:right;">₹${quoteData.grandTotal.toFixed(2)}</td></tr>`;
     
-    const htmlContent = `<html><head><style>body{font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#333;}.invoice-box{max-width:800px;margin:auto;padding:30px;border:1px solid #eee;box-shadow:0 0 10px rgba(0,0,0,.15);}.header{text-align:center;margin-bottom:20px;}.items-table{width:100%;border-collapse:collapse;}.items-table th,.items-table td{border-bottom:1px solid #eee;padding:8px;text-align:left;vertical-align:top;}.items-table th{background-color:#f9f9f9;}.totals-table{width:50%;margin-left:auto;margin-top:20px;}</style></head><body><div class="invoice-box"><div class="header"><h1>Quotation</h1><p>From: ${user.displayName}</p></div><div><table><tr><td><strong>Date:</strong> ${quoteDate}</td></tr><tr><td><strong>Client:</strong> ${quoteData.clientName}</td></tr></table></div><br><table class="items-table"><thead><tr><th>#</th><th>Item</th><th>Base Price</th><th>Qty</th><th>Disc %</th><th>Disc Price</th><th>Total</th></tr></thead><tbody>${itemsHtml}</tbody></table><table class="totals-table"><tbody>${totalsHtml}</tbody></table></div></body></html>`;
+    const htmlContent = `<html><head><style>body{font-family:Helvetica,Arial,sans-serif;font-size:12px;color:#333;}.invoice-box{max-width:800px;margin:auto;padding:30px;border:1px solid #eee;box-shadow:0 0 10px rgba(0,0,0,.15);}.items-table{width:100%;border-collapse:collapse;}.items-table th,.items-table td{border-bottom:1px solid #eee;padding:8px;text-align:left;vertical-align:top;}.items-table th{background-color:#f9f9f9;}.totals-table{width:50%;margin-left:auto;margin-top:20px;}</style></head><body><div class="invoice-box">${headerHtml}<table class="items-table"><thead><tr><th>#</th><th>Item</th><th>Base Price</th><th>Qty</th><th>Disc %</th><th>Disc Price</th><th>Total</th></tr></thead><tbody>${itemsHtml}</tbody></table><table class="totals-table"><tbody>${totalsHtml}</tbody></table></div></body></html>`;
         
     let options = { format: 'A4', margin: { top: '0.5in', right: '0.5in', bottom: '0.5in', left: '0.5in' } };
     return html_to_pdf.generatePdf({ content: htmlContent }, options);
 };
+
+
+
 
 // --- PDF and EMAIL ROUTES ---
 app.post('/api/quotes/preview-pdf', ensureAuth, async (req, res) => {
@@ -185,7 +224,7 @@ app.post('/api/quotes/preview-pdf', ensureAuth, async (req, res) => {
         res.send(pdfBuffer);
     } catch (err) {
         console.error('CRITICAL ERROR in PDF Generation:', err);
-        res.status(500).send('Error generating preview PDF');
+        res.status(500).send({ message: 'Error generating preview PDF.' });
     }
 });
 

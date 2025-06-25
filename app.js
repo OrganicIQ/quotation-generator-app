@@ -156,25 +156,26 @@ const generateExcelBuffer = (quoteData) => {
     return XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
 };
 
-const generatePdfBuffer = async (quoteData, user) => {
-    // ** FIX: Provide default empty objects to prevent errors if details are missing **
-    const senderDetails = user.billingDetails || {};
-    const clientDetails = quoteData.client || {}; // Assuming client details might be passed in future
+// In app.js, find the existing generatePdfBuffer function and replace it with this entire block.
 
+const generatePdfBuffer = async (quoteData, user) => {
+    // clientBillingDetails will be used for the "Bill To" section
+    const clientBillingDetails = user.billingDetails || {}; 
     const quoteDate = new Date().toLocaleDateString("en-IN", { day: '2-digit', month: '2-digit', year: 'numeric' });
 
+    // This block now contains your static company information
     const headerHtml = `
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
             <tr>
                 <td style="width: 20%;">
-                    <img src="${user.image || 'https://via.placeholder.com/150x80.png?text=Logo'}" style="width: 80px; height: 80px; border-radius: 50%;">
+                    <!-- You can replace this with your actual logo URL -->
+                    <img src="https://organiciqsolutions.com/wp-content/uploads/2025/06/Asset-1@2x-1.png" style="width: 120px; max-width: 100%;">
                 </td>
-                <td style="width: 45%; vertical-align: top; font-size: 11px;">
-                    <strong style="font-size: 16px;">${senderDetails.organisation || user.displayName}</strong><br>
-                    ${senderDetails.address || ''}<br>
-                    ${senderDetails.state || ''} - ${senderDetails.pinCode || ''}<br>
-                    ${senderDetails.contactNumber || ''}<br>
-                    ${senderDetails.gstNumber ? `GSTIN: ${senderDetails.gstNumber}` : ''}
+                <td style="width: 45%; vertical-align: top; font-size: 11px; line-height: 1.5;">
+                    <strong style="font-size: 16px;">organic IQ</strong><br>
+                    Sector 150, NOIDA<br>
+                    Uttar Pradesh - 201303<br>
+                    9999999999<br>
                 </td>
                 <td style="width: 35%; text-align: right; vertical-align: top;">
                     <h1 style="font-size: 24px; margin: 0; color: #333;">QUOTATION</h1>
@@ -184,12 +185,16 @@ const generatePdfBuffer = async (quoteData, user) => {
         <div style="border-top: 2px solid #333; margin-bottom: 20px;"></div>
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 12px;">
             <tr>
-                <td style="width: 50%;">
+                <td style="width: 50%; vertical-align: top;">
                     <strong>Quote No:</strong> Q-${Date.now()}<br>
                     <strong>Date:</strong> ${quoteDate}<br>
                 </td>
-                <td style="width: 50%;">
-                    <strong>Bill To:</strong> ${quoteData.clientName || ''}
+                <td style="width: 50%; vertical-align: top;">
+                    <strong>Bill To:</strong><br>
+                    <strong>${quoteData.clientName || ''}</strong><br>
+                    ${clientBillingDetails.address || ''}<br>
+                    ${clientBillingDetails.state || ''} - ${clientBillingDetails.pinCode || ''}<br>
+                    ${clientBillingDetails.gstNumber ? `GSTIN: ${clientBillingDetails.gstNumber}` : ''}
                 </td>
             </tr>
         </table>

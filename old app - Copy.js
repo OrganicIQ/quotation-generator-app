@@ -45,12 +45,14 @@ function ensureAuth(req, res, next) { if (req.isAuthenticated()) { return next()
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 app.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: process.env.FRONTEND_URL || '/' }), (req, res) => { res.redirect(process.env.FRONTEND_URL || '/'); });
 
-// MODIFIED to send the full user object
 app.get('/api/user', (req, res) => {
     if (req.user) {
         res.json({
             loggedIn: true,
-            user: req.user
+            user: {
+                displayName: req.user.displayName,
+                role: req.user.role // Corrected: removed invalid comment
+            }
         });
     } else {
         res.json({ loggedIn: false });
@@ -61,47 +63,6 @@ app.get('/auth/logout', (req, res, next) => { req.logout((err) => { if (err) { r
 
 
 // --- DATA AND ACTION API ROUTES ---
-
-// NEW ROUTE for updating account details
-app.put('/api/user/account', ensureAuth, async (req, res) => {
-    try {
-        const userId = req.user.id;
-        const {
-            displayName,
-            organisation,
-            contactNumber,
-            billingAddress,
-            shippingAddress,
-            pinCode,
-            state
-        } = req.body;
-
-        const updatedUser = await User.findByIdAndUpdate(userId, {
-            displayName,
-            organisation,
-            contactNumber,
-            billingAddress,
-            shippingAddress,
-            pinCode,
-            state
-        }, { new: true }); // { new: true } returns the updated document
-
-        if (!updatedUser) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-
-        res.json({
-            message: 'Account updated successfully!',
-            user: updatedUser
-        });
-
-    } catch (e) {
-        console.error("Error updating user account:", e);
-        res.status(500).json({ message: 'Error updating account' });
-    }
-});
-
-
 app.get('/api/products', ensureAuth, async (req, res) => {
     const searchTerm = req.query.q;
     const category = req.query.category;
@@ -155,9 +116,6 @@ app.post('/api/coupons/apply', ensureAuth, async (req, res) => {
         const coupon = await Coupon.findOne({ code: code.toUpperCase() });
         if (!coupon) { return res.status(404).json({ message: 'Invalid coupon' }) }
         if (coupon.isUsed) { return res.status(410).json({ message: 'This coupon has already been used' }) }
-        // NOTE: As per previous recommendation, this endpoint should ideally only validate.
-        // The saving of 'isUsed' should happen when the quote is saved.
-        // Keeping original logic as per your file for now.
         coupon.isUsed = true; await coupon.save();
         res.json({ message: `Success! ${coupon.discountPercentage}% discount applied.`, discountPercentage: coupon.discountPercentage });
     } catch (e) { res.status(500).json({ message: 'Server error' }); }
@@ -165,8 +123,6 @@ app.post('/api/coupons/apply', ensureAuth, async (req, res) => {
 
 app.post('/api/quotes/preview-pdf', ensureAuth, async (req, res) => {
     try {
-        // NOTE: As per previous recommendation, this HTML generation is insecure.
-        // You should use a templating engine like EJS to prevent security vulnerabilities.
         const quoteData = req.body; const user = req.user; const quoteDate = new Date().toLocaleDateString();
         const itemsHtml = quoteData.lineItems.map((item, index) => { const basePrice = item.price; const quantity = item.quantity; const discount = item.discountPercentage; const discountedPrice = basePrice * (1 - (discount / 100)); const total = discountedPrice * quantity; return `<tr><td>${index + 1}</td><td>${item.name}</td><td>₹${basePrice.toFixed(2)}</td><td>${quantity}</td><td>${discount}%</td><td>₹${discountedPrice.toFixed(2)}</td><td>₹${total.toFixed(2)}</td></tr>`; }).join('');
         const totalsHtml = `<tr><td colspan="6" style="text-align:right;">Subtotal:</td><td style="text-align:right;">₹${quoteData.subtotal.toFixed(2)}</td></tr>${quoteData.couponDiscountPercentage > 0 ? `<tr><td colspan="6" style="text-align:right;">Discount (${quoteData.couponDiscountPercentage}%):</td><td style="text-align:right;">- ₹${quoteData.couponDiscountAmount.toFixed(2)}</td></tr>` : ''}<tr><td colspan="6" style="text-align:right;">GST (${quoteData.gstPercentage}%):</td><td style="text-align:right;">+ ₹${quoteData.gstAmount.toFixed(2)}</td></tr><tr style="font-weight:bold; border-top: 2px solid #333;"><td colspan="6" style="text-align:right;">Grand Total:</td><td style="text-align:right;">₹${quoteData.grandTotal.toFixed(2)}</td></tr>`;

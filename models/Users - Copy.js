@@ -21,34 +21,8 @@ const UserSchema = new mongoose.Schema({
         type: String,
         enum: ['user', 'admin'],
         default: 'user'
-    },
-    // --- START: Add these new fields ---
-    organisation: {
-        type: String,
-        default: ''
-    },
-    contactNumber: {
-        type: String,
-        default: ''
-    },
-    billingAddress: {
-        type: String,
-        default: ''
-    },
-    shippingAddress: {
-        type: String,
-        default: ''
-    },
-    pinCode: {
-        type: String,
-        default: ''
-    },
-    state: {
-        type: String,
-        default: ''
     }
-    // --- END: New fields ---
-}, {
+}, { 
     timestamps: true
 });
 

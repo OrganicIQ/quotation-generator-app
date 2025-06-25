@@ -37,6 +37,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedQuotesHeader = document.getElementById('saved-quotes-header');
     const savedQuotesContent = document.getElementById('saved-quotes-content');
 
+    // NEW: "My Account" Modal Elements
+    const myAccountBtn = document.getElementById('my-account-btn');
+    const accountModal = document.getElementById('account-modal');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const accountForm = document.getElementById('account-form');
+    const saveAccountBtn = document.getElementById('save-account-btn');
+    const accountStatusMessage = document.getElementById('account-status-message');
+    const accountName = document.getElementById('account-name');
+    const accountOrganisation = document.getElementById('account-organisation');
+    const accountContact = document.getElementById('account-contact');
+    const accountBillingAddress = document.getElementById('account-billing-address');
+    const accountShippingAddress = document.getElementById('account-shipping-address');
+    const accountPincode = document.getElementById('account-pincode');
+    const accountState = document.getElementById('account-state');
+
     // --- State Variables ---
     let lineItemDiscount = 10;
     let couponDiscountPercentage = 0;
@@ -44,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let allCategories = [];
     let selectedCategories = [];
     let userRole = 'user';
+    let currentUser = null; // NEW: To store the full user object
 
     // --- HELPER FUNCTIONS ---
     function calculateQuotation(basePrice, quantity, discountPercentage) { const priceAfterDiscount = basePrice * (1 - (discountPercentage / 100)); const total = priceAfterDiscount * quantity; return { priceAfterDiscount, total }; }
@@ -51,6 +67,26 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateFinalTotals() { let subTotal = 0; const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); productRows.forEach(row => { const itemTotalSpan = row.querySelector('.item-total-price'); if (itemTotalSpan) { const itemTotal = parseFloat(itemTotalSpan.textContent); if (!isNaN(itemTotal)) { subTotal += itemTotal; } } }); const discountAmount = subTotal * (couponDiscountPercentage / 100); const amountAfterDiscount = subTotal - discountAmount; const gstAmount = amountAfterDiscount * (GST_RATE / 100); const finalGrandTotal = amountAfterDiscount + gstAmount; subtotalAmountSpan.textContent = subTotal.toFixed(2); if (couponDiscountPercentage > 0) { couponRateDisplay.textContent = couponDiscountPercentage; discountAmountSpan.textContent = discountAmount.toFixed(2); discountRow.style.display = 'table-row'; } else { discountRow.style.display = 'none'; } gstAmountSpan.textContent = gstAmount.toFixed(2); grandTotalAmountSpan.textContent = finalGrandTotal.toFixed(2); }
     function recalculateAllRows() { const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); productRows.forEach(row => { row.querySelector('.quantity-input').dispatchEvent(new Event('input', { bubbles: true })); }); }
     function resetQuotationWorkspace() { selectedProductsTbody.innerHTML = ''; noItemsMessage.style.display = 'block'; selectedProductsTable.style.display = 'none'; clientNameInput.value = ''; couponCodeInput.value = ''; couponCodeInput.disabled = false; applyCouponBtn.disabled = false; applyCouponBtn.textContent = 'Apply'; couponStatusMessage.textContent = ''; couponDiscountPercentage = 0; lineItemDiscount = 10; updateFinalTotals(); }
+    
+    // NEW: "My Account" Modal Functions
+    const openAccountModal = () => {
+        if (!currentUser) return;
+        // Populate form with existing data
+        accountName.value = currentUser.displayName || '';
+        accountOrganisation.value = currentUser.organisation || '';
+        accountContact.value = currentUser.contactNumber || '';
+        accountBillingAddress.value = currentUser.billingAddress || '';
+        accountShippingAddress.value = currentUser.shippingAddress || '';
+        accountPincode.value = currentUser.pinCode || '';
+        accountState.value = currentUser.state || '';
+        
+        accountStatusMessage.textContent = ''; // Clear old messages
+        accountModal.style.display = 'flex';
+    };
+
+    const closeAccountModal = () => {
+        accountModal.style.display = 'none';
+    };
 
     // --- UI AND DATA FUNCTIONS ---
     function renderSelectedPills() { selectedPillsArea.innerHTML = ''; selectedCategories.forEach(category => { const pill = document.createElement('div'); pill.className = 'selected-category-pill'; pill.textContent = category; const removeBtn = document.createElement('button'); removeBtn.className = 'remove-pill-btn'; removeBtn.textContent = '×'; removeBtn.dataset.category = category; pill.appendChild(removeBtn); selectedPillsArea.appendChild(pill); }); handleSearchAndFilter(); }
@@ -63,20 +99,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const debouncedSearch = debounce(performSearch, 300);
     const handleSearchAndFilter = () => { const searchTerm = quoteSearchInput.value.trim(); debouncedSearch(searchTerm, selectedCategories); };
     
+    // MODIFIED: This function now handles the full user object
     const updateUI = (loggedIn, user = null) => {
         if (loggedIn) {
             authContainer.style.display = 'none';
             mainContainer.style.display = 'block';
             userDisplayName.textContent = user.displayName;
             userRole = user.role || 'user';
+            currentUser = user; // Store the full user object
             loadSavedQuotes();
             loadCategories();
         } else {
-            authContainer.style.display = 'flex'; // Use 'flex' for the split-screen layout
+            authContainer.style.display = 'flex';
             mainContainer.style.display = 'none';
             userRole = 'user';
+            currentUser = null;
         }
     };
+
     const checkLoginStatus = async () => { try { const response = await fetch(`${API_BASE_URL}/api/user`, { credentials: 'include' }); const data = await response.json(); updateUI(data.loggedIn, data.user); } catch (e) { console.error("Error during checkLoginStatus:", e); updateUI(false); } };
 
     // --- EVENT LISTENERS ---
@@ -173,6 +213,65 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (err) { console.error("PDF Preview Error:", err); alert("Could not generate PDF preview."); }
         });
     }
+
+    // NEW: Event Listeners for "My Account" Modal
+    if (myAccountBtn) myAccountBtn.addEventListener('click', openAccountModal);
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeAccountModal);
+    if (accountModal) {
+        accountModal.addEventListener('click', (e) => {
+            if (e.target === accountModal) { // Close modal if overlay is clicked
+                closeAccountModal();
+            }
+        });
+    }
+    if (accountForm) {
+    accountForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        saveAccountBtn.disabled = true;
+        saveAccountBtn.textContent = 'Saving...';
+        accountStatusMessage.textContent = '';
+
+        // CORRECTED VARIABLE NAMES in this object
+        const accountData = {
+            displayName: accountName.value.trim(),
+            organisation: accountOrganisation.value.trim(),
+            contactNumber: accountContact.value.trim(),
+            billingAddress: accountBillingAddress.value.trim(), // Corrected from billingAddress
+            shippingAddress: accountShippingAddress.value.trim(), // Corrected from shippingAddress
+            pinCode: accountPincode.value.trim(),
+            state: accountState.value.trim()
+        };
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/user/account`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(accountData),
+                credentials: 'include'
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                currentUser = result.user; // Update local user state
+                userDisplayName.textContent = currentUser.displayName; // Update header
+                accountStatusMessage.textContent = 'Changes saved successfully!';
+                accountStatusMessage.style.color = 'var(--color-success)';
+                setTimeout(closeAccountModal, 1500); // Close modal after success
+            } else {
+                accountStatusMessage.textContent = result.message || 'Failed to save.';
+                accountStatusMessage.style.color = 'var(--color-danger)';
+            }
+        } catch (err) {
+            console.error("Error updating account:", err);
+            accountStatusMessage.textContent = 'A network error occurred.';
+            accountStatusMessage.style.color = 'var(--color-danger)';
+        } finally {
+            saveAccountBtn.disabled = false;
+            saveAccountBtn.textContent = 'Save Changes';
+        }
+    });
+}
+
 
     // --- Initial Load ---
     checkLoginStatus();

@@ -37,6 +37,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedQuotesHeader = document.getElementById('saved-quotes-header');
     const savedQuotesContent = document.getElementById('saved-quotes-content');
 
+    // "My Account" Modal Elements
+    const myAccountBtn = document.getElementById('my-account-btn');
+    const accountModal = document.getElementById('account-modal');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const accountForm = document.getElementById('account-form');
+    const saveAccountBtn = document.getElementById('save-account-btn');
+    const accountStatusMessage = document.getElementById('account-status-message');
+    const copyDetailsLink = document.getElementById('copy-details-link');
+
+    // Billing Column Inputs
+    const billingName = document.getElementById('billing-name');
+    const billingOrganisation = document.getElementById('billing-organisation');
+    const billingContact = document.getElementById('billing-contact');
+    const billingEmail = document.getElementById('billing-email');
+    const billingAddress = document.getElementById('billing-address');
+    const billingPincode = document.getElementById('billing-pincode');
+    const billingState = document.getElementById('billing-state');
+
+    // Shipping Column Inputs
+    const shippingName = document.getElementById('shipping-name');
+    const shippingOrganisation = document.getElementById('shipping-organisation');
+    const shippingContact = document.getElementById('shipping-contact');
+    const shippingEmail = document.getElementById('shipping-email');
+    const shippingAddress = document.getElementById('shipping-address');
+    const shippingPincode = document.getElementById('shipping-pincode');
+    const shippingState = document.getElementById('shipping-state');
+
     // --- State Variables ---
     let lineItemDiscount = 10;
     let couponDiscountPercentage = 0;
@@ -44,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let allCategories = [];
     let selectedCategories = [];
     let userRole = 'user';
+    let currentUser = null;
 
     // --- HELPER FUNCTIONS ---
     function calculateQuotation(basePrice, quantity, discountPercentage) { const priceAfterDiscount = basePrice * (1 - (discountPercentage / 100)); const total = priceAfterDiscount * quantity; return { priceAfterDiscount, total }; }
@@ -51,6 +79,36 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateFinalTotals() { let subTotal = 0; const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); productRows.forEach(row => { const itemTotalSpan = row.querySelector('.item-total-price'); if (itemTotalSpan) { const itemTotal = parseFloat(itemTotalSpan.textContent); if (!isNaN(itemTotal)) { subTotal += itemTotal; } } }); const discountAmount = subTotal * (couponDiscountPercentage / 100); const amountAfterDiscount = subTotal - discountAmount; const gstAmount = amountAfterDiscount * (GST_RATE / 100); const finalGrandTotal = amountAfterDiscount + gstAmount; subtotalAmountSpan.textContent = subTotal.toFixed(2); if (couponDiscountPercentage > 0) { couponRateDisplay.textContent = couponDiscountPercentage; discountAmountSpan.textContent = discountAmount.toFixed(2); discountRow.style.display = 'table-row'; } else { discountRow.style.display = 'none'; } gstAmountSpan.textContent = gstAmount.toFixed(2); grandTotalAmountSpan.textContent = finalGrandTotal.toFixed(2); }
     function recalculateAllRows() { const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); productRows.forEach(row => { row.querySelector('.quantity-input').dispatchEvent(new Event('input', { bubbles: true })); }); }
     function resetQuotationWorkspace() { selectedProductsTbody.innerHTML = ''; noItemsMessage.style.display = 'block'; selectedProductsTable.style.display = 'none'; clientNameInput.value = ''; couponCodeInput.value = ''; couponCodeInput.disabled = false; applyCouponBtn.disabled = false; applyCouponBtn.textContent = 'Apply'; couponStatusMessage.textContent = ''; couponDiscountPercentage = 0; lineItemDiscount = 10; updateFinalTotals(); }
+
+    const openAccountModal = () => {
+        if (!currentUser) return;
+        
+        const bill = currentUser.billingDetails || {};
+        const ship = currentUser.shippingDetails || {};
+
+        billingName.value = bill.name || currentUser.displayName || '';
+        billingOrganisation.value = bill.organisation || '';
+        billingContact.value = bill.contactNumber || '';
+        billingEmail.value = currentUser.email || '';
+        billingAddress.value = bill.address || '';
+        billingPincode.value = bill.pinCode || '';
+        billingState.value = bill.state || '';
+        
+        shippingName.value = ship.name || '';
+        shippingOrganisation.value = ship.organisation || '';
+        shippingContact.value = ship.contactNumber || '';
+        shippingEmail.value = ship.email || '';
+        shippingAddress.value = ship.address || '';
+        shippingPincode.value = ship.pinCode || '';
+        shippingState.value = ship.state || '';
+        
+        accountStatusMessage.textContent = '';
+        accountModal.style.display = 'flex';
+    };
+
+    const closeAccountModal = () => {
+        accountModal.style.display = 'none';
+    };
 
     // --- UI AND DATA FUNCTIONS ---
     function renderSelectedPills() { selectedPillsArea.innerHTML = ''; selectedCategories.forEach(category => { const pill = document.createElement('div'); pill.className = 'selected-category-pill'; pill.textContent = category; const removeBtn = document.createElement('button'); removeBtn.className = 'remove-pill-btn'; removeBtn.textContent = '×'; removeBtn.dataset.category = category; pill.appendChild(removeBtn); selectedPillsArea.appendChild(pill); }); handleSearchAndFilter(); }
@@ -64,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const handleSearchAndFilter = () => { const searchTerm = quoteSearchInput.value.trim(); debouncedSearch(searchTerm, selectedCategories); };
     
     const updateUI = (loggedIn, user = null) => {
+        currentUser = user;
         if (loggedIn) {
             authContainer.style.display = 'none';
             mainContainer.style.display = 'block';
@@ -72,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             loadSavedQuotes();
             loadCategories();
         } else {
-            authContainer.style.display = 'flex'; // Use 'flex' for the split-screen layout
+            authContainer.style.display = 'flex';
             mainContainer.style.display = 'none';
             userRole = 'user';
         }
@@ -171,6 +230,85 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (!response.ok) { throw new Error('Server failed to generate PDF.'); }
                 const blob = await response.blob(); const url = window.URL.createObjectURL(blob); const a = document.createElement('a'); a.style.display = 'none'; a.href = url; a.download = `Quote-Preview_${Date.now()}.pdf`; document.body.appendChild(a); a.click(); window.URL.revokeObjectURL(url); a.remove();
             } catch (err) { console.error("PDF Preview Error:", err); alert("Could not generate PDF preview."); }
+        });
+    }
+
+    // Event Listeners for "My Account" Modal
+    if (myAccountBtn) myAccountBtn.addEventListener('click', openAccountModal);
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeAccountModal);
+    if (accountModal) {
+        accountModal.addEventListener('click', (e) => {
+            if (e.target === accountModal) closeAccountModal();
+        });
+    }
+
+    if (copyDetailsLink) {
+        copyDetailsLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            shippingName.value = billingName.value;
+            shippingOrganisation.value = billingOrganisation.value;
+            shippingContact.value = billingContact.value;
+            shippingEmail.value = billingEmail.value;
+            shippingAddress.value = billingAddress.value;
+            shippingPincode.value = billingPincode.value;
+            shippingState.value = billingState.value;
+        });
+    }
+
+    if (accountForm) {
+        accountForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            saveAccountBtn.disabled = true;
+            saveAccountBtn.textContent = 'Saving...';
+            accountStatusMessage.textContent = '';
+
+            const accountData = {
+                billingDetails: {
+                    name: billingName.value.trim(),
+                    organisation: billingOrganisation.value.trim(),
+                    contactNumber: billingContact.value.trim(),
+                    address: billingAddress.value.trim(),
+                    pinCode: billingPincode.value.trim(),
+                    state: billingState.value.trim()
+                },
+                shippingDetails: {
+                    name: shippingName.value.trim(),
+                    organisation: shippingOrganisation.value.trim(),
+                    contactNumber: shippingContact.value.trim(),
+                    email: shippingEmail.value.trim(),
+                    address: shippingAddress.value.trim(),
+                    pinCode: shippingPincode.value.trim(),
+                    state: shippingState.value.trim()
+                }
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/user/account`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(accountData),
+                    credentials: 'include'
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    currentUser = result.user;
+                    userDisplayName.textContent = currentUser.displayName;
+                    accountStatusMessage.textContent = 'Changes saved successfully!';
+                    accountStatusMessage.style.color = 'var(--color-success)';
+                    setTimeout(closeAccountModal, 1500);
+                } else {
+                    accountStatusMessage.textContent = result.message || 'Failed to save.';
+                    accountStatusMessage.style.color = 'var(--color-danger)';
+                }
+            } catch (err) {
+                console.error("Error updating account:", err);
+                accountStatusMessage.textContent = 'A network error occurred.';
+                accountStatusMessage.style.color = 'var(--color-danger)';
+            } finally {
+                saveAccountBtn.disabled = false;
+                saveAccountBtn.textContent = 'Save Changes';
+            }
         });
     }
 

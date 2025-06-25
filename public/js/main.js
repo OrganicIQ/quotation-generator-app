@@ -76,6 +76,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- HELPER FUNCTIONS ---
     function calculateQuotation(basePrice, quantity, discountPercentage) { const priceAfterDiscount = basePrice * (1 - (discountPercentage / 100)); const total = priceAfterDiscount * quantity; return { priceAfterDiscount, total }; }
     function debounce(func, delay) { let timeout; return function(...args) { clearTimeout(timeout); timeout = setTimeout(() => func.apply(this, args), delay); }; }
+
+    // --- NEW FUNCTION ---
+    // Checks if essential billing details are filled out in the user's profile.
+    function areAccountDetailsComplete(user) {
+        if (!user || !user.billingDetails) {
+            return false;
+        }
+        const details = user.billingDetails;
+        // Check for essential billing fields. Adjust as needed.
+        return details.name &&
+               details.address &&
+               details.contactNumber &&
+               details.pinCode &&
+               details.state;
+    }
+
     function updateFinalTotals() { let subTotal = 0; const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); productRows.forEach(row => { const itemTotalSpan = row.querySelector('.item-total-price'); if (itemTotalSpan) { const itemTotal = parseFloat(itemTotalSpan.textContent); if (!isNaN(itemTotal)) { subTotal += itemTotal; } } }); const discountAmount = subTotal * (couponDiscountPercentage / 100); const amountAfterDiscount = subTotal - discountAmount; const gstAmount = amountAfterDiscount * (GST_RATE / 100); const finalGrandTotal = amountAfterDiscount + gstAmount; subtotalAmountSpan.textContent = subTotal.toFixed(2); if (couponDiscountPercentage > 0) { couponRateDisplay.textContent = couponDiscountPercentage; discountAmountSpan.textContent = discountAmount.toFixed(2); discountRow.style.display = 'table-row'; } else { discountRow.style.display = 'none'; } gstAmountSpan.textContent = gstAmount.toFixed(2); grandTotalAmountSpan.textContent = finalGrandTotal.toFixed(2); }
     function recalculateAllRows() { const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); productRows.forEach(row => { row.querySelector('.quantity-input').dispatchEvent(new Event('input', { bubbles: true })); }); }
     function resetQuotationWorkspace() { selectedProductsTbody.innerHTML = ''; noItemsMessage.style.display = 'block'; selectedProductsTable.style.display = 'none'; clientNameInput.value = ''; couponCodeInput.value = ''; couponCodeInput.disabled = false; applyCouponBtn.disabled = false; applyCouponBtn.textContent = 'Apply'; couponStatusMessage.textContent = ''; couponDiscountPercentage = 0; lineItemDiscount = 10; updateFinalTotals(); }
@@ -162,6 +178,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (saveQuoteBtn) {
         saveQuoteBtn.addEventListener('click', async () => {
+            // --- NEW CHECK ---
+            // Check if account details are complete before proceeding.
+            if (!areAccountDetailsComplete(currentUser)) {
+                alert('Please complete your billing details in "My Account" before saving a quotation.');
+                openAccountModal(); // Guide the user directly to the form
+                return; // Stop the function here
+            }
+
             const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row');
             if (productRows.length === 0) { return alert('Cannot save an empty quote.'); }
             const lineItems = Array.from(productRows).map(row => {

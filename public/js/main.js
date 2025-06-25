@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const authContainer = document.getElementById('auth-container');
     const mainContainer = document.getElementById('main-container');
     const userDisplayName = document.getElementById('user-display-name');
+    const logoutBtn = document.getElementById('logout-btn');
+    const loginBtn = document.getElementById('google-login-btn');
+    
     const quoteSearchInput = document.getElementById('quote-search');
     const autocompleteResultsUl = document.getElementById('autocomplete-results');
     const noItemsMessage = document.getElementById('no-items-message');
@@ -64,6 +67,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const shippingPincode = document.getElementById('shipping-pincode');
     const shippingState = document.getElementById('shipping-state');
 
+    // Email Modal refs
+    const sendEmailBtn = document.getElementById('send-email-btn');
+    const emailQuoteModal = document.getElementById('email-quote-modal');
+    const closeEmailModalBtn = document.getElementById('close-email-modal-btn');
+    const emailQuoteForm = document.getElementById('email-quote-form');
+    const recipientEmailInput = document.getElementById('recipient-email');
+    const emailMessageTextarea = document.getElementById('email-message');
+    const confirmSendEmailBtn = document.getElementById('confirm-send-email-btn');
+    const emailStatusMessage = document.getElementById('email-status-message');
+
+
     // --- State Variables ---
     let lineItemDiscount = 10;
     let couponDiscountPercentage = 0;
@@ -77,26 +91,61 @@ document.addEventListener('DOMContentLoaded', () => {
     function calculateQuotation(basePrice, quantity, discountPercentage) { const priceAfterDiscount = basePrice * (1 - (discountPercentage / 100)); const total = priceAfterDiscount * quantity; return { priceAfterDiscount, total }; }
     function debounce(func, delay) { let timeout; return function(...args) { clearTimeout(timeout); timeout = setTimeout(() => func.apply(this, args), delay); }; }
 
-    // --- NEW FUNCTION ---
-    // Checks if essential billing details are filled out in the user's profile.
     function areAccountDetailsComplete(user) {
-        if (!user || !user.billingDetails) {
-            return false;
-        }
-        const details = user.billingDetails;
-        // Check for essential billing fields. Adjust as needed.
-        return details.name &&
-               details.address &&
-               details.contactNumber &&
-               details.pinCode &&
-               details.state;
+        if (!user || !user.billingDetails) return false;
+        const d = user.billingDetails;
+        return d.name && d.address && d.contactNumber && d.pinCode && d.state;
     }
 
-    function updateFinalTotals() { let subTotal = 0; const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); productRows.forEach(row => { const itemTotalSpan = row.querySelector('.item-total-price'); if (itemTotalSpan) { const itemTotal = parseFloat(itemTotalSpan.textContent); if (!isNaN(itemTotal)) { subTotal += itemTotal; } } }); const discountAmount = subTotal * (couponDiscountPercentage / 100); const amountAfterDiscount = subTotal - discountAmount; const gstAmount = amountAfterDiscount * (GST_RATE / 100); const finalGrandTotal = amountAfterDiscount + gstAmount; subtotalAmountSpan.textContent = subTotal.toFixed(2); if (couponDiscountPercentage > 0) { couponRateDisplay.textContent = couponDiscountPercentage; discountAmountSpan.textContent = discountAmount.toFixed(2); discountRow.style.display = 'table-row'; } else { discountRow.style.display = 'none'; } gstAmountSpan.textContent = gstAmount.toFixed(2); grandTotalAmountSpan.textContent = finalGrandTotal.toFixed(2); }
-    function recalculateAllRows() { const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row'); productRows.forEach(row => { row.querySelector('.quantity-input').dispatchEvent(new Event('input', { bubbles: true })); }); }
-    function resetQuotationWorkspace() { selectedProductsTbody.innerHTML = ''; noItemsMessage.style.display = 'block'; selectedProductsTable.style.display = 'none'; clientNameInput.value = ''; couponCodeInput.value = ''; couponCodeInput.disabled = false; applyCouponBtn.disabled = false; applyCouponBtn.textContent = 'Apply'; couponStatusMessage.textContent = ''; couponDiscountPercentage = 0; lineItemDiscount = 10; updateFinalTotals(); }
+    function updateFinalTotals() {
+        let subTotal = 0;
+        const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row');
+        productRows.forEach(row => {
+            const itemTotalSpan = row.querySelector('.item-total-price');
+            if (itemTotalSpan) {
+                const itemTotal = parseFloat(itemTotalSpan.textContent);
+                if (!isNaN(itemTotal)) { subTotal += itemTotal; }
+            }
+        });
+        const discountAmount = subTotal * (couponDiscountPercentage / 100);
+        const amountAfterDiscount = subTotal - discountAmount;
+        const gstAmount = amountAfterDiscount * (GST_RATE / 100);
+        const finalGrandTotal = amountAfterDiscount + gstAmount;
+        subtotalAmountSpan.textContent = subTotal.toFixed(2);
+        if (couponDiscountPercentage > 0) {
+            couponRateDisplay.textContent = couponDiscountPercentage;
+            discountAmountSpan.textContent = discountAmount.toFixed(2);
+            discountRow.style.display = 'table-row';
+        } else {
+            discountRow.style.display = 'none';
+        }
+        gstAmountSpan.textContent = gstAmount.toFixed(2);
+        grandTotalAmountSpan.textContent = finalGrandTotal.toFixed(2);
+    }
 
-    const openAccountModal = () => {
+    function recalculateAllRows() {
+        const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row');
+        productRows.forEach(row => {
+            row.querySelector('.quantity-input').dispatchEvent(new Event('input', { bubbles: true }));
+        });
+    }
+
+    function resetQuotationWorkspace() {
+        selectedProductsTbody.innerHTML = '';
+        noItemsMessage.style.display = 'block';
+        selectedProductsTable.style.display = 'none';
+        clientNameInput.value = '';
+        couponCodeInput.value = '';
+        couponCodeInput.disabled = false;
+        applyCouponBtn.disabled = false;
+        applyCouponBtn.textContent = 'Apply';
+        couponStatusMessage.textContent = '';
+        couponDiscountPercentage = 0;
+        lineItemDiscount = 10; // Reset standard discount
+        updateFinalTotals();
+    }
+
+    function openAccountModal() {
         if (!currentUser) return;
         
         const bill = currentUser.billingDetails || {};
@@ -122,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
         accountModal.style.display = 'flex';
     };
 
-    const closeAccountModal = () => {
+    function closeAccountModal() {
         accountModal.style.display = 'none';
     };
 
@@ -155,6 +204,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkLoginStatus = async () => { try { const response = await fetch(`${API_BASE_URL}/api/user`, { credentials: 'include' }); const data = await response.json(); updateUI(data.loggedIn, data.user); } catch (e) { console.error("Error during checkLoginStatus:", e); updateUI(false); } };
 
     // --- EVENT LISTENERS ---
+    if(loginBtn) loginBtn.addEventListener('click', () => { window.location.href = `${API_BASE_URL}/auth/google`; });
+    if(logoutBtn) logoutBtn.addEventListener('click', () => { window.location.href = `${API_BASE_URL}/auth/logout`; });
+
     if (newQuoteBtn) { newQuoteBtn.addEventListener('click', () => { if (selectedProductsTbody.children.length > 0) { if (confirm("You have unsaved items. Are you sure you want to discard them and start a new quote?")) { resetQuotationWorkspace(); } } else { resetQuotationWorkspace(); } }); }
     if (savedQuotesHeader) { savedQuotesHeader.addEventListener('click', () => { const content = savedQuotesContent; savedQuotesHeader.classList.toggle('is-open'); if (content.style.maxHeight) { content.style.maxHeight = null; } else { content.style.maxHeight = content.scrollHeight + "px"; } }); }
     quoteSearchInput.addEventListener('input', handleSearchAndFilter);
@@ -165,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         categoryDropdown.addEventListener('click', (e) => { if (e.target.tagName === 'LI') { const category = e.target.dataset.category; if (!selectedCategories.includes(category)) { selectedCategories.push(category); renderSelectedPills(); } categorySearchInput.value = ''; filterCategoryDropdown(); categoryDropdown.classList.remove('visible'); } });
     }
     document.addEventListener('click', (e) => {
+        if (autocompleteResultsUl && !quoteSearchInput.contains(e.target)) { autocompleteResultsUl.classList.remove('visible'); }
         if (comboboxContainer && !comboboxContainer.contains(e.target)) { categoryDropdown.classList.remove('visible'); }
         if (downloadMenuBtn && !downloadMenuBtn.contains(e.target) && !downloadOptions.contains(e.target)) { downloadOptions.classList.remove('visible'); }
     });
@@ -178,19 +231,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (saveQuoteBtn) {
         saveQuoteBtn.addEventListener('click', async () => {
-            // --- NEW CHECK ---
-            // Check if account details are complete before proceeding.
             if (!areAccountDetailsComplete(currentUser)) {
                 alert('Please complete your billing details in "My Account" before saving a quotation.');
-                openAccountModal(); // Guide the user directly to the form
-                return; // Stop the function here
+                openAccountModal();
+                return;
             }
 
             const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row');
             if (productRows.length === 0) { return alert('Cannot save an empty quote.'); }
             const lineItems = Array.from(productRows).map(row => {
                 const isAdmin = userRole === 'admin';
-                return { product: row.dataset.productId, quantity: parseInt(row.querySelector('.quantity-input').value), priceAtTime: parseFloat(isAdmin ? row.querySelector('.price-input').value : row.cells[2].textContent), discountPercentage: parseFloat(isAdmin ? row.querySelector('.discount-input').value : row.cells[4].textContent.replace('%','')) };
+                return { product: row.dataset.productId, quantity: parseInt(row.querySelector('.quantity-input').value), priceAtTime: parseFloat(isAdmin ? row.querySelector('.price-input').value : row.cells[2].textContent), discountPercentage: parseFloat(isAdmin ? row.querySelector('.discount-input').value : row.cells[4].textContent) };
             });
             const quoteData = { clientName: clientNameInput.value.trim() || 'N/A', lineItems, subtotal: parseFloat(subtotalAmountSpan.textContent), couponCode: couponDiscountPercentage > 0 ? couponCodeInput.value.trim() : null, couponDiscountPercentage, couponDiscountAmount: parseFloat(discountAmountSpan.textContent) || 0, gstPercentage: GST_RATE, gstAmount: parseFloat(gstAmountSpan.textContent), grandTotal: parseFloat(grandTotalAmountSpan.textContent) };
             try {
@@ -209,12 +260,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch(`${API_BASE_URL}/api/coupons/apply`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: code }), credentials: 'include' });
                 const data = await response.json();
                 if (response.ok) {
-                    couponStatusMessage.textContent = data.message; couponStatusMessage.style.color = 'var(--color-success)';
-                    couponDiscountPercentage = data.discountPercentage; lineItemDiscount = 0;
-                    recalculateAllRows();
-                    couponCodeInput.disabled = true; applyCouponBtn.disabled = true; applyCouponBtn.textContent = 'Applied!';
-                } else { couponStatusMessage.textContent = data.message; couponStatusMessage.style.color = 'var(--danger-color)'; }
-            } catch (err) { couponStatusMessage.textContent = 'An error occurred.'; couponStatusMessage.style.color = 'var(--danger-color)'; }
+                    couponStatusMessage.textContent = data.message; 
+                    couponStatusMessage.style.color = 'var(--color-success)';
+                    couponDiscountPercentage = data.discountPercentage;
+                    
+                    // --- NEW LOGIC ---
+                    // 1. Set the global line item discount to 0 so new items don't get it.
+                    lineItemDiscount = 0; 
+
+                    // 2. Find all existing rows and set their discount to 0.
+                    const productRows = selectedProductsTbody.querySelectorAll('tr.selected-product-row');
+                    productRows.forEach(row => {
+                        const discountInput = row.querySelector('.discount-input');
+                        if (discountInput) { // For admin view
+                            discountInput.value = 0;
+                        } else { // For regular user view
+                            const discountSpan = row.cells[4].querySelector('span');
+                            if (discountSpan) {
+                                discountSpan.textContent = '0';
+                            }
+                        }
+                    });
+                    
+                    // 3. Recalculate everything.
+                    recalculateAllRows(); 
+                    // --- END NEW LOGIC ---
+
+                    couponCodeInput.disabled = true;
+                    applyCouponBtn.disabled = true;
+                    applyCouponBtn.textContent = 'Applied!';
+                } else {
+                    couponStatusMessage.textContent = data.message;
+                    couponStatusMessage.style.color = 'var(--color-danger)';
+                }
+            } catch (err) {
+                couponStatusMessage.textContent = 'An error occurred.';
+                couponStatusMessage.style.color = 'var(--color-danger)';
+            }
         });
     }
 
@@ -227,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const cells = row.querySelectorAll('td'); const isAdmin = userRole === 'admin';
                 const price = isAdmin ? cells[2].querySelector('input').value : cells[2].textContent;
                 const quantity = cells[3].querySelector('input').value;
-                const discount = isAdmin ? cells[4].querySelector('input').value + '%' : cells[4].textContent;
+                const discount = isAdmin ? cells[4].querySelector('input').value : cells[4].textContent;
                 data.push([ cells[0].textContent, cells[1].innerText.replace(/\n/g, " "), price, quantity, discount, cells[5].textContent, cells[6].textContent ]);
             });
             data.push([]); data.push(['', '', '', '', '', 'Subtotal', subtotalAmountSpan.textContent]);
@@ -332,6 +414,84 @@ document.addEventListener('DOMContentLoaded', () => {
             } finally {
                 saveAccountBtn.disabled = false;
                 saveAccountBtn.textContent = 'Save Changes';
+            }
+        });
+    }
+
+    // --- Listeners for the new Email Modal ---
+    if (sendEmailBtn) {
+        sendEmailBtn.addEventListener('click', () => {
+            if (selectedProductsTbody.rows.length === 0) {
+                alert('Cannot send an empty quote. Please add items first.');
+                return;
+            }
+            recipientEmailInput.value = '';
+            emailMessageTextarea.value = '';
+            emailStatusMessage.textContent = '';
+            confirmSendEmailBtn.disabled = false;
+            confirmSendEmailBtn.textContent = 'Send Email';
+            emailQuoteModal.style.display = 'flex';
+        });
+    }
+
+    if (closeEmailModalBtn) closeEmailModalBtn.addEventListener('click', () => emailQuoteModal.style.display = 'none');
+    if (emailQuoteModal) emailQuoteModal.addEventListener('click', (e) => { if (e.target === emailQuoteModal) emailQuoteModal.style.display = 'none'; });
+
+    if (emailQuoteForm) {
+        emailQuoteForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const recipientEmail = recipientEmailInput.value.trim();
+            if (!recipientEmail) { alert('Please enter a recipient email address.'); return; }
+
+            confirmSendEmailBtn.disabled = true;
+            confirmSendEmailBtn.textContent = 'Sending...';
+            emailStatusMessage.textContent = '';
+
+            const lineItems = Array.from(selectedProductsTbody.querySelectorAll('tr.selected-product-row')).map(row => {
+                const isAdmin = userRole === 'admin';
+                return {
+                    name: row.cells[1].innerText.replace(/\n/g, ", "),
+                    quantity: parseInt(row.querySelector('.quantity-input').value),
+                    price: parseFloat(isAdmin ? row.querySelector('.price-input').value : row.cells[2].textContent),
+                    discountPercentage: parseFloat(isAdmin ? row.querySelector('.discount-input').value : row.cells[4].textContent),
+                    total: parseFloat(row.querySelector('.item-total-price').textContent)
+                };
+            });
+
+            const quoteData = {
+                recipientEmail,
+                customMessage: emailMessageTextarea.value.trim(),
+                clientName: clientNameInput.value.trim() || 'Valued Client',
+                lineItems,
+                subtotal: parseFloat(subtotalAmountSpan.textContent),
+                couponDiscountPercentage,
+                couponDiscountAmount: parseFloat(discountAmountSpan.textContent) || 0,
+                gstPercentage: GST_RATE,
+                gstAmount: parseFloat(gstAmountSpan.textContent),
+                grandTotal: parseFloat(grandTotalAmountSpan.textContent)
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/quotes/send-email`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(quoteData),
+                    credentials: 'include'
+                });
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.message);
+                
+                emailStatusMessage.textContent = 'Email sent successfully!';
+                emailStatusMessage.style.color = 'var(--color-success)';
+                
+                setTimeout(() => emailQuoteModal.style.display = 'none', 2000);
+
+            } catch (err) {
+                emailStatusMessage.textContent = err.message || 'Failed to send email.';
+                emailStatusMessage.style.color = 'var(--color-danger)';
+            } finally {
+                confirmSendEmailBtn.disabled = false;
+                confirmSendEmailBtn.textContent = 'Send Email';
             }
         });
     }

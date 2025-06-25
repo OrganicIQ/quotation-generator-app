@@ -199,36 +199,9 @@ app.post('/api/quotes/send-email', ensureAuth, async (req, res) => {
         const billing = sender.billingDetails || {};
         const shipping = sender.shippingDetails || {};
 
-        const customerDetailsHtml = `
-            <h3 style="margin-top: 20px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Customer Details</h3>
-            <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-                <tr>
-                    <td style="padding: 10px; vertical-align: top; width: 50%;">
-                        <strong><u>Billing Details:</u></strong><br>
-                        <strong>${billing.name || ''}</strong><br>
-                        ${billing.organisation ? `${billing.organisation}<br>` : ''}
-                        ${billing.address || ''}<br>
-                        ${billing.state || ''} - ${billing.pinCode || ''}<br>
-                        ${billing.gstNumber ? `<strong>GSTIN:</strong> ${billing.gstNumber}<br>` : ''} <!-- <-- Display GST Number -->
-                        <br>
-                        <strong>Contact:</strong> ${billing.contactNumber || ''}<br>
-                        <strong>Email:</strong> ${sender.email || ''}
-                    </td>
-                    <td style="padding: 10px; vertical-align: top; width: 50%;">
-                        <strong><u>Shipping Details:</u></strong><br>
-                        <strong>${shipping.name || ''}</strong><br>
-                        ${shipping.organisation ? `${shipping.organisation}<br>` : ''}
-                        ${shipping.address || ''}<br>
-                        ${shipping.state || ''} - ${shipping.pinCode || ''}<br>
-                        <br>
-                        <strong>Contact:</strong> ${shipping.contactNumber || ''}<br>
-                        <strong>Email:</strong> ${shipping.email || ''}
-                    </td>
-                </tr>
-            </table>
-        `;
+        const customerDetailsHtml = `<h3 style="margin-top:20px;border-bottom:1px solid #eee;padding-bottom:5px;">Customer Details</h3><table style="width:100%;border-collapse:collapse;font-size:14px;"><tr><td style="padding:10px;vertical-align:top;width:50%;"><strong><u>Billing Details:</u></strong><br><strong>${billing.name||''}</strong><br>${billing.organisation?`${billing.organisation}<br>`:''}${billing.address||''}<br>${billing.state||''} - ${billing.pinCode||''}<br><br><strong>Contact:</strong> ${billing.contactNumber||''}<br><strong>Email:</strong> ${sender.email||''}</td><td style="padding:10px;vertical-align:top;width:50%;"><strong><u>Shipping Details:</u></strong><br><strong>${shipping.name||''}</strong><br>${shipping.organisation?`${shipping.organisation}<br>`:''}${shipping.address||''}<br>${shipping.state||''} - ${shipping.pinCode||''}<br><br><strong>Contact:</strong> ${shipping.contactNumber||''}<br><strong>Email:</strong> ${shipping.email||''}</td></tr></table>`;
 
-        const emailHtml = `<div style="font-family: Arial, sans-serif; color: #333;"><p>Hello,</p><p>${quoteData.customMessage || 'Please find the quotation details below and attached as a spreadsheet.'}</p><hr style="border: none; border-top: 1px solid #eee;">${customerDetailsHtml}<hr style="border: none; border-top: 1px solid #eee;"><p>Thank you,</p><p><strong>${sender.billingDetails.name || sender.displayName}</strong></p><p>${sender.billingDetails.organisation || ''}</p></div>`;
+        const emailHtml = `<div style="font-family:Arial,sans-serif;color:#333;"><p>Hello,</p><p>${quoteData.customMessage||'Please find the quotation details below and attached as a spreadsheet.'}</p><hr style="border:none;border-top:1px solid #eee;">${customerDetailsHtml}<hr style="border:none;border-top:1px solid #eee;"><p>Thank you,</p><p><strong>${sender.billingDetails.name||sender.displayName}</strong></p><p>${sender.billingDetails.organisation||''}</p></div>`;
 
         const mailOptions = {
             from: `"${sender.billingDetails.name || sender.displayName}" <${process.env.EMAIL_FROM}>`,
@@ -248,6 +221,7 @@ app.post('/api/quotes/send-email', ensureAuth, async (req, res) => {
         res.status(500).json({ message: 'Failed to send email. Please check server logs.' });
     }
 });
+
 
 // --- Serve Static Files for Development ---
 if (process.env.NODE_ENV !== 'production') {

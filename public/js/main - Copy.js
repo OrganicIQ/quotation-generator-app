@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const billingAddress = document.getElementById('billing-address');
     const billingPincode = document.getElementById('billing-pincode');
     const billingState = document.getElementById('billing-state');
-    const billingGstNumber = document.getElementById('billing-gst-number');
 
     // Shipping Column Inputs
     const shippingName = document.getElementById('shipping-name');
@@ -159,7 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
         billingAddress.value = bill.address || '';
         billingPincode.value = bill.pinCode || '';
         billingState.value = bill.state || '';
-        billingGstNumber.value = bill.gstNumber || ''; // <-- Populate the GST field
         
         shippingName.value = ship.name || '';
         shippingOrganisation.value = ship.organisation || '';
@@ -378,8 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     contactNumber: billingContact.value.trim(),
                     address: billingAddress.value.trim(),
                     pinCode: billingPincode.value.trim(),
-                    state: billingState.value.trim(),
-                    gstNumber: billingGstNumber.value.trim() // <-- Collect GST field value
+                    state: billingState.value.trim()
                 },
                 shippingDetails: {
                     name: shippingName.value.trim(),
@@ -402,7 +399,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const result = await response.json();
                 if (response.ok) {
-                    currentUser = result.user; // Important: Update currentUser with new GST data
+                    currentUser = result.user;
                     userDisplayName.textContent = currentUser.displayName;
                     accountStatusMessage.textContent = 'Changes saved successfully!';
                     accountStatusMessage.style.color = 'var(--color-success)';

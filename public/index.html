@@ -54,8 +54,8 @@
                 </div>
                 <div id="current-quotation-area">
                     <div id="selected-products-table-container">
-                        <p id="no-items-message"></p>
-                        <table id="selected-products-table">
+                        <p id="no-items-message">No items added to the current quote.</p>
+                        <table id="selected-products-table" style="display:none;">
                             <thead>
                                 <tr><th>#</th><th>Item</th><th>Price</th><th>Qty</th><th>Disc %</th><th>Disc Price</th><th>Total</th><th></th></tr>
                             </thead>
@@ -123,46 +123,41 @@
             </div>
             <div class="modal-body">
                 <form id="account-form">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="account-name">Name</label>
-                            <input type="text" id="account-name" placeholder="Your full name">
+                    <div class="two-column-layout">
+                        <div class="form-column">
+                            <h4>Billing Details</h4>
+                            <div class="form-group"><label for="billing-name">Name</label><input type="text" id="billing-name" placeholder="Billing name"></div>
+                            <div class="form-group"><label for="billing-organisation">Organisation</label><input type="text" id="billing-organisation" placeholder="Company name"></div>
+                            <div class="form-group"><label for="billing-contact">Contact Number</label><input type="text" id="billing-contact" placeholder="Phone number"></div>
+                            <div class="form-group"><label for="billing-email">Email</label><input type="email" id="billing-email" placeholder="Contact email" readonly></div>
+                            <div class="form-group"><label for="billing-address">Billing Address</label><textarea id="billing-address" rows="3" placeholder="Street, locality..."></textarea></div>
+                            <div class="form-group"><label for="billing-pincode">PIN Code</label><input type="text" id="billing-pincode" placeholder="e.g., 110001"></div>
+                            <div class="form-group"><label for="billing-state">State</label><input type="text" id="billing-state" placeholder="e.g., Uttar Pradesh"></div>
                         </div>
-                        <div class="form-group">
-                            <label for="account-organisation">Organisation</label>
-                            <input type="text" id="account-organisation" placeholder="Your company name">
-                        </div>
-                        <div class="form-group">
-                            <label for="account-contact">Contact Number</label>
-                            <input type="text" id="account-contact" placeholder="Your phone number">
-                        </div>
-                        <div class="form-group">
-                            <label for="account-pincode">PIN Code</label>
-                            <input type="text" id="account-pincode" placeholder="e.g., 110001">
-                        </div>
-                        <div class="form-group full-width">
-                            <label for="account-billing-address">Billing Address</label>
-                            <textarea id="account-billing-address" rows="3" placeholder="Your billing address"></textarea>
-                        </div>
-                        <div class="form-group full-width">
-                            <label for="account-shipping-address">Shipping Address</label>
-                            <textarea id="account-shipping-address" rows="3" placeholder="Your shipping address"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="account-state">State</label>
-                            <input type="text" id="account-state" placeholder="e.g., Delhi">
+                        <div class="form-column">
+                            <div class="column-header">
+                               <h4>Shipping Details</h4>
+                               <a href="#" id="copy-details-link">Copy Billing Details</a>
+                            </div>
+                            <div class="form-group"><label for="shipping-name">Name</label><input type="text" id="shipping-name" placeholder="Shipping name"></div>
+                            <div class="form-group"><label for="shipping-organisation">Organisation</label><input type="text" id="shipping-organisation" placeholder="Company name"></div>
+                             <div class="form-group"><label for="shipping-contact">Contact Number</label><input type="text" id="shipping-contact" placeholder="Phone number"></div>
+                            <div class="form-group"><label for="shipping-email">Email</label><input type="email" id="shipping-email" placeholder="Contact email"></div>
+                            <div class="form-group"><label for="shipping-address">Shipping Address</label><textarea id="shipping-address" rows="3" placeholder="Street, locality..."></textarea></div>
+                            <div class="form-group"><label for="shipping-pincode">PIN Code</label><input type="text" id="shipping-pincode" placeholder="e.g., 110001"></div>
+                            <div class="form-group"><label for="shipping-state">State</label><input type="text" id="shipping-state" placeholder="e.g., Uttar Pradesh"></div>
                         </div>
                     </div>
                     <div class="form-actions">
                         <button type="submit" id="save-account-btn" class="btn-primary">Save Changes</button>
                     </div>
-                     <p id="account-status-message"></p>
+                    <p id="account-status-message"></p>
                 </form>
             </div>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
 </body>

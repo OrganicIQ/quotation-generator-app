@@ -62,29 +62,24 @@ app.get('/auth/logout', (req, res, next) => { req.logout((err) => { if (err) { r
 
 // --- DATA AND ACTION API ROUTES ---
 
+
+
 // NEW ROUTE for updating account details
 app.put('/api/user/account', ensureAuth, async (req, res) => {
     try {
         const userId = req.user.id;
-        const {
-            displayName,
-            organisation,
-            contactNumber,
-            billingAddress,
-            shippingAddress,
-            pinCode,
-            state
-        } = req.body;
+        
+        // The body will now contain nested objects
+        const { billingDetails, shippingDetails } = req.body;
 
         const updatedUser = await User.findByIdAndUpdate(userId, {
-            displayName,
-            organisation,
-            contactNumber,
-            billingAddress,
-            shippingAddress,
-            pinCode,
-            state
-        }, { new: true }); // { new: true } returns the updated document
+            // Use MongoDB's dot notation for updating nested fields if needed,
+            // but setting the whole object is cleaner here.
+            $set: {
+                billingDetails: billingDetails,
+                shippingDetails: shippingDetails
+            }
+        }, { new: true, runValidators: true }); // { new: true } returns the updated document
 
         if (!updatedUser) {
             return res.status(404).json({ message: 'User not found' });

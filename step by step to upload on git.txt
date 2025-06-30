@@ -1,0 +1,93 @@
+git clone --YOUR_OLD_GIT_URL
+
+cd quotation-generator.git
+
+git remote set-url --push origin NEW_REPO_URL
+
+git push --mirror
+
+
+
+Part 2: Deploying to the New Render Account
+Now that your code is in the new repository, we can deploy it.
+
+Step 1: Create a New Web Service on Render
+Log in to your new Render account.
+
+From the dashboard, click New + > Web Service.
+
+Connect your new GitHub account to this Render account.
+
+Select the new repository you just created (quotation-generator).
+
+Step 2: Configure the Service Settings
+Fill out the deployment form with the following details:
+
+Name: A unique name for your application (e.g., my-new-quote-app).
+
+Runtime: Node
+
+Build Command: npm install
+
+Start Command: node app.js
+
+Instance Type: Free
+
+Step 3: Add Environment Variables
+Before creating the service, scroll down to the Advanced section. You must add all your secret keys here.
+
+Click Add Environment Variable for each of the following keys and paste the corresponding value from your local .env file.
+
+NODE_ENV: production
+
+MONGO_URI: Your MongoDB connection string.
+
+SESSION_SECRET: A long, random string for sessions.
+
+GOOGLE_CLIENT_ID: Your Client ID from Google Cloud.
+
+GOOGLE_CLIENT_SECRET: Your Client Secret from Google Cloud.
+
+EMAIL_HOST: Your SMTP server address.
+
+EMAIL_PORT: The port for your email server (e.g., 587).
+
+EMAIL_USER: Your email username.
+
+EMAIL_PASS: Your email password or App Password.
+
+EMAIL_FROM: The email address you want to send from.
+
+For now, skip FRONTEND_URL and GOOGLE_REDIRECT_URI. We will add them in the final step.
+
+Step 4: Deploy and Finalize Configuration
+Click Create Web Service. Render will start the first deployment.
+
+Once the deployment is live (or has finished its first attempt), copy the URL for your new service provided by Render at the top of the page (e.g., https://my-new-quote-app.onrender.com).
+
+Update Environment Variables in Render:
+
+Go back to the Environment tab for your new service.
+
+Add the FRONTEND_URL variable, pasting your new Render URL as the value.
+
+Add the GOOGLE_REDIRECT_URI variable, pasting your new URL followed by the callback path: https://my-new-quote-app.onrender.com/auth/google/callback.
+
+Save the changes. This will automatically trigger a new deployment.
+
+Update Google Cloud Console:
+
+Go to the Google Cloud Console.
+
+Navigate to your project > APIs & Services > Credentials.
+
+Click on your OAuth 2.0 Client ID.
+
+Under Authorized redirect URIs, click + ADD URI.
+
+Add your new redirect URI (https://my-new-quote-app.onrender.com/auth/google/callback).
+
+Click Save.
+
+
+

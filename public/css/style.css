@@ -80,10 +80,7 @@ hr.card-divider { margin: 1rem 0; border: 0; border-top: 1px solid var(--color-b
     gap: 1.5rem;
 }
 .card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--border-radius-md); padding: 1.5rem; box-shadow: var(--shadow-soft); }
-.header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding: 1rem; background: var(--color-surface); border-radius: var(--border-radius-md); }
-#logout-btn { padding: 8px 16px; font-size: 0.9rem; background: var(--color-surface); color: var(--color-danger); border: 1px solid var(--color-danger); }
-#logout-btn:hover { background: var(--color-danger); color: #fff; }
-.header-bar div { display: flex; align-items: center; gap: 10px; }
+
 
 
 /* --- 4. Controls & Inputs --- */
@@ -258,3 +255,63 @@ input[type=number] { -moz-appearance: textfield; }
 .form-actions { margin-top: 2rem; text-align: right; border-top: 1px solid var(--color-border); padding-top: 1.5rem; }
 #account-status-message, #email-status-message { margin-top: 1rem; text-align: right; font-weight: 500; }
 @media (max-width: 768px) { .two-column-layout { grid-template-columns: 1fr; gap: 1.5rem; } .modal-content { max-height: 85vh; width: 95%; } .modal-body { padding: 1.5rem; } }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- 10. New Navigation Bar Styles --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1rem 1.5rem;
+    background: var(--color-surface);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--color-border);
+}
+
+.navbar-logo img {
+    height: 40px; /* You can change this value to make the logo bigger or smaller */
+    display: block;
+}
+
+.navbar-controls {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Controls the spacing between the buttons */
+}
+
+.navbar-controls span {
+    font-weight: 500;
+    color: var(--color-text-secondary);
+}
+
+#logout-btn { 
+    padding: 8px 16px; 
+    font-size: 0.9rem; 
+    background: var(--color-surface); 
+    color: var(--color-danger); 
+    border: 1px solid var(--color-danger);
+    border-radius: var(--border-radius-lg);
+}
+
+#logout-btn:hover { 
+    background: var(--color-danger); 
+    color: #fff; 
+}

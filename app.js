@@ -294,12 +294,10 @@ app.post('/api/quotes/send-email', ensureAuth, async (req, res) => {
 });
 
 // --- Serve Static Files for Development ---
-if (process.env.NODE_ENV !== 'production') {
-    app.use(express.static(path.join(__dirname, 'public')));
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, 'public', 'index.html'));
-    });
-}
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`[LOG] Server running on host 0.0.0.0 and port ${PORT}`);

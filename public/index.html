@@ -33,7 +33,7 @@
                 </a>
                 <div class="navbar-controls">
             <span>Hello, <span id="user-display-name"></span>!</span>
-            <button id="my-account-btn" class="btn-secondary">My Account</button>
+            <button id="my-account-btn" class="btn-secondary"><i data-feather="user"></i>My Account</button>
             <button id="logout-btn">Logout</button>
             </div>
         </header>
@@ -56,7 +56,15 @@
             </div>
             <div id="current-quotation-area">
                 <div id="selected-products-table-container">
-                    <p id="no-items-message">No items added to the current quote.</p>
+                    
+
+                    <div id="no-items-message" class="empty-state">
+    <i data-feather="clipboard"></i>
+    <h4>Your Quote is Empty</h4>
+    <p>Start by searching for products to add them here.</p>
+</div>
+
+
                     <table id="selected-products-table" style="display:none;">
                         <thead>
                             <tr><th>#</th><th>Item</th><th>Price</th><th>Qty</th><th>Disc %</th><th>Disc Price</th><th>Total</th><th></th></tr>
@@ -88,9 +96,9 @@
                 <div class="quote-actions card">
                     <h3>Actions</h3>
                     <input type="text" id="client-name-input" placeholder="Client Name">
-                    <button id="new-quote-btn" class="btn-secondary">New Quote</button>
-                    <button id="send-email-btn" class="btn-primary" style="background-color: #3498DB;">Send by Email</button>
-                    <button id="save-quote-btn" class="btn-primary">Save Quote</button>
+                    <button id="new-quote-btn" class="btn-secondary"><i data-feather="file-plus"></i>New Quote</button>
+                    <button id="send-email-btn" class="btn-primary" style="background-color: #3498DB;"><i data-feather="send"></i>Send by Email</button>
+                    <button id="save-quote-btn" class="btn-primary"><i data-feather="save"></i>Save Quote</button>
                     <div class="download-menu-container">
                         <button id="download-menu-btn" class="btn-secondary">Download As...</button>
                         <div id="download-options" class="download-options">
@@ -188,5 +196,8 @@
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
+
+    <script src="https://unpkg.com/feather-icons"></script>
+        <script>feather.replace()</script>
 </body>
 </html>
